@@ -32,7 +32,7 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
   });
 
   expect(transition).toEqual({
-    duration: '2s, 2.6s, 0s',
+    duration: '1.65s, 2.15s, 0s',
     property: 'opacity, transform, visibility',
   });
 
@@ -42,7 +42,7 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
   });
 
   expect(tomoeReveal).toEqual({
-    duration: '1.5s, 2s',
+    duration: '1.2s, 1.7s',
     property: 'opacity, transform',
   });
 
@@ -56,8 +56,8 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
   });
 
   expect(capillaryReveal).toEqual({
-    delay: '0.62s',
-    duration: '2.2s',
+    delay: '0.4s',
+    duration: '1.75s',
     property: 'stroke-dashoffset',
   });
 
@@ -148,8 +148,8 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
     };
   });
   expect(lensMotion).toEqual({
-    delay: '0s, 1.05s, 0.8s, 0.8s',
-    duration: '2.4s, 0.7s, 0.9s, 0.9s',
+    delay: '0s, 0.85s, 0.65s, 0.65s',
+    duration: '2.05s, 0.6s, 0.75s, 0.75s',
     easing:
       'cubic-bezier(0.55, 0.02, 0.25, 1), cubic-bezier(0.55, 0.02, 0.25, 1), cubic-bezier(0.55, 0.02, 0.25, 1), cubic-bezier(0.55, 0.02, 0.25, 1)',
     property: 'd, fill, stroke, stroke-width',
@@ -175,7 +175,7 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
     };
   });
   expect(bladeMotion).toEqual({
-    duration: '2.2s',
+    duration: '1.9s',
     easing: 'cubic-bezier(0.55, 0.02, 0.25, 1)',
     property: 'transform',
   });

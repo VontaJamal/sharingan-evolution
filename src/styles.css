@@ -309,7 +309,7 @@ h1 {
   border: 1px solid color-mix(in srgb, var(--crimson-bright), transparent 22%);
   border-radius: 50%;
   opacity: 0;
-  animation: pressure-wave 2600ms cubic-bezier(.16, .62, .18, 1);
+  animation: pressure-wave 2200ms cubic-bezier(.16, .62, .18, 1);
 }
 
 .eye-trigger {
@@ -379,7 +379,7 @@ h1 {
 .sclera--dormant {
   fill: url(#dormant-sclera);
   opacity: 0;
-  transition: opacity 2000ms linear;
+  transition: opacity 1650ms linear;
 }
 
 .sclera--dormant.is-active {
@@ -392,8 +392,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 1800ms linear,
-    transform 2200ms cubic-bezier(.3, .05, .25, 1);
+    opacity 1500ms linear,
+    transform 1800ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .sclera-irritation.is-visible {
@@ -410,7 +410,7 @@ h1 {
 .eye-veins {
   fill: none;
   opacity: 0;
-  transition: opacity 1400ms linear;
+  transition: opacity 1200ms linear;
 }
 
 .eye-veins.is-visible {
@@ -431,22 +431,22 @@ h1 {
 }
 
 .eye-vein--trunk {
-  --vein-delay: 120ms;
-  --vein-duration: 1800ms;
+  --vein-delay: 80ms;
+  --vein-duration: 1500ms;
   stroke: #8a2730;
   stroke-width: 1.55;
 }
 
 .eye-vein--branch {
-  --vein-delay: 380ms;
-  --vein-duration: 2000ms;
+  --vein-delay: 250ms;
+  --vein-duration: 1650ms;
   stroke: #a0444b;
   stroke-width: 0.95;
 }
 
 .eye-vein--capillary {
-  --vein-delay: 620ms;
-  --vein-duration: 2200ms;
+  --vein-delay: 400ms;
+  --vein-duration: 1750ms;
   stroke: #b65d61;
   stroke-width: 0.55;
 }
@@ -456,14 +456,14 @@ h1 {
   stroke: #e71325;
   stroke-width: 3;
   opacity: 0.34;
-  transition: stroke 2000ms linear;
+  transition: stroke 1650ms linear;
 }
 
 .iris-disc {
   opacity: 0;
   stroke: #130306;
   stroke-width: 9;
-  transition: opacity 2000ms linear;
+  transition: opacity 1650ms linear;
 }
 
 .iris-disc.is-active {
@@ -488,7 +488,7 @@ h1 {
   stroke: rgb(22 0 2 / 38%);
   stroke-dasharray: 2 7;
   stroke-width: 7;
-  transition: opacity 2000ms linear;
+  transition: opacity 1650ms linear;
 }
 
 .eye-artwork--dormant .iris-aura {
@@ -518,12 +518,12 @@ h1 {
 .tomoe-mark {
   transform: rotate(var(--tomoe-angle)) translateY(var(--tomoe-offset));
   transform-origin: 0 0;
-  transition: transform 2600ms cubic-bezier(.3, .05, .25, 1);
+  transition: transform 2200ms cubic-bezier(.3, .05, .25, 1);
   will-change: transform;
 }
 
 .tomoe-mark.is-morphing {
-  transition: transform 2400ms var(--morph-ease);
+  transition: transform 2050ms var(--morph-ease);
 }
 
 .tomoe-shape {
@@ -532,10 +532,10 @@ h1 {
   stroke-linejoin: round;
   stroke-width: 0;
   transition:
-    d 2400ms var(--morph-ease),
-    fill 700ms 1050ms var(--morph-ease),
-    stroke 900ms 800ms var(--morph-ease),
-    stroke-width 900ms 800ms var(--morph-ease);
+    d 2050ms var(--morph-ease),
+    fill 600ms 850ms var(--morph-ease),
+    stroke 750ms 650ms var(--morph-ease),
+    stroke-width 750ms 650ms var(--morph-ease);
 }
 
 .tomoe-mark.is-morphing .tomoe-shape {
@@ -550,8 +550,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 1500ms linear,
-    transform 2000ms cubic-bezier(.3, .05, .25, 1);
+    opacity 1200ms linear,
+    transform 1700ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .tomoe-mark.is-visible .tomoe-glyph {
@@ -566,9 +566,9 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 2000ms linear,
-    transform 2600ms cubic-bezier(.3, .05, .25, 1),
-    visibility 0s linear 2600ms;
+    opacity 1650ms linear,
+    transform 2150ms cubic-bezier(.3, .05, .25, 1),
+    visibility 0s linear 2150ms;
   will-change: opacity, transform;
 }
 
@@ -589,9 +589,9 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    stroke 900ms 800ms var(--morph-ease),
-    stroke-width 900ms 800ms var(--morph-ease),
-    transform 2400ms var(--morph-ease);
+    stroke 750ms 650ms var(--morph-ease),
+    stroke-width 750ms 650ms var(--morph-ease),
+    transform 2050ms var(--morph-ease);
 }
 
 .is-morphing .iris-ring {
@@ -617,7 +617,7 @@ h1 {
   transform: scale(0.001);
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 2500ms 80ms var(--morph-ease);
+  transition: transform 2100ms 60ms var(--morph-ease);
 }
 
 .is-forming .mangekyo-void {
@@ -631,7 +631,7 @@ h1 {
   transform: scale(0.001) rotate(-32deg);
   transform-box: fill-box;
   transform-origin: center bottom;
-  transition: transform 2400ms var(--morph-ease);
+  transition: transform 2050ms var(--morph-ease);
 }
 
 .is-forming .sasuke-mangekyo-petal {
@@ -641,12 +641,12 @@ h1 {
 
 .sasuke-mangekyo-petal-axis:nth-child(2) .sasuke-mangekyo-petal,
 .sasuke-mangekyo-petal-axis:nth-child(5) .sasuke-mangekyo-petal {
-  transition-delay: 100ms;
+  transition-delay: 80ms;
 }
 
 .sasuke-mangekyo-petal-axis:nth-child(3) .sasuke-mangekyo-petal,
 .sasuke-mangekyo-petal-axis:nth-child(6) .sasuke-mangekyo-petal {
-  transition-delay: 200ms;
+  transition-delay: 160ms;
 }
 
 .itachi-inherited-blade {
@@ -654,7 +654,7 @@ h1 {
   transform: scaleX(0.45) scaleY(0.001);
   transform-box: fill-box;
   transform-origin: center top;
-  transition: transform 2200ms var(--morph-ease);
+  transition: transform 1900ms var(--morph-ease);
 }
 
 .is-unfolding .itachi-inherited-blade {
@@ -662,11 +662,11 @@ h1 {
 }
 
 .itachi-inherited-axis:nth-child(2) .itachi-inherited-blade {
-  transition-delay: 120ms;
+  transition-delay: 100ms;
 }
 
 .itachi-inherited-axis:nth-child(3) .itachi-inherited-blade {
-  transition-delay: 240ms;
+  transition-delay: 200ms;
 }
 
 .eternal-core {
@@ -674,7 +674,7 @@ h1 {
   transform: scale(0);
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 1600ms 480ms var(--morph-ease);
+  transition: transform 1350ms 360ms var(--morph-ease);
 }
 
 .is-unfolding .eternal-core {
@@ -689,8 +689,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 1600ms linear,
-    transform 2200ms cubic-bezier(.3, .05, .25, 1);
+    opacity 1350ms linear,
+    transform 1900ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .pupil--dormant {
@@ -709,8 +709,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 1500ms linear,
-    transform 2000ms cubic-bezier(.3, .05, .25, 1);
+    opacity 1250ms linear,
+    transform 1700ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .iris-glint--hidden {
