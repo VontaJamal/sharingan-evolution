@@ -46,6 +46,21 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
     property: 'opacity, transform',
   });
 
+  const capillaryReveal = await page.locator('.eye-vein--capillary').first().evaluate((node) => {
+    const style = getComputedStyle(node);
+    return {
+      delay: style.transitionDelay,
+      duration: style.transitionDuration,
+      property: style.transitionProperty,
+    };
+  });
+
+  expect(capillaryReveal).toEqual({
+    delay: '0.62s',
+    duration: '2.2s',
+    property: 'stroke-dashoffset',
+  });
+
   await page.getByRole('button', { name: /draw out the second tomoe/i }).click();
   const movingTomoe = page.locator('[data-tomoe-slot="1"]');
   const movingGlyph = movingTomoe.locator('.tomoe-glyph');

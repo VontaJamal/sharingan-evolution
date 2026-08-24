@@ -7,16 +7,19 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - `advanced-morph.webm` — 12-second browser capture of the paced three-tomoe awakening, shared-node Mangekyō morph, and inherited Eternal overlay.
 - `desktop-dormant.png` — 1440×1000 initial poster and awakening control.
 - `desktop-two-tomoe.png` — corrected 180° two-tomoe spacing.
-- `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō.
+- `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the final distressed sclera treatment.
 - `desktop-eternal-mangekyo.png` — corrected Eternal form with the inherited three-blade overlay.
 - `desktop-rinnegan.png` — 1440×1000 complete sequence, unlocked navigation, and explicit Rinnegan distinction.
-- `mobile-mangekyo.png` — 390×844 corrected Mangekyō after touch progression.
+- `mobile-mangekyo.png` — 390×844 corrected Mangekyō and sclera strain after touch progression.
+- `before-sclera-strain.png` — the previous four clean sclera strokes preserved as regression evidence.
 - `before-mangekyo.png` and `before-eternal-mangekyo.png` — the inaccurate generic-blade patterns preserved as regression evidence.
 
 ## Verification checklist
 
 - [x] The eye is the dominant full-canvas visual at desktop and phone sizes.
 - [x] The eye uses an asymmetric vector aperture, softened lid contours, and a restrained corneal sheen rather than a blocky geometric mask.
+- [x] Sixteen asymmetrical vessels fork across a diffuse, progressively deepened sclera flush instead of using four mirrored decorative lines.
+- [x] Primary vessels draw first and fine capillaries follow on a restrained 620ms delay.
 - [x] Capable devices receive a Three.js Z-depth particle field and halo; CSS remains the complete fallback.
 - [x] Two tomoe sit opposite each other at 180°.
 - [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.5–2.0 seconds.

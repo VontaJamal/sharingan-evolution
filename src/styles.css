@@ -342,11 +342,28 @@ h1 {
 }
 
 .eye-artwork {
+  --irritation-opacity: 0.22;
+  --vein-opacity: 0.4;
   display: block;
   width: 100%;
   overflow: visible;
   filter: drop-shadow(0 1.45rem 2.7rem rgb(0 0 0 / 78%));
   transition: transform 180ms ease;
+}
+
+.eye-artwork--mangekyo {
+  --irritation-opacity: 0.52;
+  --vein-opacity: 0.68;
+}
+
+.eye-artwork--eternal-mangekyo {
+  --irritation-opacity: 0.68;
+  --vein-opacity: 0.82;
+}
+
+.eye-artwork--rinnegan {
+  --irritation-opacity: 0.5;
+  --vein-opacity: 0.66;
 }
 
 .eye-shadow {
@@ -369,19 +386,69 @@ h1 {
   opacity: 1;
 }
 
+.sclera-irritation {
+  opacity: 0;
+  transform: scaleX(0.76);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 1800ms linear,
+    transform 2200ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.sclera-irritation.is-visible {
+  opacity: var(--irritation-opacity);
+  transform: scaleX(1);
+}
+
+.sclera-irritation__bloom {
+  fill: #a51724;
+  filter: url(#sclera-irritation-soften);
+  mix-blend-mode: multiply;
+}
+
 .eye-veins {
   fill: none;
-  stroke: #7f141d;
-  stroke-dasharray: 120;
-  stroke-dashoffset: 120;
-  stroke-linecap: round;
-  stroke-width: 2.2;
-  opacity: 0.46;
-  transition: stroke-dashoffset 2000ms cubic-bezier(.3, .05, .25, 1);
+  opacity: 0;
+  transition: opacity 1400ms linear;
 }
 
 .eye-veins.is-visible {
+  opacity: var(--vein-opacity);
+}
+
+.eye-vein {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transition: stroke-dashoffset var(--vein-duration) var(--vein-delay) cubic-bezier(.3, .05, .25, 1);
+}
+
+.eye-veins.is-visible .eye-vein {
   stroke-dashoffset: 0;
+}
+
+.eye-vein--trunk {
+  --vein-delay: 120ms;
+  --vein-duration: 1800ms;
+  stroke: #8a2730;
+  stroke-width: 1.55;
+}
+
+.eye-vein--branch {
+  --vein-delay: 380ms;
+  --vein-duration: 2000ms;
+  stroke: #a0444b;
+  stroke-width: 0.95;
+}
+
+.eye-vein--capillary {
+  --vein-delay: 620ms;
+  --vein-duration: 2200ms;
+  stroke: #b65d61;
+  stroke-width: 0.55;
 }
 
 .iris-aura {

@@ -16,6 +16,60 @@ const MANGEKYO_PETAL_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_LENS_ANGLES = [0, 120, 240];
 const TOMOE_SHAPE = 'M 0 -14 C 8 -14 14 -8 14 0 C 14 5 12 9 8 12 C 15 15 25 9 32 -10 C 34 3 29 15 19 21 C 9 28 -5 26 -13 17 C -19 11 -20 2 -16 -6 C -15 -10 -13 -12 -11 -13 C -7 -15 -3 -15 0 -14 Z';
 const MANGEKYO_LENS_SHAPE = 'M 47 0 C 47 31 41 61 31 87 C 22 111 10 128 0 136 C -10 128 -22 111 -31 87 C -41 61 -47 31 -47 0 C -47 -31 -41 -61 -31 -87 C -22 -111 -10 -128 0 -136 C 10 -128 22 -111 31 -87 C 41 -61 47 -31 47 0 Z';
+const SCLERA_VEINS = [
+  { side: 'left', weight: 'trunk', d: 'M 50 243 C 69 241 75 234 91 233 C 108 232 117 223 134 224 C 151 225 160 218 174 221' },
+  { side: 'left', weight: 'trunk', d: 'M 52 253 C 71 256 81 265 99 266 C 116 267 129 276 147 274 C 159 273 168 270 177 269' },
+  { side: 'left', weight: 'branch', d: 'M 82 235 C 80 222 75 214 67 207 C 61 201 59 195 56 188' },
+  { side: 'left', weight: 'branch', d: 'M 110 229 C 105 218 104 208 96 200 C 91 195 88 190 86 184' },
+  { side: 'left', weight: 'branch', d: 'M 139 224 C 134 213 127 207 119 202 C 111 197 108 190 105 182' },
+  { side: 'left', weight: 'branch', d: 'M 94 265 C 86 273 81 281 79 290 C 76 300 69 306 62 312' },
+  { side: 'left', weight: 'capillary', d: 'M 119 270 C 115 281 107 287 103 297 C 100 305 95 311 89 315' },
+  { side: 'left', weight: 'capillary', d: 'M 150 272 C 146 282 140 289 132 294 C 127 298 124 303 121 308' },
+  { side: 'right', weight: 'trunk', d: 'M 590 239 C 571 235 560 227 543 226 C 525 225 515 217 499 219 C 486 220 478 216 470 217' },
+  { side: 'right', weight: 'trunk', d: 'M 588 254 C 569 259 557 269 539 269 C 522 269 511 279 493 275 C 482 273 475 271 467 270' },
+  { side: 'right', weight: 'branch', d: 'M 560 231 C 562 219 568 210 577 203 C 583 198 586 192 589 185' },
+  { side: 'right', weight: 'branch', d: 'M 531 224 C 536 213 537 204 545 196 C 551 190 553 184 555 179' },
+  { side: 'right', weight: 'branch', d: 'M 502 219 C 507 210 514 203 521 199 C 529 194 532 188 535 181' },
+  { side: 'right', weight: 'branch', d: 'M 550 264 C 559 272 564 281 567 290 C 570 300 577 306 584 312' },
+  { side: 'right', weight: 'capillary', d: 'M 521 272 C 527 282 535 288 539 297 C 542 305 547 311 553 315' },
+  { side: 'right', weight: 'capillary', d: 'M 491 274 C 495 284 502 290 510 295 C 516 299 519 304 522 309' },
+] as const;
+
+function StrainedSclera({ visible }: { visible: boolean }) {
+  return (
+    <>
+      <g className={`sclera-irritation${visible ? ' is-visible' : ''}`} aria-hidden="true">
+        <ellipse
+          className="sclera-irritation__bloom"
+          data-shape="sclera-irritation"
+          cx="72"
+          cy="240"
+          rx="158"
+          ry="76"
+        />
+        <ellipse
+          className="sclera-irritation__bloom"
+          data-shape="sclera-irritation"
+          cx="575"
+          cy="252"
+          rx="142"
+          ry="84"
+        />
+      </g>
+      <g className={`eye-veins${visible ? ' is-visible' : ''}`} aria-hidden="true">
+        {SCLERA_VEINS.map(({ d, side, weight }, index) => (
+          <path
+            key={`${side}-${weight}-${index}`}
+            className={`eye-vein eye-vein--${weight}`}
+            data-side={side}
+            d={d}
+            pathLength="1"
+          />
+        ))}
+      </g>
+    </>
+  );
+}
 
 function Tomoe({
   angle,
@@ -171,6 +225,9 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        <filter id="sclera-irritation-soften" x="-25%" y="-45%" width="150%" height="190%">
+          <feGaussianBlur stdDeviation="13" />
+        </filter>
       </defs>
 
       <ellipse className="eye-shadow" cx="321" cy="258" rx="286" ry="139" />
@@ -184,12 +241,7 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           width="560"
           height="350"
         />
-        <g className={`eye-veins${isAwakened ? ' is-visible' : ''}`}>
-          <path d="M 73 202 C 119 207 140 225 178 241" />
-          <path d="M 79 281 C 122 270 149 271 183 255" />
-          <path d="M 566 190 C 522 204 491 220 462 240" />
-          <path d="M 559 288 C 513 270 490 268 457 253" />
-        </g>
+        <StrainedSclera visible={isAwakened} />
 
         <g className="iris" transform="translate(325 237) scale(.82)" filter={isAwakened ? 'url(#iris-glow)' : undefined}>
           <circle className="iris-aura" r="153" />

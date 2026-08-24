@@ -24,6 +24,18 @@ describe('cinematic eye canvas', () => {
     expect([...container.querySelectorAll('.iris-disc')]).toEqual(surfaces);
     expect(container.querySelector('.iris-disc--crimson')).toHaveClass('is-active');
   });
+
+  it('builds sclera strain from diffuse irritation and branching capillaries', () => {
+    const { container } = render(<EyeArtwork stage={SASUKE_STAGES[4]} />);
+    const vessels = [...container.querySelectorAll('.eye-vein')];
+
+    expect(container.querySelectorAll('[data-shape="sclera-irritation"]')).toHaveLength(2);
+    expect(container.querySelectorAll('.eye-vein--trunk')).toHaveLength(4);
+    expect(container.querySelectorAll('.eye-vein--branch')).toHaveLength(8);
+    expect(container.querySelectorAll('.eye-vein--capillary')).toHaveLength(4);
+    expect(vessels).toHaveLength(16);
+    expect(vessels.every((vessel) => vessel.getAttribute('pathLength') === '1')).toBe(true);
+  });
 });
 
 describe('base Sharingan artwork structure', () => {
