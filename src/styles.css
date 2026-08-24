@@ -360,8 +360,51 @@ h1 {
   transition: transform 260ms cubic-bezier(.2, .8, .2, 1);
 }
 
+.amaterasu-field {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 112%;
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -48%) translateZ(0.5rem) scale(0.82);
+  transform-origin: 50% 58%;
+  transition:
+    opacity 420ms ease,
+    transform 1050ms cubic-bezier(.15, .75, .2, 1);
+}
+
+.amaterasu-field.is-active {
+  opacity: 1;
+  transform: translate(-50%, -51%) translateZ(0.5rem) scale(1);
+}
+
+.amaterasu-flame {
+  --flame-delay: calc(var(--flame-index) * 65ms);
+  fill: #010103;
+  stroke: #c01525;
+  stroke-linejoin: round;
+  stroke-width: 1.35;
+  opacity: 0;
+  transform: scaleY(0.08) skewX(-4deg);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  vector-effect: non-scaling-stroke;
+}
+
+.amaterasu-field.is-active .amaterasu-flame {
+  animation: amaterasu-awaken 1250ms var(--flame-delay) both cubic-bezier(.16, .82, .18, 1);
+}
+
+.amaterasu-flame:nth-child(even) {
+  transform: scaleY(0.08) skewX(5deg);
+}
+
 .eye-trigger {
   position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   padding: 0;
@@ -551,6 +594,10 @@ h1 {
   stroke: #c7a4ee;
 }
 
+.eye-artwork--rinnegan .iris-texture {
+  opacity: 0.08;
+}
+
 .iris-ring,
 .rinnegan-pattern circle {
   fill: none;
@@ -560,7 +607,14 @@ h1 {
 
 .rinnegan-pattern circle {
   stroke: #24172f;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
   stroke-width: 5;
+  transition: stroke-dashoffset 1450ms var(--morph-ease);
+}
+
+.is-active .rinnegan-pattern circle {
+  stroke-dashoffset: 0;
 }
 
 .tomoe-mark {
@@ -656,8 +710,11 @@ h1 {
   transition: none;
 }
 
-.rinnegan-pattern .tomoe-mark {
+.rinnegan-tomoe-glyph {
   fill: #24172f;
+  stroke: #24172f;
+  stroke-linejoin: round;
+  stroke-width: 0.8;
 }
 
 .mangekyo-void {
@@ -969,6 +1026,25 @@ footer p {
   100% { opacity: 1; filter: blur(0); transform: perspective(62rem) scale(1); }
 }
 
+@keyframes amaterasu-awaken {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.08) scaleX(0.72) skewX(-7deg);
+  }
+  42% {
+    opacity: 0.94;
+    transform: scaleY(1.08) scaleX(0.92) skewX(3deg);
+  }
+  72% {
+    opacity: 0.9;
+    transform: scaleY(0.96) scaleX(1.03) skewX(-2deg);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1) skewX(0);
+  }
+}
+
 @keyframes chakra-rise {
   0% { opacity: 0; transform: translateY(4rem) scaleY(0.4); }
   15% { opacity: 0.25; }
@@ -1176,6 +1252,10 @@ footer p {
   .chakra-field,
   .ink-atmosphere {
     transform: none !important;
+  }
+
+  .amaterasu-field {
+    transform: translate(-50%, -51%) scale(1) !important;
   }
 
   .chakra-particle {

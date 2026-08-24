@@ -53,6 +53,29 @@ describe('Sharingan Evolution', () => {
     expect(container.querySelector('.eye-artwork')).toBe(eyeArtwork);
   });
 
+  it('awakens a persistent original Amaterasu field at Mangekyō and keeps it through the Rinnegan', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App />);
+    const flameField = container.querySelector('.amaterasu-field');
+
+    expect(flameField).toBeInTheDocument();
+    expect(flameField).not.toHaveClass('is-active');
+    expect(container.querySelectorAll('[data-shape="amaterasu-flame"]')).toHaveLength(8);
+
+    for (let step = 0; step < 4; step += 1) {
+      await user.click(screen.getByRole('button', { name: /current form/i }));
+    }
+
+    expect(container.querySelector('.amaterasu-field')).toBe(flameField);
+    expect(flameField).toHaveClass('is-active');
+
+    await user.click(screen.getByRole('button', { name: /current form/i }));
+    await user.click(screen.getByRole('button', { name: /current form/i }));
+
+    expect(container.querySelector('.amaterasu-field')).toBe(flameField);
+    expect(flameField).toHaveClass('is-active');
+  });
+
   it('awakens when Enter is pressed directly from the opening screen', async () => {
     const user = userEvent.setup();
     render(<App />);

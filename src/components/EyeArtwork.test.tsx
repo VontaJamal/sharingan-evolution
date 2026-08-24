@@ -112,3 +112,20 @@ describe('Sasuke Mangekyō artwork structure', () => {
     expect(container.querySelector('.ocular-pattern-layer--eternal')).toHaveClass('is-unfolding');
   });
 });
+
+describe('Sasuke Six Paths Rinnegan artwork structure', () => {
+  it('places three tomoe on each of the two inner ripple bands', () => {
+    const { container } = render(<EyeArtwork stage={SASUKE_STAGES[6]} />);
+    const innerTomoe = [...container.querySelectorAll('[data-rinnegan-band="inner"]')];
+    const outerTomoe = [...container.querySelectorAll('[data-rinnegan-band="outer"]')];
+
+    expect(container.querySelectorAll('[data-shape="rinnegan-ripple"]')).toHaveLength(4);
+    expect(container.querySelectorAll('[data-shape="rinnegan-tomoe"]')).toHaveLength(6);
+    expect(innerTomoe).toHaveLength(3);
+    expect(outerTomoe).toHaveLength(3);
+    expect(innerTomoe.map((mark) => mark.getAttribute('data-radius'))).toEqual(['73', '73', '73']);
+    expect(outerTomoe.map((mark) => mark.getAttribute('data-radius'))).toEqual(['108', '108', '108']);
+    expect(innerTomoe.map((mark) => mark.getAttribute('data-angle'))).toEqual(['0', '120', '240']);
+    expect(outerTomoe.map((mark) => mark.getAttribute('data-angle'))).toEqual(['60', '180', '300']);
+  });
+});

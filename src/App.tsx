@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, type PointerEvent } from 'react';
+import { AmaterasuField } from './components/AmaterasuField';
 import { CinematicField } from './components/CinematicField';
 import { EyeArtwork } from './components/EyeArtwork';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
@@ -12,6 +13,7 @@ function App() {
   const reducedMotion = usePrefersReducedMotion();
   const stage = SASUKE_STAGES[stageIndex];
   const isFinalStage = stageIndex === LAST_STAGE_INDEX;
+  const hasAmaterasu = stageIndex >= 4;
   const fieldAccent = stage.kind === 'rinnegan'
     ? '#b895e1'
     : stage.kind === 'dormant'
@@ -105,6 +107,7 @@ function App() {
         </div>
 
         <div className="eye-scene" data-eye-stage={stage.id}>
+          <AmaterasuField active={hasAmaterasu} />
           <button
             className="eye-trigger"
             type="button"

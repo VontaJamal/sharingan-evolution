@@ -123,6 +123,8 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
     delay: '0s',
     duration: '1e-05s',
   });
+  await expect(page.locator('.amaterasu-field')).toHaveClass(/is-active/);
+  await expect(page.locator('.amaterasu-flame').first()).toHaveCSS('animation-duration', '1e-05s');
   await context.close();
 });
 
@@ -144,6 +146,12 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(sharedPath).toHaveAttribute('data-browser-instance', 'tomoe-to-lens');
   await expect(page.locator('.ocular-pattern-layer--tomoe')).toHaveClass(/is-morphing/);
   await expect(page.locator('.ocular-pattern-layer--mangekyo')).toHaveClass(/is-forming/);
+  const flameField = page.locator('.amaterasu-field');
+  await flameField.evaluate((node) => node.setAttribute('data-browser-instance', 'persistent-amaterasu'));
+  await expect(flameField).toHaveClass(/is-active/);
+  await expect(page.locator('[data-shape="amaterasu-flame"]')).toHaveCount(8);
+  await expect(page.locator('.amaterasu-flame').first()).toHaveCSS('animation-name', 'amaterasu-awaken');
+  await expect(page.locator('.amaterasu-flame').first()).toHaveCSS('animation-duration', '1.25s');
   const lensMotion = await page.locator('[data-shape="sasuke-mangekyo-lens"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
     return {
@@ -186,4 +194,12 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
     property: 'transform',
   });
   await expect(page.locator('.eternal-core')).toBeVisible();
+
+  await page.getByRole('button', { name: /receive six paths power/i }).click();
+  await expect(page.getByRole('heading', { name: "Sasuke's Six Paths Rinnegan" })).toBeVisible();
+  await expect(flameField).toHaveAttribute('data-browser-instance', 'persistent-amaterasu');
+  await expect(flameField).toHaveClass(/is-active/);
+  await expect(page.locator('[data-rinnegan-band="inner"]')).toHaveCount(3);
+  await expect(page.locator('[data-rinnegan-band="outer"]')).toHaveCount(3);
+  await expect(page.locator('[data-shape="rinnegan-ripple"]')).toHaveCount(4);
 });

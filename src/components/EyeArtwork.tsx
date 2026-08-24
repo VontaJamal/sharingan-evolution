@@ -11,7 +11,10 @@ const TOMOE_ANGLES = {
   2: [0, 180, 240],
   3: [0, 120, 240],
 } as const;
-const RINNEGAN_TOMOE_ANGLES = [0, 60, 120, 180, 240, 300];
+const RINNEGAN_TOMOE_BANDS = [
+  { angles: [0, 120, 240], name: 'inner', radius: 73 },
+  { angles: [60, 180, 300], name: 'outer', radius: 108 },
+] as const;
 const MANGEKYO_PETAL_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_LENS_ANGLES = [0, 120, 240];
 const TOMOE_SHAPE = 'M 0 -14 C 8 -14 14 -8 14 0 C 14 5 12 9 8 12 C 15 15 25 9 32 -10 C 34 3 29 15 19 21 C 9 28 -5 26 -13 17 C -19 11 -20 2 -16 -6 C -15 -10 -13 -12 -11 -13 C -7 -15 -3 -15 0 -14 Z';
@@ -119,6 +122,32 @@ function TomoePattern({ count, morphing = false }: { count: 0 | 1 | 2 | 3; morph
   );
 }
 
+function RinneganTomoe({
+  angle,
+  band,
+  radius,
+}: {
+  angle: number;
+  band: 'inner' | 'outer';
+  radius: number;
+}) {
+  return (
+    <g
+      className="rinnegan-tomoe"
+      data-angle={angle}
+      data-radius={radius}
+      data-rinnegan-band={band}
+      transform={`rotate(${angle}) translate(0 -${radius})`}
+    >
+      <path
+        className="rinnegan-tomoe-glyph"
+        data-shape="rinnegan-tomoe"
+        d="M 0 -9 C 5 -9 9 -5 9 0 C 9 4 7 6 4 8 C 10 9 15 6 18 1 C 18 10 11 16 3 16 C -5 16 -11 9 -10 1 C -9 -5 -5 -9 0 -9 Z"
+      />
+    </g>
+  );
+}
+
 function SasukeMangekyoFramework() {
   return (
     <g className="sasuke-mangekyo-framework">
@@ -161,10 +190,14 @@ function RinneganPattern() {
   return (
     <g className="rinnegan-pattern">
       {[38, 73, 108, 143].map((radius) => (
-        <circle key={radius} r={radius} />
+        <circle key={radius} data-shape="rinnegan-ripple" pathLength="1" r={radius} />
       ))}
-      {RINNEGAN_TOMOE_ANGLES.map((angle) => (
-        <Tomoe key={angle} angle={angle} radius={92} />
+      {RINNEGAN_TOMOE_BANDS.map(({ angles, name, radius }) => (
+        <g key={name} className={`rinnegan-tomoe-band rinnegan-tomoe-band--${name}`}>
+          {angles.map((angle) => (
+            <RinneganTomoe key={`${name}-${angle}`} angle={angle} band={name} radius={radius} />
+          ))}
+        </g>
       ))}
     </g>
   );
