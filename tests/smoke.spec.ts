@@ -92,22 +92,28 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
 test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser', async ({ page }) => {
   await page.goto('/');
 
-  for (let step = 0; step < 4; step += 1) {
+  for (let step = 0; step < 3; step += 1) {
     await page.getByRole('button', { name: /current form/i }).click();
   }
+
+  const sharedPath = page.locator('[data-tomoe-slot="0"] .tomoe-shape');
+  await sharedPath.evaluate((node) => node.setAttribute('data-browser-instance', 'tomoe-to-lens'));
+  await page.getByRole('button', { name: /break beyond the limit/i }).click();
 
   await expect(page.getByRole('heading', { name: 'Mangekyō Sharingan' })).toBeVisible();
   await expect(page.locator('[data-shape="sasuke-mangekyo-petal"]')).toHaveCount(6);
   await expect(page.locator('[data-shape="sasuke-mangekyo-lens"]')).toHaveCount(3);
-  await expect(page.locator('.ocular-pattern-layer--tomoe')).toHaveClass(/is-morphing-out/);
+  await expect(sharedPath).toHaveAttribute('data-shape', 'sasuke-mangekyo-lens');
+  await expect(sharedPath).toHaveAttribute('data-browser-instance', 'tomoe-to-lens');
+  await expect(page.locator('.ocular-pattern-layer--tomoe')).toHaveClass(/is-morphing/);
   await expect(page.locator('.ocular-pattern-layer--mangekyo')).toHaveClass(/is-forming/);
   const lensMotion = await page.locator('[data-shape="sasuke-mangekyo-lens"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
     return { duration: style.transitionDuration, property: style.transitionProperty };
   });
   expect(lensMotion).toEqual({
-    duration: '2.2s, 0.8s',
-    property: 'stroke-dashoffset, opacity',
+    duration: '2.4s, 0.9s, 0.9s, 0.9s',
+    property: 'd, fill, stroke, stroke-width',
   });
   await page.locator('.sasuke-mangekyo-framework').evaluate((node) => {
     node.setAttribute('data-browser-instance', 'persistent');
@@ -126,8 +132,8 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
     return { duration: style.transitionDuration, property: style.transitionProperty };
   });
   expect(bladeMotion).toEqual({
-    duration: '0.8s, 2.2s',
-    property: 'opacity, transform',
+    duration: '2.2s',
+    property: 'transform',
   });
   await expect(page.locator('.eternal-core')).toBeVisible();
 });

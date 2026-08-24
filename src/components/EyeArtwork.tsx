@@ -14,44 +14,52 @@ const TOMOE_ANGLES = {
 const RINNEGAN_TOMOE_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_PETAL_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_LENS_ANGLES = [0, 120, 240];
+const TOMOE_SHAPE = 'M 0 -14 C 8 -14 14 -8 14 0 C 14 5 12 9 8 12 C 15 15 25 9 32 -10 C 34 3 29 15 19 21 C 9 28 -5 26 -13 17 C -19 11 -20 2 -16 -6 C -15 -10 -13 -12 -11 -13 C -7 -15 -3 -15 0 -14 Z';
+const MANGEKYO_LENS_SHAPE = 'M 47 0 C 47 31 41 61 31 87 C 22 111 10 128 0 136 C -10 128 -22 111 -31 87 C -41 61 -47 31 -47 0 C -47 -31 -41 -61 -31 -87 C -22 -111 -10 -128 0 -136 C 10 -128 22 -111 31 -87 C 41 -61 47 -31 47 0 Z';
 
 function Tomoe({
   angle,
   radius = 93,
   slot,
   visible = true,
+  morphing = false,
 }: {
   angle: number;
   radius?: number;
   slot?: number;
   visible?: boolean;
+  morphing?: boolean;
 }) {
   const orbitStyle = {
     '--tomoe-angle': `${angle}deg`,
-    '--tomoe-offset': `${-radius}px`,
+    '--tomoe-offset': `${morphing ? 0 : -radius}px`,
   } as CSSProperties;
 
   return (
     <g
-      className={`tomoe-mark${visible ? ' is-visible' : ''}`}
+      className={`tomoe-mark${visible ? ' is-visible' : ''}${morphing ? ' is-morphing' : ''}`}
       data-angle={angle}
       data-tomoe-slot={slot}
       style={orbitStyle}
     >
       <g className="tomoe-glyph">
-        <circle cx="0" cy="0" r="14" />
-        <path d="M -3 12 C 14 20 30 7 32 -12 C 23 -3 15 0 8 -4 C 9 3 5 9 -3 12 Z" />
+        <path
+          className="tomoe-shape"
+          data-morph-source="tomoe"
+          data-shape={morphing ? 'sasuke-mangekyo-lens' : undefined}
+          d={morphing ? MANGEKYO_LENS_SHAPE : TOMOE_SHAPE}
+        />
       </g>
     </g>
   );
 }
 
-function TomoePattern({ count }: { count: 0 | 1 | 2 | 3 }) {
+function TomoePattern({ count, morphing = false }: { count: 0 | 1 | 2 | 3; morphing?: boolean }) {
   return (
     <g className="tomoe-pattern">
       <circle className="iris-ring" r="91" />
       {TOMOE_ANGLES[count].map((angle, slot) => (
-        <Tomoe key={slot} angle={angle} slot={slot} visible={slot < count} />
+        <Tomoe key={slot} angle={angle} slot={slot} visible={slot < count} morphing={morphing} />
       ))}
     </g>
   );
@@ -74,17 +82,6 @@ function SasukeMangekyoFramework() {
         ))}
       </g>
 
-      <g className="sasuke-mangekyo-lenses">
-        {MANGEKYO_LENS_ANGLES.map((angle) => (
-          <g key={angle} className="sasuke-mangekyo-lens-axis" transform={`rotate(${angle})`}>
-            <path
-              data-shape="sasuke-mangekyo-lens"
-              pathLength="1"
-              d="M 47 0 C 47 61 24 112 0 136 C -24 112 -47 61 -47 0 C -47 -61 -24 -112 0 -136 C 24 -112 47 -61 47 0 Z"
-            />
-          </g>
-        ))}
-      </g>
     </g>
   );
 }
@@ -201,11 +198,11 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           <circle className={`iris-disc iris-disc--rinnegan${isRinnegan ? ' is-active' : ''}`} r="143" />
           <circle className="iris-texture" r="132" />
 
-          <g className={`ocular-pattern-layer ocular-pattern-layer--tomoe${isTomoe ? ' is-active' : ''}${isMangekyo ? ' is-morphing-out' : ''}`}>
-            <TomoePattern count={tomoeCount} />
-          </g>
           <g className={`ocular-pattern-layer ocular-pattern-layer--mangekyo${isMangekyo ? ' is-active is-forming' : ''}`}>
             <SasukeMangekyoFramework />
+          </g>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--tomoe${isTomoe || isMangekyo ? ' is-active' : ''}${isMangekyo ? ' is-morphing' : ''}`}>
+            <TomoePattern count={tomoeCount} morphing={isMangekyo} />
           </g>
           <g className={`ocular-pattern-layer ocular-pattern-layer--eternal${isEternal ? ' is-active is-unfolding' : ''}`}>
             <ItachiInheritedPattern />

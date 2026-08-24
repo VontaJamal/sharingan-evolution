@@ -56,20 +56,19 @@ describe('base Sharingan artwork structure', () => {
 });
 
 describe('Sasuke Mangekyō artwork structure', () => {
-  it('uses the mounted three-tomoe pattern as the Mangekyō transformation source', () => {
+  it('morphs the same three tomoe path nodes into the Mangekyō lenses', () => {
     const { container, rerender } = render(<EyeArtwork stage={SASUKE_STAGES[3]} />);
     const tomoeLayer = container.querySelector('.ocular-pattern-layer--tomoe');
-    const tomoeSlots = [...container.querySelectorAll('[data-tomoe-slot]')];
+    const tomoeShapes = [...container.querySelectorAll('[data-tomoe-slot] .tomoe-shape')];
+
+    expect(tomoeShapes).toHaveLength(3);
 
     rerender(<EyeArtwork stage={SASUKE_STAGES[4]} />);
 
     expect(container.querySelector('.ocular-pattern-layer--tomoe')).toBe(tomoeLayer);
-    expect([...container.querySelectorAll('[data-tomoe-slot]')]).toEqual(tomoeSlots);
-    expect(tomoeLayer).toHaveClass('is-morphing-out');
+    expect([...container.querySelectorAll('[data-shape="sasuke-mangekyo-lens"]')]).toEqual(tomoeShapes);
+    expect(tomoeLayer).toHaveClass('is-morphing');
     expect(container.querySelector('.ocular-pattern-layer--mangekyo')).toHaveClass('is-forming');
-    for (const lens of container.querySelectorAll('[data-shape="sasuke-mangekyo-lens"]')) {
-      expect(lens).toHaveAttribute('pathLength', '1');
-    }
   });
 
   it('renders the Mangekyō as six outer petals held by three overlapping lenses', () => {

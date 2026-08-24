@@ -19,12 +19,12 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Capable devices receive a Three.js Z-depth particle field and halo; CSS remains the complete fallback.
 - [x] Two tomoe sit opposite each other at 180°.
 - [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.5–2.0 seconds.
-- [x] Three tomoe spiral outward as Mangekyō petals bloom and the three lens lines draw from matching axes.
+- [x] The same three SVG path nodes interpolate from tomoe silhouettes into Mangekyō lens curves as the ring expands and petals grow behind them.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 2.0–2.6 seconds without a full-eye crossfade.
 - [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
-- [x] Eternal's inherited blades extend from the center instead of fading in as a complete replacement layer.
+- [x] Eternal's inherited blades extend from the center without an opacity crossfade or complete replacement layer.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.
 - [x] Restart returns to the dormant eye while discovered-stage navigation remains available.
