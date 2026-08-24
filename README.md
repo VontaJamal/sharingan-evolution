@@ -60,8 +60,8 @@ Behavior coverage includes sequential progression, the preserved 12-to-10 o'cloc
 
 Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
 
-- focused 11-second WebM showing the preserved 12-to-10 o'clock tomoe travel and center-pupil-to-Eternal-core morph
-- full 11-second WebM showing the Mangekyō awakening, explicit Amaterasu cast, moving black fire, Eternal overlay, and corrected Rinnegan
+- focused 14-second WebM showing the peripheral crest, preserved 12-to-10 o'clock tomoe travel, and viscous center-pupil-to-Eternal-core morph
+- full 15-second WebM showing the anchored Mangekyō awakening, explicit Amaterasu cast, moving black fire, Eternal overlay, and corrected Rinnegan
 - 1440×1000 dormant desktop poster
 - 1440×1000 corrected two-tomoe, Mangekyō, and Eternal Mangekyō states
 - 1440×1000 fully discovered Rinnegan state
@@ -70,6 +70,7 @@ Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
 - before-and-after evidence for the generic halo replacement
 - before-and-after evidence for the single-orbit Rinnegan correction and Amaterasu addition
 - before-and-after evidence for the opposed tomoe placement and separate Eternal-core swap
+- before-and-after evidence for the centered folding-fan composition and geometric Eternal morph
 - a concise written verification checklist
 
 ## Lore and IP boundary

@@ -4,15 +4,15 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
-- `shared-element-morphs.webm` — focused 11-second browser capture of the preserved 12-to-10 o'clock first-tomoe travel, second mark materializing near 2 o'clock, shared-node Mangekyō awakening, and center-pupil-to-Eternal-core morph.
-- `advanced-morph.webm` — 11-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, pupil-grown Eternal core, inherited blade overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
-- `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and code-drawn fan backdrop.
+- `shared-element-morphs.webm` — focused 14-second browser capture of the peripheral crest, preserved 12-to-10 o'clock first-tomoe travel, second mark materializing near 2 o'clock, shared-node Mangekyō awakening, and viscous center-pupil-to-Eternal-core morph.
+- `advanced-morph.webm` — 15-second browser capture of the viewport-anchored awakening, explicit Amaterasu cast, continuously moving black fire, viscous pupil-grown Eternal core, inherited blade overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
+- `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and cropped peripheral uchiwa watermark.
 - `desktop-two-tomoe.png` — two-tomoe state with the preserved first mark near 10 o'clock and the newly revealed mark near 2 o'clock.
 - `desktop-amaterasu-ready.png` — Mangekyō with the explicit, idle **Cast Amaterasu** control.
 - `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and actively burning procedural fire.
 - `desktop-eternal-mangekyo.png` — corrected Eternal form with the pupil-grown triangular core, inherited three-blade overlay, and persistent flame field.
 - `desktop-rinnegan.png` — 1440×1000 corrected two-band six-tomoe Rinnegan, unlocked navigation, and explicit dōjutsu distinction.
-- `mobile-mangekyo.png` — 390×844 corrected Mangekyō, sclera strain, original flames, and responsive fan backdrop after touch progression.
+- `mobile-mangekyo.png` — 390×844 corrected Mangekyō, sclera strain, original flames, and an uncluttered phone backdrop after touch progression.
 - `mobile-two-tomoe.png` — 390×844 two-tomoe state with the preserved 10-and-2 o'clock arrangement after touch progression.
 - `mobile-eternal-mangekyo.png` — 390×844 Eternal state with the pupil-grown core and inherited blade overlay.
 - `mobile-rinnegan.png` — 390×844 two-band Rinnegan and flame framing after touch progression.
@@ -25,6 +25,8 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - `before-opposed-two-tomoe.png` — the prior opposed two-tomoe placement preserved before the 12-to-10 and 2 o'clock choreography.
 - `before-separate-eternal-core.png` — the prior Eternal center rendered by a separate circular core rather than the persistent pupil path.
 - `before-eternal-core-swap.webm` — the prior Mangekyō-to-Eternal sequence in which the pupil retreated before a separate core appeared.
+- `before-centered-folding-fan.png` — the prior centered folding-fan composition that shared the eye's centerline and made the ocular artwork read off-center.
+- `before-geometric-eternal-morph.webm` — the prior direct geometric pupil-to-core interpolation preserved before the rounded multi-keyframe swell.
 
 ## Verification checklist
 
@@ -32,8 +34,9 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The eye uses an asymmetric vector aperture, softened lid contours, and a restrained corneal sheen rather than a blocky geometric mask.
 - [x] Sixteen asymmetrical vessels fork across a diffuse, progressively deepened sclera flush instead of using four mirrored decorative lines.
 - [x] Primary vessels draw first and fine capillaries follow on a restrained 400ms delay, finishing with the main eye transition.
-- [x] An oversized code-drawn uchiwa fan replaces the generic rotating halo and breathing circular aura at desktop and phone sizes.
-- [x] The fan has no looping animation; it receives only restrained pointer depth while Three.js owns the sparse particles.
+- [x] A cropped code-drawn uchiwa silhouette sits beyond the eye's right edge instead of sharing its centerline or reading as a frame around it.
+- [x] The fan has no looping animation, receives only restrained pointer depth, and is removed on phone layouts where it cannot avoid the ocular silhouette.
+- [x] The poster frame remains locked to the viewport origin after mouse, touch, and keyboard activation rather than scrolling toward atmospheric overflow.
 - [x] The first tomoe remains visible as it travels counterclockwise from 12 toward 10 o'clock while the second mark materializes near 2 o'clock.
 - [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.2–1.7 seconds.
 - [x] The same three SVG path nodes interpolate from tomoe silhouettes into Mangekyō lens curves as the ring expands and petals grow behind them.
@@ -48,7 +51,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The Rinnegan draws its four concentric ripples into the existing iris while suppressing the prior dotted texture.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 1.65–2.15 seconds without a full-eye crossfade.
 - [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
-- [x] The same center pupil path broadens into Eternal's black triangular core before the three inherited blades grow outward from it.
+- [x] The same center pupil path swells into a rounded black mass, pulls through three soft lobes, and settles as Eternal's triangular core before the inherited blades finish growing outward.
 - [x] Eternal's inherited blades extend from the transformed pupil without an opacity crossfade or complete replacement layer.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.
