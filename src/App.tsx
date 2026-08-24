@@ -105,7 +105,6 @@ function App() {
         </div>
 
         <div className="eye-scene" data-eye-stage={stage.id}>
-          <div key={`wave-${stage.id}`} className="pressure-ring" aria-hidden="true" />
           <button
             className="eye-trigger"
             type="button"

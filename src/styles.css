@@ -119,9 +119,81 @@ button {
   opacity: 0.78;
 }
 
-.chakra-field {
+.clan-fan-backdrop {
   position: absolute;
   z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(68vw, 46rem);
+  height: min(86svh, 54rem);
+  overflow: visible;
+  opacity: 0.27;
+  filter: drop-shadow(0 0 4.5rem rgb(153 8 22 / 34%));
+  transform: translate(-50%, -48%)
+    translate(calc(var(--pointer-x) * -1.05rem), calc(var(--pointer-y) * -0.68rem))
+    rotate(-4deg);
+  transition:
+    opacity 900ms ease,
+    transform 500ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.experience--dormant .clan-fan-backdrop {
+  opacity: 0.17;
+}
+
+.experience--mangekyo .clan-fan-backdrop,
+.experience--eternal-mangekyo .clan-fan-backdrop {
+  opacity: 0.33;
+}
+
+.clan-fan-backdrop__shadow {
+  fill: #6f0712;
+  opacity: 0.28;
+  filter: url(#clan-fan-ink);
+}
+
+.clan-fan-backdrop__canopy {
+  fill: url(#clan-fan-red);
+  stroke: #070506;
+  stroke-width: 12;
+}
+
+.clan-fan-backdrop__lower {
+  fill: url(#clan-fan-bone);
+  stroke: #070506;
+  stroke-width: 12;
+}
+
+.clan-fan-backdrop__handle {
+  fill: #241619;
+  stroke: #070506;
+  stroke-width: 12;
+}
+
+.clan-fan-backdrop__rib,
+.clan-fan-backdrop__seam {
+  fill: none;
+  stroke: #14070a;
+  stroke-linecap: round;
+  stroke-width: 7;
+  opacity: 0.58;
+}
+
+.clan-fan-backdrop__seam {
+  stroke: #e2d5d1;
+  stroke-width: 9;
+  opacity: 0.34;
+}
+
+.clan-fan-backdrop__pin {
+  fill: #0b0708;
+  stroke: #8c1721;
+  stroke-width: 6;
+}
+
+.chakra-field {
+  position: absolute;
+  z-index: 1;
   inset: 0;
   overflow: hidden;
   opacity: 1;
@@ -286,30 +358,6 @@ h1 {
   transform-style: preserve-3d;
   animation: awakening-enter 950ms both cubic-bezier(.16, 1, .3, 1);
   transition: transform 260ms cubic-bezier(.2, .8, .2, 1);
-}
-
-.eye-scene::before {
-  position: absolute;
-  z-index: -1;
-  width: 69%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  opacity: 0.34;
-  background: var(--crimson);
-  filter: blur(90px);
-  content: '';
-  animation: aura-breathe 5s ease-in-out infinite;
-}
-
-.pressure-ring {
-  position: absolute;
-  z-index: -1;
-  width: 53%;
-  aspect-ratio: 1;
-  border: 1px solid color-mix(in srgb, var(--crimson-bright), transparent 22%);
-  border-radius: 50%;
-  opacity: 0;
-  animation: pressure-wave 2200ms cubic-bezier(.16, .62, .18, 1);
 }
 
 .eye-trigger {
@@ -921,16 +969,6 @@ footer p {
   100% { opacity: 1; filter: blur(0); transform: perspective(62rem) scale(1); }
 }
 
-@keyframes pressure-wave {
-  0% { opacity: 0.75; transform: scale(0.45); }
-  100% { opacity: 0; transform: scale(1.75); }
-}
-
-@keyframes aura-breathe {
-  0%, 100% { opacity: 0.25; transform: scale(0.9); }
-  50% { opacity: 0.44; transform: scale(1.05); }
-}
-
 @keyframes chakra-rise {
   0% { opacity: 0; transform: translateY(4rem) scaleY(0.4); }
   15% { opacity: 0.25; }
@@ -961,6 +999,22 @@ footer p {
 @media (max-width: 900px) {
   .experience {
     overflow-y: auto;
+  }
+
+  .experience .clan-fan-backdrop {
+    top: 47%;
+    width: min(112vw, 38rem);
+    height: 75svh;
+    opacity: 0.22;
+  }
+
+  .experience--dormant .clan-fan-backdrop {
+    opacity: 0.14;
+  }
+
+  .experience--mangekyo .clan-fan-backdrop,
+  .experience--eternal-mangekyo .clan-fan-backdrop {
+    opacity: 0.27;
   }
 
   .awakening {
@@ -1124,8 +1178,7 @@ footer p {
     transform: none !important;
   }
 
-  .chakra-particle,
-  .pressure-ring {
+  .chakra-particle {
     display: none;
   }
 }

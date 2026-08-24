@@ -10,6 +10,71 @@ interface AccentController {
   setAccent: (accent: string) => void;
 }
 
+const FAN_RIBS = [
+  'M 320 468 L 95 305',
+  'M 320 468 L 116 220',
+  'M 320 468 L 175 125',
+  'M 320 468 L 245 75',
+  'M 320 468 L 320 52',
+  'M 320 468 L 395 75',
+  'M 320 468 L 465 125',
+  'M 320 468 L 524 220',
+  'M 320 468 L 545 305',
+] as const;
+
+function ClanFanBackdrop() {
+  return (
+    <svg
+      className="clan-fan-backdrop"
+      viewBox="0 0 640 760"
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="clan-fan-red" x1="18%" y1="8%" x2="82%" y2="92%">
+          <stop offset="0%" stopColor="#ee2635" />
+          <stop offset="52%" stopColor="#a70e1b" />
+          <stop offset="100%" stopColor="#3f050c" />
+        </linearGradient>
+        <linearGradient id="clan-fan-bone" x1="22%" y1="12%" x2="80%" y2="88%">
+          <stop offset="0%" stopColor="#d8ceca" />
+          <stop offset="100%" stopColor="#4a3d40" />
+        </linearGradient>
+        <filter id="clan-fan-ink" x="-30%" y="-25%" width="160%" height="165%">
+          <feGaussianBlur stdDeviation="18" />
+        </filter>
+      </defs>
+
+      <path
+        className="clan-fan-backdrop__shadow"
+        d="M 320 32 C 169 32 55 154 55 305 C 55 420 126 513 235 548 L 254 703 C 258 733 283 750 320 750 C 357 750 382 733 386 703 L 405 548 C 514 513 585 420 585 305 C 585 154 471 32 320 32 Z"
+      />
+      <path
+        className="clan-fan-backdrop__handle"
+        data-shape="clan-fan-handle"
+        d="M 287 433 L 353 433 L 378 694 C 381 716 365 731 344 731 L 296 731 C 275 731 259 716 262 694 Z"
+      />
+      <path
+        className="clan-fan-backdrop__lower"
+        d="M 80 305 C 92 408 165 486 263 514 L 279 576 L 361 576 L 377 514 C 475 486 548 408 560 305 Z"
+      />
+      <path
+        className="clan-fan-backdrop__canopy"
+        data-shape="clan-fan-canopy"
+        d="M 80 305 C 80 164 186 52 320 52 C 454 52 560 164 560 305 Z"
+      />
+      <g className="clan-fan-backdrop__ribs">
+        {FAN_RIBS.map((d) => (
+          <path key={d} className="clan-fan-backdrop__rib" d={d} />
+        ))}
+      </g>
+      <path className="clan-fan-backdrop__seam" d="M 80 305 C 202 326 438 326 560 305" />
+      <circle className="clan-fan-backdrop__pin" cx="320" cy="468" r="13" />
+    </svg>
+  );
+}
+
 function seededRandom(seed: number) {
   let state = seed >>> 0;
   return () => {
@@ -86,20 +151,6 @@ export function CinematicField({ accent, reducedMotion }: CinematicFieldProps) {
         const particles = new THREE.Points(particleGeometry, particleMaterial);
         field.add(particles);
 
-        const haloGeometry = new THREE.RingGeometry(1.72, 1.77, 128);
-        const haloMaterial = new THREE.MeshBasicMaterial({
-          blending: THREE.AdditiveBlending,
-          color: new THREE.Color(accentRef.current),
-          depthWrite: false,
-          opacity: 0.1,
-          side: THREE.DoubleSide,
-          transparent: true,
-        });
-        const halo = new THREE.Mesh(haloGeometry, haloMaterial);
-        halo.position.z = -0.8;
-        halo.scale.set(1.58, 0.76, 1);
-        field.add(halo);
-
         const targetAccent = new THREE.Color(accentRef.current);
         const pointerTarget = new THREE.Vector2();
         const resize = () => {
@@ -135,12 +186,7 @@ export function CinematicField({ accent, reducedMotion }: CinematicFieldProps) {
 
           particles.rotation.z = elapsed * 0.018;
           particles.rotation.y = Math.sin(elapsed * 0.18) * 0.08;
-          halo.rotation.z = elapsed * -0.045;
-          halo.scale.x = 1.58 + Math.sin(elapsed * 0.62) * 0.025;
-          halo.scale.y = 0.76 + Math.cos(elapsed * 0.62) * 0.012;
-
           particleMaterial.color.lerp(targetAccent, 0.022);
-          haloMaterial.color.lerp(targetAccent, 0.022);
           renderer.render(scene, camera);
         });
 
@@ -158,8 +204,6 @@ export function CinematicField({ accent, reducedMotion }: CinematicFieldProps) {
           window.removeEventListener('resize', resize);
           particleGeometry.dispose();
           particleMaterial.dispose();
-          haloGeometry.dispose();
-          haloMaterial.dispose();
           renderer.dispose();
           controllerRef.current = null;
         };
@@ -180,6 +224,7 @@ export function CinematicField({ accent, reducedMotion }: CinematicFieldProps) {
       data-webgl={webglReady ? 'active' : 'fallback'}
       aria-hidden="true"
     >
+      <ClanFanBackdrop />
       <ChakraField />
       <canvas ref={canvasRef} className="cinematic-field__canvas" />
     </div>

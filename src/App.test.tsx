@@ -4,6 +4,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 
 describe('Sharingan Evolution', () => {
+  it('uses an original fan crest as the static background anchor', () => {
+    const { container } = render(<App />);
+
+    expect(container.querySelector('svg.clan-fan-backdrop')).toBeInTheDocument();
+    expect(container.querySelector('[data-shape="clan-fan-canopy"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-shape="clan-fan-handle"]')).toBeInTheDocument();
+    expect(container.querySelectorAll('.clan-fan-backdrop__rib')).toHaveLength(9);
+    expect(container.querySelector('.pressure-ring')).not.toBeInTheDocument();
+  });
+
   beforeEach(() => {
     vi.mocked(window.matchMedia).mockImplementation((query: string) => ({
       matches: false,

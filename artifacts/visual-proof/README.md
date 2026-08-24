@@ -4,13 +4,14 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
-- `advanced-morph.webm` — 12-second browser capture of the paced three-tomoe awakening, shared-node Mangekyō morph, and inherited Eternal overlay.
-- `desktop-dormant.png` — 1440×1000 initial poster and awakening control.
+- `advanced-morph.webm` — 11-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, and inherited Eternal overlay.
+- `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and code-drawn fan backdrop.
 - `desktop-two-tomoe.png` — corrected 180° two-tomoe spacing.
-- `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the final distressed sclera treatment.
+- `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and fan backdrop.
 - `desktop-eternal-mangekyo.png` — corrected Eternal form with the inherited three-blade overlay.
 - `desktop-rinnegan.png` — 1440×1000 complete sequence, unlocked navigation, and explicit Rinnegan distinction.
-- `mobile-mangekyo.png` — 390×844 corrected Mangekyō and sclera strain after touch progression.
+- `mobile-mangekyo.png` — 390×844 corrected Mangekyō, sclera strain, and responsive fan backdrop after touch progression.
+- `before-generic-halo.png` — the previous rotating ring and breathing circular aura preserved as regression evidence.
 - `before-sclera-strain.png` — the previous four clean sclera strokes preserved as regression evidence.
 - `before-mangekyo.png` and `before-eternal-mangekyo.png` — the inaccurate generic-blade patterns preserved as regression evidence.
 
@@ -20,7 +21,8 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The eye uses an asymmetric vector aperture, softened lid contours, and a restrained corneal sheen rather than a blocky geometric mask.
 - [x] Sixteen asymmetrical vessels fork across a diffuse, progressively deepened sclera flush instead of using four mirrored decorative lines.
 - [x] Primary vessels draw first and fine capillaries follow on a restrained 400ms delay, finishing with the main eye transition.
-- [x] Capable devices receive a Three.js Z-depth particle field and halo; CSS remains the complete fallback.
+- [x] An oversized code-drawn uchiwa fan replaces the generic rotating halo and breathing circular aura at desktop and phone sizes.
+- [x] The fan has no looping animation; it receives only restrained pointer depth while Three.js owns the sparse particles.
 - [x] Two tomoe sit opposite each other at 180°.
 - [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.2–1.7 seconds.
 - [x] The same three SVG path nodes interpolate from tomoe silhouettes into Mangekyō lens curves as the ring expands and petals grow behind them.

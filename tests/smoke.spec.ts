@@ -6,6 +6,12 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
   await expect(page).toHaveTitle(/Sharingan Evolution/);
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
   await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', 'active');
+  await expect(page.locator('.clan-fan-backdrop')).toBeVisible();
+  await expect(page.locator('.clan-fan-backdrop')).toHaveCSS('animation-name', 'none');
+  const removedHalo = await page.locator('.eye-scene').evaluate(
+    (node) => getComputedStyle(node, '::before').content,
+  );
+  expect(removedHalo).toBe('none');
   await page.locator('.eye-scene').evaluate((node) => {
     node.setAttribute('data-browser-instance', 'persistent');
   });
