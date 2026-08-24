@@ -59,13 +59,14 @@ Behavior coverage includes sequential progression, paced in-place eye transforma
 
 Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
 
-- 11-second WebM showing the fan-backed tomoe-to-Mangekyō morph and Eternal overlay in motion
+- 12-second WebM showing the fan-backed tomoe-to-Mangekyō morph, Amaterasu awakening, Eternal overlay, and corrected Rinnegan
 - 1440×1000 dormant desktop poster
 - 1440×1000 corrected two-tomoe, Mangekyō, and Eternal Mangekyō states
 - 1440×1000 fully discovered Rinnegan state
-- 390×844 touch-sized corrected Mangekyō state
+- 390×844 touch-sized corrected Mangekyō and Rinnegan states
 - before-and-after evidence for the advanced-eye redraw
 - before-and-after evidence for the generic halo replacement
+- before-and-after evidence for the single-orbit Rinnegan correction and Amaterasu addition
 - a concise written verification checklist
 
 ## Lore and IP boundary
