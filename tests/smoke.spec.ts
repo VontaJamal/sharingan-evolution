@@ -5,6 +5,7 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
 
   await expect(page).toHaveTitle(/Sharingan Evolution/);
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
+  await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', 'active');
   await page.locator('.eye-scene').evaluate((node) => {
     node.setAttribute('data-browser-instance', 'persistent');
   });
@@ -19,6 +20,21 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
 
   await page.getByRole('button', { name: 'Restart' }).click();
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
+});
+
+test('paces ocular symbols into the persistent eye', async ({ page }) => {
+  await page.goto('/');
+
+  await page.keyboard.press('Enter');
+  const transition = await page.locator('.ocular-pattern-layer--tomoe').evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { duration: style.transitionDuration, property: style.transitionProperty };
+  });
+
+  expect(transition).toEqual({
+    duration: '0.8s, 1.1s, 0s',
+    property: 'opacity, transform, visibility',
+  });
 });
 
 test('keeps the experience usable in a phone viewport', async ({ browser }) => {
@@ -44,6 +60,7 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   await page.goto('/');
 
   await expect(page.locator('main')).toHaveAttribute('data-motion', 'reduced');
+  await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', 'fallback');
   await expect(page.locator('.chakra-particle').first()).toHaveCSS('display', 'none');
   await context.close();
 });

@@ -119,12 +119,18 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
       <desc id={`eye-description-${stage.id}`}>{stage.lore}</desc>
       <defs>
         <clipPath id="eye-clip">
-          <path d="M 55 242 C 132 120 230 80 320 80 C 423 80 519 129 585 242 C 503 354 413 400 320 400 C 217 400 125 353 55 242 Z" />
+          <path d="M 49 244 C 122 158 218 116 323 120 C 430 123 522 168 591 239 C 522 306 430 341 320 345 C 211 347 120 314 49 244 Z" />
         </clipPath>
-        <radialGradient id="sclera-light" cx="50%" cy="50%" r="58%">
-          <stop offset="0%" stopColor="#f0e8e2" />
-          <stop offset="70%" stopColor="#b9a9a5" />
-          <stop offset="100%" stopColor="#35282b" />
+        <linearGradient id="sclera-light" x1="10%" y1="10%" x2="88%" y2="90%">
+          <stop offset="0%" stopColor="#8d7778" />
+          <stop offset="36%" stopColor="#f1e8e2" />
+          <stop offset="68%" stopColor="#c4b1ae" />
+          <stop offset="100%" stopColor="#3a292d" />
+        </linearGradient>
+        <radialGradient id="dormant-sclera" cx="48%" cy="42%" r="68%">
+          <stop offset="0%" stopColor="#50484a" />
+          <stop offset="58%" stopColor="#312d2f" />
+          <stop offset="100%" stopColor="#171416" />
         </radialGradient>
         <radialGradient id="crimson-iris" cx="44%" cy="40%" r="62%">
           <stop offset="0%" stopColor="#ff443b" />
@@ -136,6 +142,11 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           <stop offset="55%" stopColor="#886cae" />
           <stop offset="100%" stopColor="#2e223d" />
         </radialGradient>
+        <linearGradient id="corneal-light" x1="25%" y1="18%" x2="68%" y2="78%">
+          <stop offset="0%" stopColor="#fff" stopOpacity="0.2" />
+          <stop offset="42%" stopColor="#fff" stopOpacity="0.045" />
+          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
         <filter id="iris-glow" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="10" result="blur" />
           <feMerge>
@@ -145,7 +156,7 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
         </filter>
       </defs>
 
-      <ellipse className="eye-shadow" cx="320" cy="260" rx="278" ry="172" />
+      <ellipse className="eye-shadow" cx="321" cy="258" rx="286" ry="139" />
 
       <g clipPath="url(#eye-clip)" className="eye-surface">
         <rect className="sclera" x="40" y="65" width="560" height="350" />
@@ -156,7 +167,7 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           <path d="M 559 288 C 513 270 490 268 457 253" />
         </g>
 
-        <g className="iris" transform="translate(320 240)" filter={isAwakened ? 'url(#iris-glow)' : undefined}>
+        <g className="iris" transform="translate(325 237) scale(.82)" filter={isAwakened ? 'url(#iris-glow)' : undefined}>
           <circle className="iris-aura" r="153" />
           <circle className="iris-disc" r="143" />
           <circle className="iris-texture" r="132" />
@@ -187,13 +198,16 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           />
         </g>
 
-        <path className="lid-shadow lid-shadow--top" d="M 35 232 C 140 66 251 41 325 52 C 451 61 542 145 607 234 C 508 137 417 105 320 106 C 210 106 128 156 35 232 Z" />
-        <path className="lid-shadow lid-shadow--bottom" d="M 37 252 C 135 363 224 410 320 414 C 425 414 518 358 606 248 C 516 334 416 373 319 371 C 215 369 132 332 37 252 Z" />
+        <path className="corneal-sheen" d="M 109 221 C 188 151 277 132 365 143 C 300 151 231 178 174 230 C 149 230 126 227 109 221 Z" />
+        <path className="lid-shadow lid-shadow--top" d="M 34 239 C 111 126 222 94 333 104 C 449 114 542 171 607 237 C 520 179 432 142 328 135 C 223 129 129 166 49 246 Z" />
+        <path className="lid-shadow lid-shadow--bottom" d="M 47 253 C 120 319 211 350 320 349 C 431 346 523 309 597 244 C 523 327 431 369 320 373 C 207 375 112 337 47 253 Z" />
       </g>
 
-      <path className="lid-line" d="M 55 242 C 132 120 230 80 320 80 C 423 80 519 129 585 242" />
-      <path className="lid-line lid-line--lower" d="M 55 242 C 125 353 217 400 320 400 C 413 400 503 354 585 242" />
-      <path className="ink-stroke" d="M 35 229 C 118 107 229 57 331 65 C 442 71 529 137 606 236" />
+      <path className="lid-line" data-shape="eye-aperture" d="M 49 244 C 122 158 218 116 323 120 C 430 123 522 168 591 239" />
+      <path className="lid-line lid-line--lower" d="M 49 244 C 120 314 211 347 320 345 C 430 341 522 306 591 239" />
+      <path className="ink-stroke" d="M 36 236 C 113 133 220 96 332 107 C 449 118 541 173 605 237" />
+      <path className="lid-crease lid-crease--top" d="M 96 176 C 170 111 266 88 357 105 C 436 119 498 152 548 190" />
+      <path className="lid-crease lid-crease--lower" d="M 124 326 C 209 374 324 384 430 351" />
     </svg>
   );
 }

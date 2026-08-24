@@ -126,5 +126,6 @@ describe('Sharingan Evolution', () => {
 
     const { container } = render(<App />);
     expect(container.querySelector('main')).toHaveAttribute('data-motion', 'reduced');
+    expect(container.querySelector('.cinematic-field')).toHaveAttribute('data-webgl', 'fallback');
   });
 });

@@ -3,6 +3,16 @@ import { describe, expect, it } from 'vitest';
 import { SASUKE_STAGES } from '../stages';
 import { EyeArtwork } from './EyeArtwork';
 
+describe('cinematic eye canvas', () => {
+  it('uses an organic aperture with layered corneal and lid depth', () => {
+    const { container } = render(<EyeArtwork stage={SASUKE_STAGES[0]} />);
+
+    expect(container.querySelector('[data-shape="eye-aperture"]')).toBeInTheDocument();
+    expect(container.querySelector('.corneal-sheen')).toBeInTheDocument();
+    expect(container.querySelectorAll('.lid-crease')).toHaveLength(2);
+  });
+});
+
 describe('base Sharingan artwork structure', () => {
   it('places two tomoe opposite each other instead of inheriting three-tomoe spacing', () => {
     const { container } = render(<EyeArtwork stage={SASUKE_STAGES[2]} />);

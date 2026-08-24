@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type PointerEvent } from 'react';
-import { ChakraField } from './components/ChakraField';
+import { CinematicField } from './components/CinematicField';
 import { EyeArtwork } from './components/EyeArtwork';
 import { usePrefersReducedMotion } from './hooks/usePrefersReducedMotion';
 import { SASUKE_STAGES } from './stages';
@@ -12,6 +12,11 @@ function App() {
   const reducedMotion = usePrefersReducedMotion();
   const stage = SASUKE_STAGES[stageIndex];
   const isFinalStage = stageIndex === LAST_STAGE_INDEX;
+  const fieldAccent = stage.kind === 'rinnegan'
+    ? '#b895e1'
+    : stage.kind === 'dormant'
+      ? '#7d1c24'
+      : '#ec1f2d';
 
   const selectStage = useCallback((nextIndex: number) => {
     setStageIndex(nextIndex);
@@ -69,7 +74,7 @@ function App() {
       onPointerMove={handlePointerMove}
     >
       <a className="skip-link" href="#evolution-controls">Skip to evolution controls</a>
-      <ChakraField />
+      <CinematicField accent={fieldAccent} reducedMotion={reducedMotion} />
       <div className="ink-atmosphere" aria-hidden="true" />
 
       <header className="masthead">

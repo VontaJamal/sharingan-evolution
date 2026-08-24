@@ -96,14 +96,43 @@ button {
   transition: transform 350ms cubic-bezier(.2, .8, .2, 1);
 }
 
-.chakra-field {
+.cinematic-field {
   position: absolute;
   z-index: -1;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+}
+
+.cinematic-field__canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+.cinematic-field.is-webgl-ready .cinematic-field__canvas {
+  opacity: 0.78;
+}
+
+.chakra-field {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  opacity: 1;
+  pointer-events: none;
   transform: translate(calc(var(--pointer-x) * 0.45rem), calc(var(--pointer-y) * 0.3rem));
-  transition: transform 450ms cubic-bezier(.2, .8, .2, 1);
+  transition:
+    opacity 900ms ease,
+    transform 450ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.cinematic-field.is-webgl-ready .chakra-field {
+  opacity: 0.18;
 }
 
 .chakra-particle {
@@ -279,7 +308,7 @@ h1 {
   border: 1px solid color-mix(in srgb, var(--crimson-bright), transparent 22%);
   border-radius: 50%;
   opacity: 0;
-  animation: pressure-wave 850ms cubic-bezier(.12, .7, .15, 1);
+  animation: pressure-wave 1300ms cubic-bezier(.12, .7, .15, 1);
 }
 
 .eye-trigger {
@@ -315,14 +344,14 @@ h1 {
   display: block;
   width: 100%;
   overflow: visible;
-  filter: drop-shadow(0 1.6rem 3.2rem rgb(0 0 0 / 80%));
+  filter: drop-shadow(0 1.45rem 2.7rem rgb(0 0 0 / 78%));
   transition: transform 180ms ease;
 }
 
 .eye-shadow {
   fill: #000;
-  opacity: 0.92;
-  filter: blur(22px);
+  opacity: 0.86;
+  filter: blur(28px);
 }
 
 .sclera {
@@ -330,7 +359,7 @@ h1 {
 }
 
 .eye-artwork--dormant .sclera {
-  fill: #302d2e;
+  fill: url(#dormant-sclera);
 }
 
 .eye-veins {
@@ -341,7 +370,7 @@ h1 {
   stroke-linecap: round;
   stroke-width: 2.2;
   opacity: 0.46;
-  transition: stroke-dashoffset 480ms cubic-bezier(.16, 1, .3, 1);
+  transition: stroke-dashoffset 850ms cubic-bezier(.16, 1, .3, 1);
 }
 
 .eye-veins.is-visible {
@@ -373,7 +402,7 @@ h1 {
 }
 
 .eye-artwork--dormant .iris-disc {
-  fill: #1a1718;
+  fill: #211e20;
   stroke: #070607;
 }
 
@@ -408,20 +437,24 @@ h1 {
 .tomoe-glyph {
   transform-box: fill-box;
   transform-origin: center;
-  animation: ocular-symbol-emerge 420ms cubic-bezier(.16, 1, .3, 1);
+  animation: ocular-symbol-emerge 950ms 80ms both cubic-bezier(.16, 1, .3, 1);
 }
 
 .ocular-pattern-layer {
+  opacity: 0;
   visibility: hidden;
-  transform: scale(0.01) rotate(-12deg);
+  transform: scale(0.68) rotate(-18deg);
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    transform 520ms cubic-bezier(.16, 1, .3, 1),
-    visibility 0s linear 520ms;
+    opacity 800ms cubic-bezier(.2, .72, .2, 1),
+    transform 1100ms cubic-bezier(.16, 1, .3, 1),
+    visibility 0s linear 1100ms;
+  will-change: opacity, transform;
 }
 
 .ocular-pattern-layer.is-active {
+  opacity: 1;
   visibility: visible;
   transform: scale(1) rotate(0);
   transition-delay: 0s;
@@ -458,10 +491,13 @@ h1 {
 
 .pupil {
   fill: #050204;
+  opacity: 1;
   transform: scale(1);
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 420ms cubic-bezier(.16, 1, .3, 1);
+  transition:
+    opacity 650ms ease,
+    transform 850ms cubic-bezier(.16, 1, .3, 1);
 }
 
 .pupil--dormant {
@@ -469,6 +505,7 @@ h1 {
 }
 
 .pupil--hidden {
+  opacity: 0;
   transform: scale(0);
 }
 
@@ -478,15 +515,26 @@ h1 {
   transform: rotate(38deg);
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 380ms cubic-bezier(.16, 1, .3, 1);
+  transition:
+    opacity 620ms ease,
+    transform 760ms cubic-bezier(.16, 1, .3, 1);
 }
 
 .iris-glint--hidden {
+  opacity: 0;
   transform: rotate(38deg) scale(0);
+}
+
+.corneal-sheen {
+  fill: url(#corneal-light);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .lid-shadow {
   fill: #080708;
+  opacity: 0.9;
+  filter: blur(2.4px);
 }
 
 .lid-shadow--top {
@@ -502,18 +550,34 @@ h1 {
   fill: none;
   stroke: #1a1719;
   stroke-linecap: round;
-  stroke-width: 15;
+  stroke-linejoin: round;
+  stroke-width: 10;
 }
 
 .lid-line--lower {
   stroke: #0a090a;
-  stroke-width: 12;
+  stroke-width: 6;
 }
 
 .ink-stroke {
   stroke: #000;
-  stroke-width: 27;
-  opacity: 0.68;
+  stroke-width: 17;
+  opacity: 0.72;
+}
+
+.lid-crease {
+  fill: none;
+  stroke: #47141c;
+  stroke-linecap: round;
+  stroke-width: 3;
+  opacity: 0.38;
+  filter: blur(0.5px);
+}
+
+.lid-crease--lower {
+  stroke: #26171b;
+  stroke-width: 2;
+  opacity: 0.48;
 }
 
 .stage-narrative {
@@ -702,9 +766,10 @@ footer p {
 }
 
 @keyframes ocular-symbol-emerge {
-  0% { transform: scale(0); }
-  65% { transform: scale(1.14); }
-  100% { transform: scale(1); }
+  0% { opacity: 0; transform: scale(0.18) rotate(-24deg); }
+  48% { opacity: 0.78; }
+  72% { opacity: 1; transform: scale(1.14) rotate(3deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
 }
 
 @media (max-width: 900px) {
@@ -866,6 +931,7 @@ footer p {
   }
 
   .eye-scene,
+  .cinematic-field,
   .chakra-field,
   .ink-atmosphere {
     transform: none !important;
