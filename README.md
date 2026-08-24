@@ -60,7 +60,7 @@ Behavior coverage includes sequential progression, paced in-place eye transforma
 
 Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
 
-- short WebM showing the fan-backed tomoe-to-Mangekyō morph, explicit Amaterasu cast, moving black fire, Eternal overlay, and corrected Rinnegan
+- 14-second WebM showing the fan-backed tomoe-to-Mangekyō morph, explicit Amaterasu cast, moving black fire, Eternal overlay, and corrected Rinnegan
 - 1440×1000 dormant desktop poster
 - 1440×1000 corrected two-tomoe, Mangekyō, and Eternal Mangekyō states
 - 1440×1000 fully discovered Rinnegan state

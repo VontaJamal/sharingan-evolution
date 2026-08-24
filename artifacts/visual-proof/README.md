@@ -4,7 +4,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
-- `advanced-morph.webm` — short browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, inherited Eternal overlay, and two-band Rinnegan reveal.
+- `advanced-morph.webm` — 14-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, inherited Eternal overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
 - `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and code-drawn fan backdrop.
 - `desktop-two-tomoe.png` — corrected 180° two-tomoe spacing.
 - `desktop-amaterasu-ready.png` — Mangekyō with the explicit, idle **Cast Amaterasu** control.
