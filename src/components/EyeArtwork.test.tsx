@@ -92,7 +92,7 @@ describe('Sasuke Mangekyō artwork structure', () => {
     expect(container.querySelector('.ocular-pattern-layer--eternal')).not.toHaveClass('is-active');
   });
 
-  it('swells the persistent pupil into Eternal’s lobed three-blade center', () => {
+  it('pulls the persistent pupil continuously into Eternal’s three inherited blades', () => {
     const { container, rerender } = render(<EyeArtwork stage={SASUKE_STAGES[4]} />);
     const pupil = container.querySelector('.pupil');
 
@@ -102,10 +102,14 @@ describe('Sasuke Mangekyō artwork structure', () => {
 
     expect(container.querySelectorAll('[data-shape="sasuke-mangekyo-petal"]')).toHaveLength(6);
     expect(container.querySelectorAll('[data-shape="sasuke-mangekyo-lens"]')).toHaveLength(3);
-    expect(container.querySelectorAll('[data-shape="itachi-inherited-blade"]')).toHaveLength(3);
+    const inheritedBlades = container.querySelectorAll('[data-shape="itachi-inherited-blade"]');
+    expect(inheritedBlades).toHaveLength(3);
+    inheritedBlades.forEach((blade) => {
+      expect(blade).toHaveAttribute('data-morph-origin', 'pupil');
+    });
     expect(container.querySelector('.pupil')).toBe(pupil);
     expect(pupil).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
-    expect(pupil).toHaveAttribute('data-morph-style', 'viscous');
+    expect(pupil).toHaveAttribute('data-morph-style', 'ink-pull');
     expect(pupil).toHaveClass('pupil--eternal');
     expect(container.querySelector('.eternal-core')).not.toBeInTheDocument();
   });

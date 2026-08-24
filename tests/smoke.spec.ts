@@ -203,8 +203,12 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   await expect(page.locator('.amaterasu-field')).toHaveAttribute('data-frame', reducedFrame ?? '1');
   await page.getByRole('button', { name: /current form/i }).click();
   await expect(page.locator('.pupil')).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
-  await expect(page.locator('.pupil')).toHaveAttribute('data-morph-style', 'viscous');
+  await expect(page.locator('.pupil')).toHaveAttribute('data-morph-style', 'ink-pull');
   await expect(page.locator('.pupil')).toHaveCSS('transition-duration', '1e-05s');
+  await expect(page.locator('[data-shape="itachi-inherited-blade"]').first()).toHaveCSS(
+    'animation-delay',
+    '0s',
+  );
   await context.close();
 });
 
@@ -268,23 +272,28 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
   await expect(sharedPupil).toHaveAttribute('data-browser-instance', 'pupil-to-triangle');
   await expect(sharedPupil).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
-  await expect(sharedPupil).toHaveAttribute('data-morph-style', 'viscous');
-  await expect(sharedPupil).toHaveCSS('animation-name', 'eternal-pupil-bloom');
+  await expect(sharedPupil).toHaveAttribute('data-morph-style', 'ink-pull');
+  await expect(sharedPupil).toHaveCSS('animation-name', 'eternal-pupil-pull');
   await expect(page.locator('.eternal-core')).toHaveCount(0);
-  const bladeMotion = await page.locator('[data-shape="itachi-inherited-blade"]').first().evaluate((node) => {
+  const inheritedBlades = page.locator('[data-shape="itachi-inherited-blade"]');
+  await expect(inheritedBlades).toHaveCount(3);
+  await expect(inheritedBlades.first()).toHaveAttribute('data-morph-origin', 'pupil');
+  const bladeMotion = await inheritedBlades.first().evaluate((node) => {
     const style = getComputedStyle(node);
     return {
-      delay: style.transitionDelay,
-      duration: style.transitionDuration,
-      easing: style.transitionTimingFunction,
-      property: style.transitionProperty,
+      delay: style.animationDelay,
+      duration: style.animationDuration,
+      easing: style.animationTimingFunction,
+      fillMode: style.animationFillMode,
+      name: style.animationName,
     };
   });
   expect(bladeMotion).toEqual({
-    delay: '0.3s',
-    duration: '1.45s',
-    easing: 'cubic-bezier(0.3, 0.02, 0.18, 1)',
-    property: 'transform',
+    delay: '0.18s',
+    duration: '1.42s',
+    easing: 'cubic-bezier(0.35, 0.02, 0.18, 1)',
+    fillMode: 'both',
+    name: 'eternal-blade-pour',
   });
   const pupilMotion = await sharedPupil.evaluate((node) => {
     const style = getComputedStyle(node);

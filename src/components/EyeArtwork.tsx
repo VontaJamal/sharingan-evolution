@@ -20,7 +20,8 @@ const MANGEKYO_LENS_ANGLES = [0, 120, 240];
 const TOMOE_SHAPE = 'M 0 -14 C 8 -14 14 -8 14 0 C 14 5 12 9 8 12 C 15 15 25 9 32 -10 C 34 3 29 15 19 21 C 9 28 -5 26 -13 17 C -19 11 -20 2 -16 -6 C -15 -10 -13 -12 -11 -13 C -7 -15 -3 -15 0 -14 Z';
 const MANGEKYO_LENS_SHAPE = 'M 47 0 C 47 31 41 61 31 87 C 22 111 10 128 0 136 C -10 128 -22 111 -31 87 C -41 61 -47 31 -47 0 C -47 -31 -41 -61 -31 -87 C -22 -111 -10 -128 0 -136 C 10 -128 22 -111 31 -87 C 41 -61 47 -31 47 0 Z';
 const PUPIL_SHAPE = 'M 0 22 C -7 22 -14 18 -18 11 C -22 5 -22 -5 -18 -11 C -14 -18 -7 -22 0 -22 C 7 -22 14 -18 18 -11 C 22 -5 22 5 18 11 C 14 18 7 22 0 22 Z';
-const ETERNAL_PUPIL_SHAPE = 'M 0 46 C -11 45 -18 32 -17 20 C -18 9 -33 -4 -43 -14 C -37 -25 -17 -22 0 -14 C 17 -22 37 -25 43 -14 C 33 -4 18 9 17 20 C 18 32 11 45 0 46 Z';
+const ETERNAL_PUPIL_SHAPE = 'M 0 34 C -8 34 -13 25 -12 16 C -13 8 -25 -2 -32 -10 C -28 -18 -13 -17 0 -10 C 13 -17 28 -18 32 -10 C 25 -2 13 8 12 16 C 13 25 8 34 0 34 Z';
+const INHERITED_BLADE_SEED = 'M -3 5 C -4 9 -4 14 0 18 C 4 14 4 9 3 5 L 0 -5 Z';
 const SCLERA_VEINS = [
   { side: 'left', weight: 'trunk', d: 'M 50 243 C 69 241 75 234 91 233 C 108 232 117 223 134 224 C 151 225 160 218 174 221' },
   { side: 'left', weight: 'trunk', d: 'M 52 253 C 71 256 81 265 99 266 C 116 267 129 276 147 274 C 159 273 168 270 177 269' },
@@ -179,7 +180,8 @@ function ItachiInheritedPattern() {
           <path
             className="itachi-inherited-blade"
             data-shape="itachi-inherited-blade"
-            d="M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z"
+            data-morph-origin="pupil"
+            d={INHERITED_BLADE_SEED}
           />
         </g>
       ))}
@@ -300,7 +302,7 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           <path
             className={`pupil${stage.kind === 'dormant' ? ' pupil--dormant' : ''}${isEternal ? ' pupil--eternal' : ''}`}
             data-shape={isEternal ? 'eternal-pupil-triangle' : 'pupil'}
-            data-morph-style={isEternal ? 'viscous' : undefined}
+            data-morph-style={isEternal ? 'ink-pull' : undefined}
             d={isEternal ? ETERNAL_PUPIL_SHAPE : PUPIL_SHAPE}
           />
           <ellipse

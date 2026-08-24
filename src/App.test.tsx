@@ -75,7 +75,7 @@ describe('Sharingan Evolution', () => {
     expect(container.querySelector('[data-tomoe-slot="1"]')).toHaveClass('is-visible');
   });
 
-  it('morphs the persistent Mangekyo pupil outward into the Eternal viscous core', async () => {
+  it('pulls the persistent Mangekyo pupil outward into the Eternal inherited blades', async () => {
     const user = userEvent.setup();
     const { container } = render(<App />);
 
@@ -89,7 +89,8 @@ describe('Sharingan Evolution', () => {
     await user.click(screen.getByRole('button', { name: /seek the eternal light/i }));
 
     expect(container.querySelector('[data-shape="eternal-pupil-triangle"]')).toBe(pupil);
-    expect(pupil).toHaveAttribute('data-morph-style', 'viscous');
+    expect(pupil).toHaveAttribute('data-morph-style', 'ink-pull');
+    expect(container.querySelectorAll('[data-morph-origin="pupil"]')).toHaveLength(3);
     expect(pupil).toHaveClass('pupil--eternal');
     expect(container.querySelector('.eternal-core')).not.toBeInTheDocument();
   });

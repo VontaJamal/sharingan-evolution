@@ -4,13 +4,14 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
-- `shared-element-morphs.webm` — focused 14-second browser capture of the peripheral crest, preserved 12-to-10 o'clock first-tomoe travel, second mark materializing near 2 o'clock, shared-node Mangekyō awakening, and viscous center-pupil-to-Eternal-core morph.
-- `advanced-morph.webm` — 15-second browser capture of the viewport-anchored awakening, explicit Amaterasu cast, continuously moving black fire, viscous pupil-grown Eternal core, inherited blade overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
+- `eternal-ink-pull.webm` — focused 4-second browser capture of the settled Mangekyō pupil pulling continuously into the compact Eternal core and three inherited blades.
+- `shared-element-morphs.webm` — 12-second browser capture of the peripheral crest, preserved 12-to-10 o'clock first-tomoe travel, second mark materializing near 2 o'clock, shared-node Mangekyō awakening, and pupil-led Eternal ink pull.
+- `advanced-morph.webm` — 7-second browser capture of the explicit Amaterasu cast, continuously moving black fire, Eternal ink-pull overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
 - `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and cropped peripheral uchiwa watermark.
 - `desktop-two-tomoe.png` — two-tomoe state with the preserved first mark near 10 o'clock and the newly revealed mark near 2 o'clock.
 - `desktop-amaterasu-ready.png` — Mangekyō with the explicit, idle **Cast Amaterasu** control.
 - `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and actively burning procedural fire.
-- `desktop-eternal-mangekyo.png` — corrected Eternal form with the pupil-grown triangular core, inherited three-blade overlay, and persistent flame field.
+- `desktop-eternal-mangekyo.png` — corrected Eternal form with the compact pupil-grown core, inherited three-blade overlay, and active jutsu state.
 - `desktop-rinnegan.png` — 1440×1000 corrected two-band six-tomoe Rinnegan, unlocked navigation, and explicit dōjutsu distinction.
 - `mobile-mangekyo.png` — 390×844 corrected Mangekyō, sclera strain, original flames, and an uncluttered phone backdrop after touch progression.
 - `mobile-two-tomoe.png` — 390×844 two-tomoe state with the preserved 10-and-2 o'clock arrangement after touch progression.
@@ -26,7 +27,8 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - `before-separate-eternal-core.png` — the prior Eternal center rendered by a separate circular core rather than the persistent pupil path.
 - `before-eternal-core-swap.webm` — the prior Mangekyō-to-Eternal sequence in which the pupil retreated before a separate core appeared.
 - `before-centered-folding-fan.png` — the prior centered folding-fan composition that shared the eye's centerline and made the ocular artwork read off-center.
-- `before-geometric-eternal-morph.webm` — the prior direct geometric pupil-to-core interpolation preserved before the rounded multi-keyframe swell.
+- `before-geometric-eternal-morph.webm` — the prior direct geometric pupil-to-core interpolation preserved before the rounded multi-keyframe approach.
+- `before-balloon-eternal-morph.webm` — the rejected blur-heavy transition in which the pupil ballooned into an oversized black disk before collapsing into the Eternal core.
 
 ## Verification checklist
 
@@ -51,15 +53,15 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The Rinnegan draws its four concentric ripples into the existing iris while suppressing the prior dotted texture.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 1.65–2.15 seconds without a full-eye crossfade.
 - [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
-- [x] The same center pupil path swells into a rounded black mass, pulls through three soft lobes, and settles as Eternal's triangular core before the inherited blades finish growing outward.
-- [x] Eternal's inherited blades extend from the transformed pupil without an opacity crossfade or complete replacement layer.
+- [x] The same center pupil expands only slightly and settles into a compact rounded triangular core without blur or an oversized black disk.
+- [x] Eternal's three inherited blade paths begin beneath the pupil and unspool outward through rounded tendril keyframes without an opacity crossfade or replacement layer.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.
 - [x] Restart returns to the dormant eye while discovered-stage navigation remains available.
 - [x] All seven canonical stage names remain visible even while future navigation is locked.
 - [x] The final state is labeled as a distinct left-eye dōjutsu, not a Sharingan form.
 - [x] Focus rings are visible on the primary eye, restart action, and discovered-stage controls.
-- [x] Reduced-motion mode removes continuous particles, depth transforms, transition travel, and delayed intermediate morph states.
+- [x] Reduced-motion mode removes continuous particles, depth transforms, animation delays, transition travel, and intermediate morph states.
 - [x] Reduced-motion mode renders one settled Amaterasu frame instead of running the continuous fire loop.
 - [x] The disclaimer remains visible without competing with the awakening interaction.
 
