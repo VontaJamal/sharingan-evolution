@@ -92,7 +92,7 @@ describe('Sasuke Mangekyō artwork structure', () => {
     expect(container.querySelector('.ocular-pattern-layer--eternal')).not.toHaveClass('is-active');
   });
 
-  it('grows the persistent pupil into Eternal’s triangular three-blade center', () => {
+  it('swells the persistent pupil into Eternal’s lobed three-blade center', () => {
     const { container, rerender } = render(<EyeArtwork stage={SASUKE_STAGES[4]} />);
     const pupil = container.querySelector('.pupil');
 
@@ -105,6 +105,8 @@ describe('Sasuke Mangekyō artwork structure', () => {
     expect(container.querySelectorAll('[data-shape="itachi-inherited-blade"]')).toHaveLength(3);
     expect(container.querySelector('.pupil')).toBe(pupil);
     expect(pupil).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
+    expect(pupil).toHaveAttribute('data-morph-style', 'viscous');
+    expect(pupil).toHaveClass('pupil--eternal');
     expect(container.querySelector('.eternal-core')).not.toBeInTheDocument();
   });
 

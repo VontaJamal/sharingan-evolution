@@ -6,8 +6,15 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
   await expect(page).toHaveTitle(/Sharingan Evolution/);
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
   await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', /^(active|fallback)$/);
-  await expect(page.locator('.clan-fan-backdrop')).toBeVisible();
-  await expect(page.locator('.clan-fan-backdrop')).toHaveCSS('animation-name', 'none');
+  const clanFan = page.locator('.clan-fan-backdrop');
+  await expect(clanFan).toBeVisible();
+  await expect(clanFan).toHaveAttribute('data-composition', 'peripheral');
+  await expect(clanFan).toHaveCSS('animation-name', 'none');
+  const eyeBox = await page.locator('.eye-scene').boundingBox();
+  const fanBox = await clanFan.boundingBox();
+  expect(eyeBox).not.toBeNull();
+  expect(fanBox).not.toBeNull();
+  expect(fanBox!.x).toBeGreaterThanOrEqual(eyeBox!.x + eyeBox!.width);
   const removedHalo = await page.locator('.eye-scene').evaluate(
     (node) => getComputedStyle(node, '::before').content,
   );
@@ -96,6 +103,7 @@ test('keeps the experience usable in a phone viewport', async ({ browser }) => {
   const page = await context.newPage();
   await page.goto('/');
 
+  await expect(page.locator('.clan-fan-backdrop')).toHaveCSS('display', 'none');
   const eye = page.getByRole('button', { name: /awaken the eye/i });
   await expect(eye).toBeInViewport();
   await eye.tap();
@@ -144,6 +152,7 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   await expect(page.locator('.amaterasu-field')).toHaveAttribute('data-frame', reducedFrame ?? '1');
   await page.getByRole('button', { name: /current form/i }).click();
   await expect(page.locator('.pupil')).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
+  await expect(page.locator('.pupil')).toHaveAttribute('data-morph-style', 'viscous');
   await expect(page.locator('.pupil')).toHaveCSS('transition-duration', '1e-05s');
   await context.close();
 });
@@ -208,6 +217,8 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
   await expect(sharedPupil).toHaveAttribute('data-browser-instance', 'pupil-to-triangle');
   await expect(sharedPupil).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
+  await expect(sharedPupil).toHaveAttribute('data-morph-style', 'viscous');
+  await expect(sharedPupil).toHaveCSS('animation-name', 'eternal-pupil-bloom');
   await expect(page.locator('.eternal-core')).toHaveCount(0);
   const bladeMotion = await page.locator('[data-shape="itachi-inherited-blade"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
@@ -219,9 +230,9 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
     };
   });
   expect(bladeMotion).toEqual({
-    delay: '0.22s',
-    duration: '1.75s',
-    easing: 'cubic-bezier(0.55, 0.02, 0.25, 1)',
+    delay: '0.3s',
+    duration: '1.45s',
+    easing: 'cubic-bezier(0.3, 0.02, 0.18, 1)',
     property: 'transform',
   });
   const pupilMotion = await sharedPupil.evaluate((node) => {
@@ -232,7 +243,7 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
     };
   });
   expect(pupilMotion).toEqual({
-    duration: '1.6s, 1.9s',
+    duration: '1.65s, 1.65s',
     property: 'd, transform',
   });
   await page.getByRole('button', { name: /receive six paths power/i }).click();

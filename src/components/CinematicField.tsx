@@ -10,67 +10,53 @@ interface AccentController {
   setAccent: (accent: string) => void;
 }
 
-const FAN_RIBS = [
-  'M 320 468 L 95 305',
-  'M 320 468 L 116 220',
-  'M 320 468 L 175 125',
-  'M 320 468 L 245 75',
-  'M 320 468 L 320 52',
-  'M 320 468 L 395 75',
-  'M 320 468 L 465 125',
-  'M 320 468 L 524 220',
-  'M 320 468 L 545 305',
-] as const;
-
 function ClanFanBackdrop() {
   return (
     <svg
       className="clan-fan-backdrop"
-      viewBox="0 0 640 760"
+      data-composition="peripheral"
+      viewBox="0 0 440 640"
       preserveAspectRatio="xMidYMid meet"
       focusable="false"
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id="clan-fan-red" x1="18%" y1="8%" x2="82%" y2="92%">
-          <stop offset="0%" stopColor="#ee2635" />
-          <stop offset="52%" stopColor="#a70e1b" />
-          <stop offset="100%" stopColor="#3f050c" />
-        </linearGradient>
-        <linearGradient id="clan-fan-bone" x1="22%" y1="12%" x2="80%" y2="88%">
-          <stop offset="0%" stopColor="#d8ceca" />
-          <stop offset="100%" stopColor="#4a3d40" />
+        <radialGradient id="clan-fan-red" cx="36%" cy="22%" r="82%">
+          <stop offset="0%" stopColor="#f52e3c" />
+          <stop offset="48%" stopColor="#9f0c19" />
+          <stop offset="100%" stopColor="#310309" />
+        </radialGradient>
+        <linearGradient id="clan-fan-bone" x1="20%" y1="8%" x2="76%" y2="94%">
+          <stop offset="0%" stopColor="#c9bdbc" />
+          <stop offset="58%" stopColor="#6e5d61" />
+          <stop offset="100%" stopColor="#24181b" />
         </linearGradient>
         <filter id="clan-fan-ink" x="-30%" y="-25%" width="160%" height="165%">
-          <feGaussianBlur stdDeviation="18" />
+          <feGaussianBlur stdDeviation="15" />
         </filter>
       </defs>
 
       <path
         className="clan-fan-backdrop__shadow"
-        d="M 320 32 C 169 32 55 154 55 305 C 55 420 126 513 235 548 L 254 703 C 258 733 283 750 320 750 C 357 750 382 733 386 703 L 405 548 C 514 513 585 420 585 305 C 585 154 471 32 320 32 Z"
+        d="M 220 21 C 103 21 29 117 29 267 C 29 352 84 416 157 441 L 143 576 C 138 620 170 638 220 638 C 270 638 302 620 297 576 L 283 441 C 356 416 411 352 411 267 C 411 117 337 21 220 21 Z"
       />
       <path
         className="clan-fan-backdrop__handle"
         data-shape="clan-fan-handle"
-        d="M 287 433 L 353 433 L 378 694 C 381 716 365 731 344 731 L 296 731 C 275 731 259 716 262 694 Z"
+        d="M 176 371 L 264 371 L 284 579 C 288 612 264 626 220 626 C 176 626 152 612 156 579 Z"
       />
       <path
-        className="clan-fan-backdrop__lower"
-        d="M 80 305 C 92 408 165 486 263 514 L 279 576 L 361 576 L 377 514 C 475 486 548 408 560 305 Z"
+        className="clan-fan-backdrop__guard"
+        data-shape="clan-fan-guard"
+        d="M 48 267 C 63 350 117 398 180 414 C 194 418 206 421 220 421 C 234 421 246 418 260 414 C 323 398 377 350 392 267 Z"
       />
       <path
-        className="clan-fan-backdrop__canopy"
-        data-shape="clan-fan-canopy"
-        d="M 80 305 C 80 164 186 52 320 52 C 454 52 560 164 560 305 Z"
+        className="clan-fan-backdrop__crown"
+        data-shape="clan-fan-crown"
+        d="M 48 267 C 48 125 119 42 220 42 C 321 42 392 125 392 267 Z"
       />
-      <g className="clan-fan-backdrop__ribs">
-        {FAN_RIBS.map((d) => (
-          <path key={d} className="clan-fan-backdrop__rib" d={d} />
-        ))}
-      </g>
-      <path className="clan-fan-backdrop__seam" d="M 80 305 C 202 326 438 326 560 305" />
-      <circle className="clan-fan-backdrop__pin" cx="320" cy="468" r="13" />
+      <path className="clan-fan-backdrop__seam" d="M 48 267 C 137 284 303 284 392 267" />
+      <path className="clan-fan-backdrop__spine" d="M 220 421 L 220 613" />
     </svg>
   );
 }

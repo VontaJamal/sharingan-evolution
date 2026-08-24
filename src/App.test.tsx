@@ -4,13 +4,17 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 
 describe('Sharingan Evolution', () => {
-  it('uses an original fan crest as the static background anchor', () => {
+  it('keeps the original clan fan as a peripheral watermark outside the eye focal plane', () => {
     const { container } = render(<App />);
 
-    expect(container.querySelector('svg.clan-fan-backdrop')).toBeInTheDocument();
-    expect(container.querySelector('[data-shape="clan-fan-canopy"]')).toBeInTheDocument();
+    expect(container.querySelector('svg.clan-fan-backdrop')).toHaveAttribute(
+      'data-composition',
+      'peripheral',
+    );
+    expect(container.querySelector('[data-shape="clan-fan-crown"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-shape="clan-fan-guard"]')).toBeInTheDocument();
     expect(container.querySelector('[data-shape="clan-fan-handle"]')).toBeInTheDocument();
-    expect(container.querySelectorAll('.clan-fan-backdrop__rib')).toHaveLength(9);
+    expect(container.querySelectorAll('.clan-fan-backdrop__rib')).toHaveLength(0);
     expect(container.querySelector('.pressure-ring')).not.toBeInTheDocument();
   });
 
@@ -71,7 +75,7 @@ describe('Sharingan Evolution', () => {
     expect(container.querySelector('[data-tomoe-slot="1"]')).toHaveClass('is-visible');
   });
 
-  it('morphs the persistent Mangekyo pupil outward into the Eternal triangular core', async () => {
+  it('morphs the persistent Mangekyo pupil outward into the Eternal viscous core', async () => {
     const user = userEvent.setup();
     const { container } = render(<App />);
 
@@ -85,6 +89,8 @@ describe('Sharingan Evolution', () => {
     await user.click(screen.getByRole('button', { name: /seek the eternal light/i }));
 
     expect(container.querySelector('[data-shape="eternal-pupil-triangle"]')).toBe(pupil);
+    expect(pupil).toHaveAttribute('data-morph-style', 'viscous');
+    expect(pupil).toHaveClass('pupil--eternal');
     expect(container.querySelector('.eternal-core')).not.toBeInTheDocument();
   });
 

@@ -122,28 +122,29 @@ button {
 .clan-fan-backdrop {
   position: absolute;
   z-index: 0;
-  top: 50%;
-  left: 50%;
-  width: min(68vw, 46rem);
-  height: min(86svh, 54rem);
+  top: -8rem;
+  right: -18rem;
+  width: min(43vw, 34rem);
+  height: min(72svh, 42rem);
   overflow: visible;
-  opacity: 0.27;
-  filter: drop-shadow(0 0 4.5rem rgb(153 8 22 / 34%));
-  transform: translate(-50%, -48%)
-    translate(calc(var(--pointer-x) * -1.05rem), calc(var(--pointer-y) * -0.68rem))
-    rotate(-4deg);
+  opacity: 0.18;
+  filter: drop-shadow(0 0 4rem rgb(153 8 22 / 24%));
+  mask-image: linear-gradient(152deg, #000 0 52%, rgb(0 0 0 / 72%) 70%, transparent 96%);
+  transform: translate(calc(var(--pointer-x) * -0.45rem), calc(var(--pointer-y) * -0.3rem))
+    rotate(13deg);
+  transform-origin: 52% 38%;
   transition:
     opacity 900ms ease,
     transform 500ms cubic-bezier(.2, .8, .2, 1);
 }
 
 .experience--dormant .clan-fan-backdrop {
-  opacity: 0.17;
+  opacity: 0.11;
 }
 
 .experience--mangekyo .clan-fan-backdrop,
 .experience--eternal-mangekyo .clan-fan-backdrop {
-  opacity: 0.33;
+  opacity: 0.22;
 }
 
 .clan-fan-backdrop__shadow {
@@ -152,43 +153,41 @@ button {
   filter: url(#clan-fan-ink);
 }
 
-.clan-fan-backdrop__canopy {
+.clan-fan-backdrop__crown {
   fill: url(#clan-fan-red);
   stroke: #070506;
-  stroke-width: 12;
+  stroke-width: 10;
 }
 
-.clan-fan-backdrop__lower {
+.clan-fan-backdrop__guard {
   fill: url(#clan-fan-bone);
   stroke: #070506;
-  stroke-width: 12;
+  stroke-width: 10;
 }
 
 .clan-fan-backdrop__handle {
-  fill: #241619;
+  fill: #3b292d;
   stroke: #070506;
-  stroke-width: 12;
+  stroke-width: 10;
 }
 
-.clan-fan-backdrop__rib,
-.clan-fan-backdrop__seam {
+.clan-fan-backdrop__seam,
+.clan-fan-backdrop__spine {
   fill: none;
-  stroke: #14070a;
+  stroke: #e0d2d0;
   stroke-linecap: round;
   stroke-width: 7;
-  opacity: 0.58;
+  opacity: 0.24;
 }
 
 .clan-fan-backdrop__seam {
-  stroke: #e2d5d1;
-  stroke-width: 9;
-  opacity: 0.34;
+  stroke-width: 8;
 }
 
-.clan-fan-backdrop__pin {
-  fill: #0b0708;
-  stroke: #8c1721;
+.clan-fan-backdrop__spine {
+  stroke: #14070a;
   stroke-width: 6;
+  opacity: 0.52;
 }
 
 .chakra-field {
@@ -802,7 +801,7 @@ h1 {
   transform: scaleX(0.2) scaleY(0.04);
   transform-box: fill-box;
   transform-origin: center top;
-  transition: transform 1750ms 220ms var(--morph-ease);
+  transition: transform 1450ms 300ms cubic-bezier(.3, .02, .18, 1);
 }
 
 .is-unfolding .itachi-inherited-blade {
@@ -810,11 +809,11 @@ h1 {
 }
 
 .itachi-inherited-axis:nth-child(2) .itachi-inherited-blade {
-  transition-delay: 310ms;
+  transition-delay: 380ms;
 }
 
 .itachi-inherited-axis:nth-child(3) .itachi-inherited-blade {
-  transition-delay: 400ms;
+  transition-delay: 460ms;
 }
 
 .pupil {
@@ -823,12 +822,16 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    d 1600ms var(--morph-ease),
-    transform 1900ms cubic-bezier(.3, .05, .25, 1);
+    d 1650ms cubic-bezier(.35, .02, .12, 1),
+    transform 1650ms cubic-bezier(.35, .02, .12, 1);
 }
 
 .pupil--dormant {
   transform: scale(2.14);
+}
+
+.pupil--eternal {
+  animation: eternal-pupil-bloom 1650ms both cubic-bezier(.35, .02, .12, 1);
 }
 
 .iris-glint {
@@ -1050,6 +1053,34 @@ footer p {
   100% { opacity: 1; filter: blur(0); transform: perspective(62rem) scale(1); }
 }
 
+@keyframes eternal-pupil-bloom {
+  0% {
+    d: path("M 0 22 C -7 22 -14 18 -18 11 C -22 5 -22 -5 -18 -11 C -14 -18 -7 -22 0 -22 C 7 -22 14 -18 18 -11 C 22 -5 22 5 18 11 C 14 18 7 22 0 22 Z");
+    filter: blur(0);
+    transform: scale(1);
+  }
+  30% {
+    d: path("M 0 36 C -16 36 -30 27 -34 13 C -38 0 -35 -16 -24 -27 C -12 -38 12 -38 24 -27 C 35 -16 38 0 34 13 C 30 27 16 36 0 36 Z");
+    filter: blur(1.35px);
+    transform: scale(1.1, 0.92);
+  }
+  58% {
+    d: path("M 0 43 C -13 42 -23 31 -22 18 C -22 6 -35 -5 -38 -13 C -30 -20 -14 -18 0 -9 C 14 -18 30 -20 38 -13 C 35 -5 22 6 22 18 C 23 31 13 42 0 43 Z");
+    filter: blur(1.8px);
+    transform: scale(0.98, 1.04);
+  }
+  80% {
+    d: path("M 0 46 C -11 45 -18 32 -17 20 C -18 9 -33 -4 -43 -14 C -37 -25 -17 -22 0 -14 C 17 -22 37 -25 43 -14 C 33 -4 18 9 17 20 C 18 32 11 45 0 46 Z");
+    filter: blur(0.55px);
+    transform: scale(1.06, 0.98);
+  }
+  100% {
+    d: path("M 0 46 C -11 45 -18 32 -17 20 C -18 9 -33 -4 -43 -14 C -37 -25 -17 -22 0 -14 C 17 -22 37 -25 43 -14 C 33 -4 18 9 17 20 C 18 32 11 45 0 46 Z");
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
 @keyframes amaterasu-recoil {
   0% {
     filter: drop-shadow(0 1.45rem 2.7rem rgb(0 0 0 / 78%));
@@ -1098,19 +1129,22 @@ footer p {
   }
 
   .experience .clan-fan-backdrop {
-    top: 47%;
-    width: min(112vw, 38rem);
-    height: 75svh;
-    opacity: 0.22;
+    top: -12rem;
+    right: -5rem;
+    width: min(38vw, 18rem);
+    height: 22rem;
+    opacity: 0.15;
+    transform: translate(calc(var(--pointer-x) * -0.28rem), calc(var(--pointer-y) * -0.2rem))
+      rotate(14deg);
   }
 
   .experience--dormant .clan-fan-backdrop {
-    opacity: 0.14;
+    opacity: 0.09;
   }
 
   .experience--mangekyo .clan-fan-backdrop,
   .experience--eternal-mangekyo .clan-fan-backdrop {
-    opacity: 0.27;
+    opacity: 0.18;
   }
 
   .awakening {
@@ -1166,6 +1200,10 @@ footer p {
   .experience {
     min-height: 100svh;
     grid-template-rows: auto 1fr auto auto;
+  }
+
+  .experience .clan-fan-backdrop {
+    display: none;
   }
 
   .masthead {
