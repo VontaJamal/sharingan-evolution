@@ -43,3 +43,20 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   await expect(page.locator('.chakra-particle').first()).toHaveCSS('display', 'none');
   await context.close();
 });
+
+test('renders Sasuke-specific Mangekyō and Eternal geometry in the browser', async ({ page }) => {
+  await page.goto('/');
+
+  for (let step = 0; step < 4; step += 1) {
+    await page.getByRole('button', { name: /current form/i }).click();
+  }
+
+  await expect(page.getByRole('heading', { name: 'Mangekyō Sharingan' })).toBeVisible();
+  await expect(page.locator('[data-shape="sasuke-mangekyo-petal"]')).toHaveCount(6);
+  await expect(page.locator('[data-shape="sasuke-mangekyo-lens"]')).toHaveCount(3);
+
+  await page.getByRole('button', { name: /seek the eternal light/i }).click();
+  await expect(page.getByRole('heading', { name: 'Eternal Mangekyō Sharingan' })).toBeVisible();
+  await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
+  await expect(page.locator('.eternal-core')).toBeVisible();
+});

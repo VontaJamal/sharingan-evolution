@@ -383,8 +383,7 @@ h1 {
 }
 
 .iris-ring,
-.rinnegan-pattern circle,
-.outer-ring {
+.rinnegan-pattern circle {
   fill: none;
   stroke: #150106;
   stroke-width: 7;
@@ -395,9 +394,7 @@ h1 {
   stroke-width: 5;
 }
 
-.tomoe-mark,
-.mangekyo-pattern,
-.eternal-pattern {
+.tomoe-mark {
   fill: #110106;
 }
 
@@ -405,14 +402,29 @@ h1 {
   fill: #24172f;
 }
 
-.pattern-core {
-  fill: #d51022;
-  stroke: #100105;
-  stroke-width: 11;
+.mangekyo-void {
+  fill: #090104;
 }
 
-.eternal-pattern .outer-ring {
+.sasuke-mangekyo-petal {
+  fill: #d0081c;
+  stroke: #150106;
+  stroke-width: 1.5;
+}
+
+.sasuke-mangekyo-lenses {
+  fill: none;
+  stroke: #090104;
+  stroke-linejoin: round;
   stroke-width: 5;
+}
+
+.itachi-inherited-blade {
+  fill: #090104;
+}
+
+.eternal-core {
+  fill: #d0081c;
 }
 
 .pupil {

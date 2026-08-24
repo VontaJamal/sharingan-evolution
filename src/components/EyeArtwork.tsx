@@ -4,14 +4,24 @@ interface EyeArtworkProps {
   stage: EyeStage;
 }
 
-const TOMOE_ANGLES = [0, 120, 240];
+const TOMOE_ANGLES = {
+  1: [0],
+  2: [0, 180],
+  3: [0, 120, 240],
+} as const;
 const RINNEGAN_TOMOE_ANGLES = [0, 60, 120, 180, 240, 300];
+const MANGEKYO_PETAL_ANGLES = [0, 60, 120, 180, 240, 300];
+const MANGEKYO_LENS_ANGLES = [0, 120, 240];
 
 function Tomoe({ angle, radius = 93 }: { angle: number; radius?: number }) {
   return (
-    <g transform={`rotate(${angle}) translate(0 ${-radius})`} className="tomoe-mark">
-      <circle cx="0" cy="0" r="13" />
-      <path d="M -2 11 C 13 18 26 8 28 -8 C 21 -1 14 1 8 -2 Z" />
+    <g
+      transform={`rotate(${angle}) translate(0 ${-radius})`}
+      className="tomoe-mark"
+      data-angle={angle}
+    >
+      <circle cx="0" cy="0" r="14" />
+      <path d="M -3 12 C 14 20 30 7 32 -12 C 23 -3 15 0 8 -4 C 9 3 5 9 -3 12 Z" />
     </g>
   );
 }
@@ -20,9 +30,40 @@ function TomoePattern({ count }: { count: 1 | 2 | 3 }) {
   return (
     <g className="tomoe-pattern">
       <circle className="iris-ring" r="91" />
-      {TOMOE_ANGLES.slice(0, count).map((angle) => (
+      {TOMOE_ANGLES[count].map((angle) => (
         <Tomoe key={angle} angle={angle} />
       ))}
+    </g>
+  );
+}
+
+function SasukeMangekyoFramework() {
+  return (
+    <g className="sasuke-mangekyo-framework">
+      <circle className="mangekyo-void" r="132" />
+
+      <g className="sasuke-mangekyo-petals">
+        {MANGEKYO_PETAL_ANGLES.map((angle) => (
+          <path
+            key={angle}
+            className="sasuke-mangekyo-petal"
+            data-shape="sasuke-mangekyo-petal"
+            transform={`rotate(${angle})`}
+            d="M 0 -132 C -23 -108 -42 -71 -43 -38 C -25 -31 -11 -21 0 -7 C 11 -21 25 -31 43 -38 C 42 -71 23 -108 0 -132 Z"
+          />
+        ))}
+      </g>
+
+      <g className="sasuke-mangekyo-lenses">
+        {MANGEKYO_LENS_ANGLES.map((angle) => (
+          <path
+            key={angle}
+            data-shape="sasuke-mangekyo-lens"
+            transform={`rotate(${angle})`}
+            d="M 47 0 C 47 61 24 112 0 136 C -24 112 -47 61 -47 0 C -47 -61 -24 -112 0 -136 C 24 -112 47 -61 47 0 Z"
+          />
+        ))}
+      </g>
     </g>
   );
 }
@@ -30,14 +71,7 @@ function TomoePattern({ count }: { count: 1 | 2 | 3 }) {
 function MangekyoPattern() {
   return (
     <g className="mangekyo-pattern">
-      {[0, 120, 240].map((angle) => (
-        <path
-          key={angle}
-          transform={`rotate(${angle})`}
-          d="M 0 -128 C 14 -91 45 -64 88 -54 C 54 -44 31 -19 16 12 C 20 -39 1 -72 -34 -96 C -20 -103 -9 -113 0 -128 Z"
-        />
-      ))}
-      <circle className="pattern-core" r="29" />
+      <SasukeMangekyoFramework />
     </g>
   );
 }
@@ -45,15 +79,19 @@ function MangekyoPattern() {
 function EternalMangekyoPattern() {
   return (
     <g className="eternal-pattern">
-      <circle className="outer-ring" r="116" />
-      {[0, 60, 120, 180, 240, 300].map((angle) => (
-        <path
-          key={angle}
-          transform={`rotate(${angle})`}
-          d="M 0 -126 C 9 -93 25 -66 47 -43 C 24 -49 3 -45 -18 -29 C -10 -61 -17 -91 -38 -117 C -23 -110 -10 -113 0 -126 Z"
-        />
-      ))}
-      <MangekyoPattern />
+      <SasukeMangekyoFramework />
+      <g className="itachi-inherited-pattern">
+        {MANGEKYO_LENS_ANGLES.map((angle) => (
+          <path
+            key={angle}
+            className="itachi-inherited-blade"
+            data-shape="itachi-inherited-blade"
+            transform={`rotate(${angle})`}
+            d="M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z"
+          />
+        ))}
+      </g>
+      <circle className="eternal-core" r="22" />
     </g>
   );
 }
@@ -134,8 +172,12 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           {stage.kind === 'eternal-mangekyo' && <EternalMangekyoPattern />}
           {stage.kind === 'rinnegan' && <RinneganPattern />}
 
-          <circle className="pupil" r={stage.kind === 'dormant' ? 47 : 22} />
-          <ellipse className="iris-glint" cx="-45" cy="-53" rx="13" ry="24" />
+          {stage.kind !== 'eternal-mangekyo' && (
+            <circle className="pupil" r={stage.kind === 'dormant' ? 47 : 22} />
+          )}
+          {stage.kind !== 'mangekyo' && stage.kind !== 'eternal-mangekyo' && (
+            <ellipse className="iris-glint" cx="-45" cy="-53" rx="13" ry="24" />
+          )}
         </g>
 
         <path className="lid-shadow lid-shadow--top" d="M 35 232 C 140 66 251 41 325 52 C 451 61 542 145 607 234 C 508 137 417 105 320 106 C 210 106 128 156 35 232 Z" />

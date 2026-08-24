@@ -60,8 +60,10 @@ Behavior coverage includes sequential progression, pointer and native keyboard a
 Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
 
 - 1440×1000 dormant desktop poster
+- 1440×1000 corrected two-tomoe, Mangekyō, and Eternal Mangekyō states
 - 1440×1000 fully discovered Rinnegan state
-- 390×844 touch-sized Mangekyō state
+- 390×844 touch-sized corrected Mangekyō state
+- before-and-after evidence for the advanced-eye redraw
 - a concise written verification checklist
 
 ## Lore and IP boundary
