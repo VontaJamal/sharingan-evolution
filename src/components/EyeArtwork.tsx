@@ -101,7 +101,8 @@ function RinneganPattern() {
 }
 
 export function EyeArtwork({ stage }: EyeArtworkProps) {
-  const isAwakened = stage.kind !== 'dormant';
+  const isDormant = stage.kind === 'dormant';
+  const isAwakened = !isDormant;
   const isTomoe = stage.kind === 'tomoe';
   const isMangekyo = stage.kind === 'mangekyo' || stage.kind === 'eternal-mangekyo';
   const isEternal = stage.kind === 'eternal-mangekyo';
@@ -159,7 +160,14 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
       <ellipse className="eye-shadow" cx="321" cy="258" rx="286" ry="139" />
 
       <g clipPath="url(#eye-clip)" className="eye-surface">
-        <rect className="sclera" x="40" y="65" width="560" height="350" />
+        <rect className="sclera sclera--awakened" x="40" y="65" width="560" height="350" />
+        <rect
+          className={`sclera sclera--dormant${isDormant ? ' is-active' : ''}`}
+          x="40"
+          y="65"
+          width="560"
+          height="350"
+        />
         <g className={`eye-veins${isAwakened ? ' is-visible' : ''}`}>
           <path d="M 73 202 C 119 207 140 225 178 241" />
           <path d="M 79 281 C 122 270 149 271 183 255" />
@@ -169,7 +177,9 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
 
         <g className="iris" transform="translate(325 237) scale(.82)" filter={isAwakened ? 'url(#iris-glow)' : undefined}>
           <circle className="iris-aura" r="153" />
-          <circle className="iris-disc" r="143" />
+          <circle className={`iris-disc iris-disc--dormant${isDormant ? ' is-active' : ''}`} r="143" />
+          <circle className={`iris-disc iris-disc--crimson${isAwakened && !isRinnegan ? ' is-active' : ''}`} r="143" />
+          <circle className={`iris-disc iris-disc--rinnegan${isRinnegan ? ' is-active' : ''}`} r="143" />
           <circle className="iris-texture" r="132" />
 
           <g className={`ocular-pattern-layer ocular-pattern-layer--tomoe${isTomoe ? ' is-active' : ''}`}>

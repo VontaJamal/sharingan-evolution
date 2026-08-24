@@ -11,6 +11,19 @@ describe('cinematic eye canvas', () => {
     expect(container.querySelector('.corneal-sheen')).toBeInTheDocument();
     expect(container.querySelectorAll('.lid-crease')).toHaveLength(2);
   });
+
+  it('keeps layered iris surfaces mounted while their color state changes', () => {
+    const { container, rerender } = render(<EyeArtwork stage={SASUKE_STAGES[0]} />);
+    const surfaces = [...container.querySelectorAll('.iris-disc')];
+
+    expect(surfaces).toHaveLength(3);
+    expect(container.querySelector('.iris-disc--dormant')).toHaveClass('is-active');
+
+    rerender(<EyeArtwork stage={SASUKE_STAGES[1]} />);
+
+    expect([...container.querySelectorAll('.iris-disc')]).toEqual(surfaces);
+    expect(container.querySelector('.iris-disc--crimson')).toHaveClass('is-active');
+  });
 });
 
 describe('base Sharingan artwork structure', () => {

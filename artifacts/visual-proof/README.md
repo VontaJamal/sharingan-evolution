@@ -20,7 +20,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Two tomoe sit opposite each other at 180°.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
-- [x] One eye canvas remains mounted while each ocular pattern fades and settles into place over roughly one second without a full-eye crossfade.
+- [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 2.0–2.6 seconds without a full-eye crossfade.
 - [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.

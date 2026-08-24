@@ -237,7 +237,7 @@ footer {
 
 .stage-copy {
   align-self: center;
-  animation: copy-enter 520ms both cubic-bezier(.16, 1, .3, 1);
+  animation: copy-enter 900ms both cubic-bezier(.18, .72, .24, 1);
 }
 
 .stage-kicker {
@@ -308,7 +308,7 @@ h1 {
   border: 1px solid color-mix(in srgb, var(--crimson-bright), transparent 22%);
   border-radius: 50%;
   opacity: 0;
-  animation: pressure-wave 1300ms cubic-bezier(.12, .7, .15, 1);
+  animation: pressure-wave 2600ms cubic-bezier(.16, .62, .18, 1);
 }
 
 .eye-trigger {
@@ -354,12 +354,18 @@ h1 {
   filter: blur(28px);
 }
 
-.sclera {
+.sclera--awakened {
   fill: url(#sclera-light);
 }
 
-.eye-artwork--dormant .sclera {
+.sclera--dormant {
   fill: url(#dormant-sclera);
+  opacity: 0;
+  transition: opacity 2000ms linear;
+}
+
+.sclera--dormant.is-active {
+  opacity: 1;
 }
 
 .eye-veins {
@@ -370,7 +376,7 @@ h1 {
   stroke-linecap: round;
   stroke-width: 2.2;
   opacity: 0.46;
-  transition: stroke-dashoffset 850ms cubic-bezier(.16, 1, .3, 1);
+  transition: stroke-dashoffset 2000ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .eye-veins.is-visible {
@@ -382,12 +388,31 @@ h1 {
   stroke: #e71325;
   stroke-width: 3;
   opacity: 0.34;
+  transition: stroke 2000ms linear;
 }
 
 .iris-disc {
-  fill: url(#crimson-iris);
+  opacity: 0;
   stroke: #130306;
   stroke-width: 9;
+  transition: opacity 2000ms linear;
+}
+
+.iris-disc.is-active {
+  opacity: 1;
+}
+
+.iris-disc--dormant {
+  fill: #211e20;
+  stroke: #070607;
+}
+
+.iris-disc--crimson {
+  fill: url(#crimson-iris);
+}
+
+.iris-disc--rinnegan {
+  fill: url(#violet-iris);
 }
 
 .iris-texture {
@@ -395,15 +420,11 @@ h1 {
   stroke: rgb(22 0 2 / 38%);
   stroke-dasharray: 2 7;
   stroke-width: 7;
+  transition: opacity 2000ms linear;
 }
 
 .eye-artwork--dormant .iris-aura {
   stroke: #5e4a4b;
-}
-
-.eye-artwork--dormant .iris-disc {
-  fill: #211e20;
-  stroke: #070607;
 }
 
 .eye-artwork--dormant .iris-texture {
@@ -412,10 +433,6 @@ h1 {
 
 .eye-artwork--rinnegan .iris-aura {
   stroke: #c7a4ee;
-}
-
-.eye-artwork--rinnegan .iris-disc {
-  fill: url(#violet-iris);
 }
 
 .iris-ring,
@@ -437,7 +454,7 @@ h1 {
 .tomoe-glyph {
   transform-box: fill-box;
   transform-origin: center;
-  animation: ocular-symbol-emerge 950ms 80ms both cubic-bezier(.16, 1, .3, 1);
+  animation: ocular-symbol-emerge 2200ms 180ms both cubic-bezier(.3, .05, .25, 1);
 }
 
 .ocular-pattern-layer {
@@ -447,9 +464,9 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 800ms cubic-bezier(.2, .72, .2, 1),
-    transform 1100ms cubic-bezier(.16, 1, .3, 1),
-    visibility 0s linear 1100ms;
+    opacity 2000ms linear,
+    transform 2600ms cubic-bezier(.3, .05, .25, 1),
+    visibility 0s linear 2600ms;
   will-change: opacity, transform;
 }
 
@@ -496,8 +513,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 650ms ease,
-    transform 850ms cubic-bezier(.16, 1, .3, 1);
+    opacity 1600ms linear,
+    transform 2200ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .pupil--dormant {
@@ -516,8 +533,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 620ms ease,
-    transform 760ms cubic-bezier(.16, 1, .3, 1);
+    opacity 1500ms linear,
+    transform 2000ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .iris-glint--hidden {
@@ -583,7 +600,7 @@ h1 {
 .stage-narrative {
   align-self: center;
   max-width: 19rem;
-  animation: lore-enter 520ms 60ms both cubic-bezier(.16, 1, .3, 1);
+  animation: lore-enter 900ms 120ms both cubic-bezier(.18, .72, .24, 1);
 }
 
 .stage-narrative > p:first-child {
@@ -647,7 +664,7 @@ h1 {
   height: 100%;
   background: var(--crimson-bright);
   box-shadow: 0 0 10px var(--crimson);
-  transition: width 500ms cubic-bezier(.16, 1, .3, 1);
+  transition: width 1000ms cubic-bezier(.18, .72, .24, 1);
 }
 
 .evolution-track ol {

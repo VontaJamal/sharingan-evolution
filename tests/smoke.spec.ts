@@ -32,7 +32,7 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
   });
 
   expect(transition).toEqual({
-    duration: '0.8s, 1.1s, 0s',
+    duration: '2s, 2.6s, 0s',
     property: 'opacity, transform, visibility',
   });
 });

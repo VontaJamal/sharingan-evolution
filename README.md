@@ -27,7 +27,7 @@ The final state is deliberately labeled **Distinct dōjutsu · Left eye only**. 
 - Use the progress rail to revisit any discovered form.
 - Select **Restart** at any time, or select the final eye to begin again.
 
-Each form transforms inside the same continuously mounted eye: the iris symbols fade, scale, and turn into place over a paced one-second reveal without replacing or fading the full eye canvas. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, and transition travel.
+Each form transforms inside the same continuously mounted eye: layered sclera and iris surfaces dissolve between colors while the ocular symbols fade, scale, and turn into place over a deliberate 2.0–2.6 second reveal. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, and transition travel.
 
 ## Local setup
 

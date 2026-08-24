@@ -139,8 +139,8 @@ export function CinematicField({ accent, reducedMotion }: CinematicFieldProps) {
           halo.scale.x = 1.58 + Math.sin(elapsed * 0.62) * 0.025;
           halo.scale.y = 0.76 + Math.cos(elapsed * 0.62) * 0.012;
 
-          particleMaterial.color.lerp(targetAccent, 0.045);
-          haloMaterial.color.lerp(targetAccent, 0.045);
+          particleMaterial.color.lerp(targetAccent, 0.022);
+          haloMaterial.color.lerp(targetAccent, 0.022);
           renderer.render(scene, camera);
         });
 
