@@ -5,9 +5,13 @@ test('awakens through pointer and keyboard controls', async ({ page }) => {
 
   await expect(page).toHaveTitle(/Sharingan Evolution/);
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
+  await page.locator('.eye-scene').evaluate((node) => {
+    node.setAttribute('data-browser-instance', 'persistent');
+  });
 
   await page.getByRole('button', { name: /awaken the eye/i }).click();
   await expect(page.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeVisible();
+  await expect(page.locator('.eye-scene')).toHaveAttribute('data-browser-instance', 'persistent');
 
   await page.getByRole('button', { name: /draw out the second tomoe/i }).focus();
   await page.keyboard.press('Enter');
@@ -54,9 +58,16 @@ test('renders Sasuke-specific Mangekyō and Eternal geometry in the browser', as
   await expect(page.getByRole('heading', { name: 'Mangekyō Sharingan' })).toBeVisible();
   await expect(page.locator('[data-shape="sasuke-mangekyo-petal"]')).toHaveCount(6);
   await expect(page.locator('[data-shape="sasuke-mangekyo-lens"]')).toHaveCount(3);
+  await page.locator('.sasuke-mangekyo-framework').evaluate((node) => {
+    node.setAttribute('data-browser-instance', 'persistent');
+  });
 
   await page.getByRole('button', { name: /seek the eternal light/i }).click();
   await expect(page.getByRole('heading', { name: 'Eternal Mangekyō Sharingan' })).toBeVisible();
+  await expect(page.locator('.sasuke-mangekyo-framework')).toHaveAttribute(
+    'data-browser-instance',
+    'persistent',
+  );
   await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
   await expect(page.locator('.eternal-core')).toBeVisible();
 });

@@ -336,9 +336,16 @@ h1 {
 .eye-veins {
   fill: none;
   stroke: #7f141d;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
   stroke-linecap: round;
   stroke-width: 2.2;
   opacity: 0.46;
+  transition: stroke-dashoffset 480ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.eye-veins.is-visible {
+  stroke-dashoffset: 0;
 }
 
 .iris-aura {
@@ -398,6 +405,28 @@ h1 {
   fill: #110106;
 }
 
+.tomoe-glyph {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ocular-symbol-emerge 420ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.ocular-pattern-layer {
+  visibility: hidden;
+  transform: scale(0.01) rotate(-12deg);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 520ms cubic-bezier(.16, 1, .3, 1),
+    visibility 0s linear 520ms;
+}
+
+.ocular-pattern-layer.is-active {
+  visibility: visible;
+  transform: scale(1) rotate(0);
+  transition-delay: 0s;
+}
+
 .rinnegan-pattern .tomoe-mark {
   fill: #24172f;
 }
@@ -429,13 +458,31 @@ h1 {
 
 .pupil {
   fill: #050204;
+  transform: scale(1);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.pupil--dormant {
+  transform: scale(2.14);
+}
+
+.pupil--hidden {
+  transform: scale(0);
 }
 
 .iris-glint {
   fill: #fff;
   opacity: 0.16;
   transform: rotate(38deg);
+  transform-box: fill-box;
   transform-origin: center;
+  transition: transform 380ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.iris-glint--hidden {
+  transform: rotate(38deg) scale(0);
 }
 
 .lid-shadow {
@@ -652,6 +699,12 @@ footer p {
 @keyframes control-pulse {
   0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--crimson), transparent 18%); }
   55%, 100% { box-shadow: 0 0 0 0.75rem transparent; }
+}
+
+@keyframes ocular-symbol-emerge {
+  0% { transform: scale(0); }
+  65% { transform: scale(1.14); }
+  100% { transform: scale(1); }
 }
 
 @media (max-width: 900px) {

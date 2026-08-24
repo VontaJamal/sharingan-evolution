@@ -31,6 +31,18 @@ describe('Sharingan Evolution', () => {
     expect(screen.getByRole('heading', { name: 'Two Tomoe Sharingan' })).toBeInTheDocument();
   });
 
+  it('keeps one eye canvas mounted while the ocular pattern transforms in place', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App />);
+    const eyeScene = container.querySelector('.eye-scene');
+    const eyeArtwork = container.querySelector('.eye-artwork');
+
+    await user.click(screen.getByRole('button', { name: /awaken the eye/i }));
+
+    expect(container.querySelector('.eye-scene')).toBe(eyeScene);
+    expect(container.querySelector('.eye-artwork')).toBe(eyeArtwork);
+  });
+
   it('uses native keyboard activation and supports arrow-key progression', async () => {
     const user = userEvent.setup();
     render(<App />);

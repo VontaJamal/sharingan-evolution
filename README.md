@@ -27,7 +27,7 @@ The final state is deliberately labeled **Distinct dōjutsu · Left eye only**. 
 - Use the progress rail to revisit any discovered form.
 - Select **Restart** at any time, or select the final eye to begin again.
 
-The interface has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, depth response, and transition travel.
+Each form transforms inside the same continuously mounted eye: the iris symbols scale and turn into place without crossfading or replacing the full eye canvas. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, depth response, and transition travel.
 
 ## Local setup
 
@@ -53,7 +53,7 @@ npm run test:e2e
 
 `npm run check` runs linting, strict type checking, behavior tests, and the production build in one command. GitHub Actions runs that quality gate and the Chromium smoke suite for pull requests and `main`.
 
-Behavior coverage includes sequential progression, pointer and native keyboard activation, direct navigation after discovery, restart, accurate Rinnegan distinction, locked-state accessibility, reduced-motion behavior, real touch input, phone layout, and browser-level keyboard operation.
+Behavior coverage includes sequential progression, persistent in-place eye transformations, Mangekyō-to-Eternal artwork continuity, pointer and native keyboard activation, direct navigation after discovery, restart, accurate Rinnegan distinction, locked-state accessibility, reduced-motion behavior, real touch input, phone layout, and browser-level keyboard operation.
 
 ## Visual proof
 

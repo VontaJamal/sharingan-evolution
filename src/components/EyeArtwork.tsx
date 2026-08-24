@@ -20,8 +20,10 @@ function Tomoe({ angle, radius = 93 }: { angle: number; radius?: number }) {
       className="tomoe-mark"
       data-angle={angle}
     >
-      <circle cx="0" cy="0" r="14" />
-      <path d="M -3 12 C 14 20 30 7 32 -12 C 23 -3 15 0 8 -4 C 9 3 5 9 -3 12 Z" />
+      <g className="tomoe-glyph">
+        <circle cx="0" cy="0" r="14" />
+        <path d="M -3 12 C 14 20 30 7 32 -12 C 23 -3 15 0 8 -4 C 9 3 5 9 -3 12 Z" />
+      </g>
     </g>
   );
 }
@@ -68,29 +70,18 @@ function SasukeMangekyoFramework() {
   );
 }
 
-function MangekyoPattern() {
+function ItachiInheritedPattern() {
   return (
-    <g className="mangekyo-pattern">
-      <SasukeMangekyoFramework />
-    </g>
-  );
-}
-
-function EternalMangekyoPattern() {
-  return (
-    <g className="eternal-pattern">
-      <SasukeMangekyoFramework />
-      <g className="itachi-inherited-pattern">
-        {MANGEKYO_LENS_ANGLES.map((angle) => (
-          <path
-            key={angle}
-            className="itachi-inherited-blade"
-            data-shape="itachi-inherited-blade"
-            transform={`rotate(${angle})`}
-            d="M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z"
-          />
-        ))}
-      </g>
+    <g className="itachi-inherited-pattern">
+      {MANGEKYO_LENS_ANGLES.map((angle) => (
+        <path
+          key={angle}
+          className="itachi-inherited-blade"
+          data-shape="itachi-inherited-blade"
+          transform={`rotate(${angle})`}
+          d="M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z"
+        />
+      ))}
       <circle className="eternal-core" r="22" />
     </g>
   );
@@ -111,6 +102,11 @@ function RinneganPattern() {
 
 export function EyeArtwork({ stage }: EyeArtworkProps) {
   const isAwakened = stage.kind !== 'dormant';
+  const isTomoe = stage.kind === 'tomoe';
+  const isMangekyo = stage.kind === 'mangekyo' || stage.kind === 'eternal-mangekyo';
+  const isEternal = stage.kind === 'eternal-mangekyo';
+  const isRinnegan = stage.kind === 'rinnegan';
+  const tomoeCount = isTomoe ? stage.tomoe : 3;
 
   return (
     <svg
@@ -153,31 +149,42 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
 
       <g clipPath="url(#eye-clip)" className="eye-surface">
         <rect className="sclera" x="40" y="65" width="560" height="350" />
-        {isAwakened && (
-          <g className="eye-veins">
-            <path d="M 73 202 C 119 207 140 225 178 241" />
-            <path d="M 79 281 C 122 270 149 271 183 255" />
-            <path d="M 566 190 C 522 204 491 220 462 240" />
-            <path d="M 559 288 C 513 270 490 268 457 253" />
-          </g>
-        )}
+        <g className={`eye-veins${isAwakened ? ' is-visible' : ''}`}>
+          <path d="M 73 202 C 119 207 140 225 178 241" />
+          <path d="M 79 281 C 122 270 149 271 183 255" />
+          <path d="M 566 190 C 522 204 491 220 462 240" />
+          <path d="M 559 288 C 513 270 490 268 457 253" />
+        </g>
 
         <g className="iris" transform="translate(320 240)" filter={isAwakened ? 'url(#iris-glow)' : undefined}>
           <circle className="iris-aura" r="153" />
           <circle className="iris-disc" r="143" />
           <circle className="iris-texture" r="132" />
 
-          {stage.kind === 'tomoe' && <TomoePattern count={stage.tomoe} />}
-          {stage.kind === 'mangekyo' && <MangekyoPattern />}
-          {stage.kind === 'eternal-mangekyo' && <EternalMangekyoPattern />}
-          {stage.kind === 'rinnegan' && <RinneganPattern />}
+          <g className={`ocular-pattern-layer ocular-pattern-layer--tomoe${isTomoe ? ' is-active' : ''}`}>
+            <TomoePattern count={tomoeCount} />
+          </g>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--mangekyo${isMangekyo ? ' is-active' : ''}`}>
+            <SasukeMangekyoFramework />
+          </g>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--eternal${isEternal ? ' is-active' : ''}`}>
+            <ItachiInheritedPattern />
+          </g>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--rinnegan${isRinnegan ? ' is-active' : ''}`}>
+            <RinneganPattern />
+          </g>
 
-          {stage.kind !== 'eternal-mangekyo' && (
-            <circle className="pupil" r={stage.kind === 'dormant' ? 47 : 22} />
-          )}
-          {stage.kind !== 'mangekyo' && stage.kind !== 'eternal-mangekyo' && (
-            <ellipse className="iris-glint" cx="-45" cy="-53" rx="13" ry="24" />
-          )}
+          <circle
+            className={`pupil${stage.kind === 'dormant' ? ' pupil--dormant' : ''}${isEternal ? ' pupil--hidden' : ''}`}
+            r="22"
+          />
+          <ellipse
+            className={`iris-glint${isMangekyo ? ' iris-glint--hidden' : ''}`}
+            cx="-45"
+            cy="-53"
+            rx="13"
+            ry="24"
+          />
         </g>
 
         <path className="lid-shadow lid-shadow--top" d="M 35 232 C 140 66 251 41 325 52 C 451 61 542 145 607 234 C 508 137 417 105 320 106 C 210 106 128 156 35 232 Z" />

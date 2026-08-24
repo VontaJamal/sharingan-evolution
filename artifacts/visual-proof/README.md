@@ -18,6 +18,8 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Two tomoe sit opposite each other at 180°.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
+- [x] One eye canvas remains mounted while each ocular pattern transforms in place without a full-eye crossfade.
+- [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter`, `Space`, and arrow-key operation use semantic controls.
 - [x] Restart returns to the dormant eye while discovered-stage navigation remains available.
@@ -26,4 +28,4 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Reduced-motion mode removes continuous particles, depth transforms, and transition travel.
 - [x] The disclaimer remains visible without competing with the awakening interaction.
 
-A short WebM was attempted, but the local capture backend did not finalize a bounded recording. These responsive screenshots are the review proof for this version.
+A short WebM was attempted, but the local capture backend did not finalize a bounded recording. These responsive screenshots, the written checklist, and the browser persistence assertions are the review proof for this version.
