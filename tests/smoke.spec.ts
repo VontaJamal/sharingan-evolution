@@ -89,7 +89,7 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   await context.close();
 });
 
-test('renders Sasuke-specific Mangekyō and Eternal geometry in the browser', async ({ page }) => {
+test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser', async ({ page }) => {
   await page.goto('/');
 
   for (let step = 0; step < 4; step += 1) {
@@ -99,6 +99,16 @@ test('renders Sasuke-specific Mangekyō and Eternal geometry in the browser', as
   await expect(page.getByRole('heading', { name: 'Mangekyō Sharingan' })).toBeVisible();
   await expect(page.locator('[data-shape="sasuke-mangekyo-petal"]')).toHaveCount(6);
   await expect(page.locator('[data-shape="sasuke-mangekyo-lens"]')).toHaveCount(3);
+  await expect(page.locator('.ocular-pattern-layer--tomoe')).toHaveClass(/is-morphing-out/);
+  await expect(page.locator('.ocular-pattern-layer--mangekyo')).toHaveClass(/is-forming/);
+  const lensMotion = await page.locator('[data-shape="sasuke-mangekyo-lens"]').first().evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { duration: style.transitionDuration, property: style.transitionProperty };
+  });
+  expect(lensMotion).toEqual({
+    duration: '2.2s, 0.8s',
+    property: 'stroke-dashoffset, opacity',
+  });
   await page.locator('.sasuke-mangekyo-framework').evaluate((node) => {
     node.setAttribute('data-browser-instance', 'persistent');
   });
@@ -109,6 +119,15 @@ test('renders Sasuke-specific Mangekyō and Eternal geometry in the browser', as
     'data-browser-instance',
     'persistent',
   );
+  await expect(page.locator('.ocular-pattern-layer--eternal')).toHaveClass(/is-unfolding/);
   await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
+  const bladeMotion = await page.locator('[data-shape="itachi-inherited-blade"]').first().evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { duration: style.transitionDuration, property: style.transitionProperty };
+  });
+  expect(bladeMotion).toEqual({
+    duration: '0.8s, 2.2s',
+    property: 'opacity, transform',
+  });
   await expect(page.locator('.eternal-core')).toBeVisible();
 });

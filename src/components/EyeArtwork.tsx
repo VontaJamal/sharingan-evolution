@@ -64,24 +64,25 @@ function SasukeMangekyoFramework() {
 
       <g className="sasuke-mangekyo-petals">
         {MANGEKYO_PETAL_ANGLES.map((angle) => (
-          <path
-            key={angle}
-            className="sasuke-mangekyo-petal"
-            data-shape="sasuke-mangekyo-petal"
-            transform={`rotate(${angle})`}
-            d="M 0 -132 C -23 -108 -42 -71 -43 -38 C -25 -31 -11 -21 0 -7 C 11 -21 25 -31 43 -38 C 42 -71 23 -108 0 -132 Z"
-          />
+          <g key={angle} className="sasuke-mangekyo-petal-axis" transform={`rotate(${angle})`}>
+            <path
+              className="sasuke-mangekyo-petal"
+              data-shape="sasuke-mangekyo-petal"
+              d="M 0 -132 C -23 -108 -42 -71 -43 -38 C -25 -31 -11 -21 0 -7 C 11 -21 25 -31 43 -38 C 42 -71 23 -108 0 -132 Z"
+            />
+          </g>
         ))}
       </g>
 
       <g className="sasuke-mangekyo-lenses">
         {MANGEKYO_LENS_ANGLES.map((angle) => (
-          <path
-            key={angle}
-            data-shape="sasuke-mangekyo-lens"
-            transform={`rotate(${angle})`}
-            d="M 47 0 C 47 61 24 112 0 136 C -24 112 -47 61 -47 0 C -47 -61 -24 -112 0 -136 C 24 -112 47 -61 47 0 Z"
-          />
+          <g key={angle} className="sasuke-mangekyo-lens-axis" transform={`rotate(${angle})`}>
+            <path
+              data-shape="sasuke-mangekyo-lens"
+              pathLength="1"
+              d="M 47 0 C 47 61 24 112 0 136 C -24 112 -47 61 -47 0 C -47 -61 -24 -112 0 -136 C 24 -112 47 -61 47 0 Z"
+            />
+          </g>
         ))}
       </g>
     </g>
@@ -92,13 +93,13 @@ function ItachiInheritedPattern() {
   return (
     <g className="itachi-inherited-pattern">
       {MANGEKYO_LENS_ANGLES.map((angle) => (
-        <path
-          key={angle}
-          className="itachi-inherited-blade"
-          data-shape="itachi-inherited-blade"
-          transform={`rotate(${angle})`}
-          d="M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z"
-        />
+        <g key={angle} className="itachi-inherited-axis" transform={`rotate(${angle})`}>
+          <path
+            className="itachi-inherited-blade"
+            data-shape="itachi-inherited-blade"
+            d="M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z"
+          />
+        </g>
       ))}
       <circle className="eternal-core" r="22" />
     </g>
@@ -200,13 +201,13 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
           <circle className={`iris-disc iris-disc--rinnegan${isRinnegan ? ' is-active' : ''}`} r="143" />
           <circle className="iris-texture" r="132" />
 
-          <g className={`ocular-pattern-layer ocular-pattern-layer--tomoe${isTomoe ? ' is-active' : ''}`}>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--tomoe${isTomoe ? ' is-active' : ''}${isMangekyo ? ' is-morphing-out' : ''}`}>
             <TomoePattern count={tomoeCount} />
           </g>
-          <g className={`ocular-pattern-layer ocular-pattern-layer--mangekyo${isMangekyo ? ' is-active' : ''}`}>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--mangekyo${isMangekyo ? ' is-active is-forming' : ''}`}>
             <SasukeMangekyoFramework />
           </g>
-          <g className={`ocular-pattern-layer ocular-pattern-layer--eternal${isEternal ? ' is-active' : ''}`}>
+          <g className={`ocular-pattern-layer ocular-pattern-layer--eternal${isEternal ? ' is-active is-unfolding' : ''}`}>
             <ItachiInheritedPattern />
           </g>
           <g className={`ocular-pattern-layer ocular-pattern-layer--rinnegan${isRinnegan ? ' is-active' : ''}`}>

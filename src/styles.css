@@ -490,18 +490,71 @@ h1 {
   transition-delay: 0s;
 }
 
+.ocular-pattern-layer--tomoe.is-morphing-out {
+  visibility: visible;
+  animation: tomoe-to-mangekyo 2400ms both cubic-bezier(.3, .05, .25, 1);
+}
+
+.is-morphing-out .iris-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tomoe-ring-release 2200ms both cubic-bezier(.3, .05, .25, 1);
+}
+
+.ocular-pattern-layer--mangekyo,
+.ocular-pattern-layer--eternal {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}
+
 .rinnegan-pattern .tomoe-mark {
   fill: #24172f;
 }
 
 .mangekyo-void {
   fill: #090104;
+  opacity: 0;
+  transform: scale(0.12);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 900ms 260ms linear,
+    transform 2200ms 120ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.is-forming .mangekyo-void {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .sasuke-mangekyo-petal {
   fill: #d0081c;
   stroke: #150106;
   stroke-width: 1.5;
+  opacity: 0;
+  transform: scale(0.14) rotate(-24deg);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition:
+    opacity 850ms linear,
+    transform 2100ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.is-forming .sasuke-mangekyo-petal {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.sasuke-mangekyo-petal-axis:nth-child(2) .sasuke-mangekyo-petal,
+.sasuke-mangekyo-petal-axis:nth-child(5) .sasuke-mangekyo-petal {
+  transition-delay: 100ms;
+}
+
+.sasuke-mangekyo-petal-axis:nth-child(3) .sasuke-mangekyo-petal,
+.sasuke-mangekyo-petal-axis:nth-child(6) .sasuke-mangekyo-petal {
+  transition-delay: 200ms;
 }
 
 .sasuke-mangekyo-lenses {
@@ -511,12 +564,58 @@ h1 {
   stroke-width: 5;
 }
 
+[data-shape='sasuke-mangekyo-lens'] {
+  opacity: 0.14;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition:
+    stroke-dashoffset 2200ms 240ms cubic-bezier(.3, .05, .25, 1),
+    opacity 800ms 240ms linear;
+}
+
+.is-forming [data-shape='sasuke-mangekyo-lens'] {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
 .itachi-inherited-blade {
   fill: #090104;
+  opacity: 0;
+  transform: scaleX(0.5) scaleY(0.04);
+  transform-box: fill-box;
+  transform-origin: center top;
+  transition:
+    opacity 800ms linear,
+    transform 2200ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.is-unfolding .itachi-inherited-blade {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.itachi-inherited-axis:nth-child(2) .itachi-inherited-blade {
+  transition-delay: 120ms;
+}
+
+.itachi-inherited-axis:nth-child(3) .itachi-inherited-blade {
+  transition-delay: 240ms;
 }
 
 .eternal-core {
   fill: #d0081c;
+  opacity: 0;
+  transform: scale(0);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 700ms 420ms linear,
+    transform 1400ms 320ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.is-unfolding .eternal-core {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .pupil {
@@ -793,6 +892,18 @@ footer p {
 @keyframes control-pulse {
   0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--crimson), transparent 18%); }
   55%, 100% { box-shadow: 0 0 0 0.75rem transparent; }
+}
+
+@keyframes tomoe-to-mangekyo {
+  0% { opacity: 1; transform: scale(1) rotate(0); }
+  54% { opacity: 1; transform: scale(1.13) rotate(28deg); }
+  100% { opacity: 0; transform: scale(1.38) rotate(60deg); }
+}
+
+@keyframes tomoe-ring-release {
+  0% { opacity: 1; transform: scale(1); }
+  58% { opacity: 0.8; transform: scale(1.22); }
+  100% { opacity: 0; transform: scale(1.48); }
 }
 
 @media (max-width: 900px) {
