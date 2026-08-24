@@ -799,10 +799,10 @@ h1 {
 
 .itachi-inherited-blade {
   fill: #090104;
-  transform: scaleX(0.45) scaleY(0.001);
+  transform: scaleX(0.2) scaleY(0.04);
   transform-box: fill-box;
   transform-origin: center top;
-  transition: transform 1900ms var(--morph-ease);
+  transition: transform 1750ms 220ms var(--morph-ease);
 }
 
 .is-unfolding .itachi-inherited-blade {
@@ -810,44 +810,25 @@ h1 {
 }
 
 .itachi-inherited-axis:nth-child(2) .itachi-inherited-blade {
-  transition-delay: 100ms;
+  transition-delay: 310ms;
 }
 
 .itachi-inherited-axis:nth-child(3) .itachi-inherited-blade {
-  transition-delay: 200ms;
-}
-
-.eternal-core {
-  fill: #d0081c;
-  transform: scale(0);
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 1350ms 360ms var(--morph-ease);
-}
-
-.is-unfolding .eternal-core {
-  opacity: 1;
-  transform: scale(1);
+  transition-delay: 400ms;
 }
 
 .pupil {
   fill: #050204;
-  opacity: 1;
   transform: scale(1);
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 1350ms linear,
+    d 1600ms var(--morph-ease),
     transform 1900ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .pupil--dormant {
   transform: scale(2.14);
-}
-
-.pupil--hidden {
-  opacity: 0;
-  transform: scale(0);
 }
 
 .iris-glint {

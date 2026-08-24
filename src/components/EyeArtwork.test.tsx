@@ -39,13 +39,13 @@ describe('cinematic eye canvas', () => {
 });
 
 describe('base Sharingan artwork structure', () => {
-  it('places two tomoe opposite each other instead of inheriting three-tomoe spacing', () => {
+  it('places two tomoe near ten and two o’clock', () => {
     const { container } = render(<EyeArtwork stage={SASUKE_STAGES[2]} />);
 
     const angles = [
       ...container.querySelectorAll('.ocular-pattern-layer--tomoe .tomoe-mark.is-visible'),
     ].map((mark) => mark.getAttribute('data-angle'));
-    expect(angles).toEqual(['0', '180']);
+    expect(angles).toEqual(['-60', '60']);
   });
 
   it('keeps earned tomoe mounted while they move into the three-tomoe arrangement', () => {
@@ -55,7 +55,7 @@ describe('base Sharingan artwork structure', () => {
 
     expect(slots).toHaveLength(3);
     expect(movingTomoe).toHaveClass('is-visible');
-    expect(movingTomoe).toHaveAttribute('data-angle', '180');
+    expect(movingTomoe).toHaveAttribute('data-angle', '60');
 
     rerender(<EyeArtwork stage={SASUKE_STAGES[3]} />);
 
@@ -92,14 +92,20 @@ describe('Sasuke Mangekyō artwork structure', () => {
     expect(container.querySelector('.ocular-pattern-layer--eternal')).not.toHaveClass('is-active');
   });
 
-  it('adds Itachi’s three-blade overlay only for the Eternal Mangekyō', () => {
-    const { container } = render(<EyeArtwork stage={SASUKE_STAGES[5]} />);
+  it('grows the persistent pupil into Eternal’s triangular three-blade center', () => {
+    const { container, rerender } = render(<EyeArtwork stage={SASUKE_STAGES[4]} />);
+    const pupil = container.querySelector('.pupil');
+
+    expect(pupil).toHaveAttribute('data-shape', 'pupil');
+
+    rerender(<EyeArtwork stage={SASUKE_STAGES[5]} />);
 
     expect(container.querySelectorAll('[data-shape="sasuke-mangekyo-petal"]')).toHaveLength(6);
     expect(container.querySelectorAll('[data-shape="sasuke-mangekyo-lens"]')).toHaveLength(3);
     expect(container.querySelectorAll('[data-shape="itachi-inherited-blade"]')).toHaveLength(3);
-    expect(container.querySelector('.eternal-core')).toBeInTheDocument();
-    expect(container.querySelector('.pupil')).toHaveClass('pupil--hidden');
+    expect(container.querySelector('.pupil')).toBe(pupil);
+    expect(pupil).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
+    expect(container.querySelector('.eternal-core')).not.toBeInTheDocument();
   });
 
   it('keeps Sasuke’s Mangekyō framework mounted when Eternal Mangekyō is activated', () => {

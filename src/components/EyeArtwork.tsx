@@ -8,7 +8,7 @@ interface EyeArtworkProps {
 const TOMOE_ANGLES = {
   0: [0, 180, 240],
   1: [0, 180, 240],
-  2: [0, 180, 240],
+  2: [-60, 60, 240],
   3: [0, 120, 240],
 } as const;
 const RINNEGAN_TOMOE_BANDS = [
@@ -19,6 +19,8 @@ const MANGEKYO_PETAL_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_LENS_ANGLES = [0, 120, 240];
 const TOMOE_SHAPE = 'M 0 -14 C 8 -14 14 -8 14 0 C 14 5 12 9 8 12 C 15 15 25 9 32 -10 C 34 3 29 15 19 21 C 9 28 -5 26 -13 17 C -19 11 -20 2 -16 -6 C -15 -10 -13 -12 -11 -13 C -7 -15 -3 -15 0 -14 Z';
 const MANGEKYO_LENS_SHAPE = 'M 47 0 C 47 31 41 61 31 87 C 22 111 10 128 0 136 C -10 128 -22 111 -31 87 C -41 61 -47 31 -47 0 C -47 -31 -41 -61 -31 -87 C -22 -111 -10 -128 0 -136 C 10 -128 22 -111 31 -87 C 41 -61 47 -31 47 0 Z';
+const PUPIL_SHAPE = 'M 0 22 C -7 22 -14 18 -18 11 C -22 5 -22 -5 -18 -11 C -14 -18 -7 -22 0 -22 C 7 -22 14 -18 18 -11 C 22 -5 22 5 18 11 C 14 18 7 22 0 22 Z';
+const ETERNAL_PUPIL_SHAPE = 'M 0 40 C -6 27 -8 17 -14 10 C -20 2 -29 -8 -38 -21 C -23 -18 -9 -15 0 -15 C 9 -15 23 -18 38 -21 C 29 -8 20 2 14 10 C 8 17 6 27 0 40 Z';
 const SCLERA_VEINS = [
   { side: 'left', weight: 'trunk', d: 'M 50 243 C 69 241 75 234 91 233 C 108 232 117 223 134 224 C 151 225 160 218 174 221' },
   { side: 'left', weight: 'trunk', d: 'M 52 253 C 71 256 81 265 99 266 C 116 267 129 276 147 274 C 159 273 168 270 177 269' },
@@ -181,7 +183,6 @@ function ItachiInheritedPattern() {
           />
         </g>
       ))}
-      <circle className="eternal-core" r="22" />
     </g>
   );
 }
@@ -296,9 +297,10 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
             <RinneganPattern />
           </g>
 
-          <circle
-            className={`pupil${stage.kind === 'dormant' ? ' pupil--dormant' : ''}${isEternal ? ' pupil--hidden' : ''}`}
-            r="22"
+          <path
+            className={`pupil${stage.kind === 'dormant' ? ' pupil--dormant' : ''}`}
+            data-shape={isEternal ? 'eternal-pupil-triangle' : 'pupil'}
+            d={isEternal ? ETERNAL_PUPIL_SHAPE : PUPIL_SHAPE}
           />
           <ellipse
             className={`iris-glint${isMangekyo ? ' iris-glint--hidden' : ''}`}

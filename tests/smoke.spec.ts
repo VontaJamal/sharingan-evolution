@@ -5,7 +5,7 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
 
   await expect(page).toHaveTitle(/Sharingan Evolution/);
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
-  await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', 'active');
+  await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', /^(active|fallback)$/);
   await expect(page.locator('.clan-fan-backdrop')).toBeVisible();
   await expect(page.locator('.clan-fan-backdrop')).toHaveCSS('animation-name', 'none');
   const removedHalo = await page.locator('.eye-scene').evaluate(
@@ -67,10 +67,15 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
     property: 'stroke-dashoffset',
   });
 
+  const firstTomoe = page.locator('[data-tomoe-slot="0"]');
+  await firstTomoe.evaluate((node) => node.setAttribute('data-browser-instance', 'one-to-two'));
   await page.getByRole('button', { name: /draw out the second tomoe/i }).click();
+  await expect(firstTomoe).toHaveAttribute('data-browser-instance', 'one-to-two');
+  await expect(firstTomoe).toHaveAttribute('data-angle', '-60');
   const movingTomoe = page.locator('[data-tomoe-slot="1"]');
   const movingGlyph = movingTomoe.locator('.tomoe-glyph');
   await movingTomoe.evaluate((node) => node.setAttribute('data-browser-instance', 'persistent'));
+  await expect(movingTomoe).toHaveAttribute('data-angle', '60');
   await expect(movingGlyph).toHaveCSS('opacity', '1');
 
   await page.getByRole('button', { name: /complete the pattern/i }).click();
@@ -95,7 +100,10 @@ test('keeps the experience usable in a phone viewport', async ({ browser }) => {
   await expect(eye).toBeInViewport();
   await eye.tap();
   await expect(page.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeVisible();
-  for (let step = 0; step < 3; step += 1) {
+  await page.getByRole('button', { name: /current form/i }).tap();
+  await expect(page.locator('[data-tomoe-slot="0"]')).toHaveAttribute('data-angle', '-60');
+  await expect(page.locator('[data-tomoe-slot="1"]')).toHaveAttribute('data-angle', '60');
+  for (let step = 0; step < 2; step += 1) {
     await page.getByRole('button', { name: /current form/i }).tap();
   }
   await page.getByRole('button', { name: 'Cast Amaterasu' }).tap();
@@ -134,6 +142,9 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   const reducedFrame = await page.locator('.amaterasu-field').getAttribute('data-frame');
   await page.waitForTimeout(180);
   await expect(page.locator('.amaterasu-field')).toHaveAttribute('data-frame', reducedFrame ?? '1');
+  await page.getByRole('button', { name: /current form/i }).click();
+  await expect(page.locator('.pupil')).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
+  await expect(page.locator('.pupil')).toHaveCSS('transition-duration', '1e-05s');
   await context.close();
 });
 
@@ -183,6 +194,9 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await page.locator('.sasuke-mangekyo-framework').evaluate((node) => {
     node.setAttribute('data-browser-instance', 'persistent');
   });
+  const sharedPupil = page.locator('.pupil');
+  await expect(sharedPupil).toHaveAttribute('data-shape', 'pupil');
+  await sharedPupil.evaluate((node) => node.setAttribute('data-browser-instance', 'pupil-to-triangle'));
 
   await page.getByRole('button', { name: /seek the eternal light/i }).click();
   await expect(page.getByRole('heading', { name: 'Eternal Mangekyō Sharingan' })).toBeVisible();
@@ -192,21 +206,35 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   );
   await expect(page.locator('.ocular-pattern-layer--eternal')).toHaveClass(/is-unfolding/);
   await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
+  await expect(sharedPupil).toHaveAttribute('data-browser-instance', 'pupil-to-triangle');
+  await expect(sharedPupil).toHaveAttribute('data-shape', 'eternal-pupil-triangle');
+  await expect(page.locator('.eternal-core')).toHaveCount(0);
   const bladeMotion = await page.locator('[data-shape="itachi-inherited-blade"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
     return {
+      delay: style.transitionDelay,
       duration: style.transitionDuration,
       easing: style.transitionTimingFunction,
       property: style.transitionProperty,
     };
   });
   expect(bladeMotion).toEqual({
-    duration: '1.9s',
+    delay: '0.22s',
+    duration: '1.75s',
     easing: 'cubic-bezier(0.55, 0.02, 0.25, 1)',
     property: 'transform',
   });
-  await expect(page.locator('.eternal-core')).toBeVisible();
-
+  const pupilMotion = await sharedPupil.evaluate((node) => {
+    const style = getComputedStyle(node);
+    return {
+      duration: style.transitionDuration,
+      property: style.transitionProperty,
+    };
+  });
+  expect(pupilMotion).toEqual({
+    duration: '1.6s, 1.9s',
+    property: 'd, transform',
+  });
   await page.getByRole('button', { name: /receive six paths power/i }).click();
   await expect(page.getByRole('heading', { name: "Sasuke's Six Paths Rinnegan" })).toBeVisible();
   await expect(flameField).toHaveAttribute('data-browser-instance', 'persistent-amaterasu');

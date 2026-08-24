@@ -6,7 +6,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 - `advanced-morph.webm` — 14-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, inherited Eternal overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
 - `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and code-drawn fan backdrop.
-- `desktop-two-tomoe.png` — corrected 180° two-tomoe spacing.
+- `desktop-two-tomoe.png` — two-tomoe state with the preserved first mark near 10 o'clock and the newly revealed mark near 2 o'clock.
 - `desktop-amaterasu-ready.png` — Mangekyō with the explicit, idle **Cast Amaterasu** control.
 - `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and actively burning procedural fire.
 - `desktop-eternal-mangekyo.png` — corrected Eternal form with the inherited three-blade overlay and persistent flame field.
@@ -28,7 +28,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Primary vessels draw first and fine capillaries follow on a restrained 400ms delay, finishing with the main eye transition.
 - [x] An oversized code-drawn uchiwa fan replaces the generic rotating halo and breathing circular aura at desktop and phone sizes.
 - [x] The fan has no looping animation; it receives only restrained pointer depth while Three.js owns the sparse particles.
-- [x] Two tomoe sit opposite each other at 180°.
+- [x] The first tomoe remains visible as it travels counterclockwise from 12 toward 10 o'clock while the second mark materializes near 2 o'clock.
 - [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.2–1.7 seconds.
 - [x] The same three SVG path nodes interpolate from tomoe silhouettes into Mangekyō lens curves as the ring expands and petals grow behind them.
 - [x] The advanced morph preserves solid tomoe through the first beat, delays their conversion into linework, and sustains visible transformation through the middle of the 2.05-second motion.
@@ -42,7 +42,8 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The Rinnegan draws its four concentric ripples into the existing iris while suppressing the prior dotted texture.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 1.65–2.15 seconds without a full-eye crossfade.
 - [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
-- [x] Eternal's inherited blades extend from the center without an opacity crossfade or complete replacement layer.
+- [x] The same center pupil path broadens into Eternal's black triangular core before the three inherited blades grow outward from it.
+- [x] Eternal's inherited blades extend from the transformed pupil without an opacity crossfade or complete replacement layer.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.
 - [x] Restart returns to the dormant eye while discovered-stage navigation remains available.

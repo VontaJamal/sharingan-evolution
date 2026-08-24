@@ -53,6 +53,41 @@ describe('Sharingan Evolution', () => {
     expect(container.querySelector('.eye-artwork')).toBe(eyeArtwork);
   });
 
+  it('moves the first tomoe from twelve to ten while the second appears at two', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App />);
+
+    await user.click(screen.getByRole('button', { name: /awaken the eye/i }));
+    const firstTomoe = container.querySelector('[data-tomoe-slot="0"]');
+
+    expect(firstTomoe).toHaveAttribute('data-angle', '0');
+    expect(firstTomoe).toHaveClass('is-visible');
+
+    await user.click(screen.getByRole('button', { name: /draw out the second tomoe/i }));
+
+    expect(container.querySelector('[data-tomoe-slot="0"]')).toBe(firstTomoe);
+    expect(firstTomoe).toHaveAttribute('data-angle', '-60');
+    expect(container.querySelector('[data-tomoe-slot="1"]')).toHaveAttribute('data-angle', '60');
+    expect(container.querySelector('[data-tomoe-slot="1"]')).toHaveClass('is-visible');
+  });
+
+  it('morphs the persistent Mangekyo pupil outward into the Eternal triangular core', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App />);
+
+    for (let step = 0; step < 4; step += 1) {
+      await user.click(screen.getByRole('button', { name: /current form/i }));
+    }
+
+    const pupil = container.querySelector('[data-shape="pupil"]');
+    expect(pupil?.tagName.toLowerCase()).toBe('path');
+
+    await user.click(screen.getByRole('button', { name: /seek the eternal light/i }));
+
+    expect(container.querySelector('[data-shape="eternal-pupil-triangle"]')).toBe(pupil);
+    expect(container.querySelector('.eternal-core')).not.toBeInTheDocument();
+  });
+
   it('casts Amaterasu from an explicit control and keeps the burning field mounted across advanced forms', async () => {
     const user = userEvent.setup();
     const { container } = render(<App />);
