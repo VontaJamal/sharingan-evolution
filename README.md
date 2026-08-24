@@ -24,10 +24,10 @@ The final state is deliberately labeled **Distinct dōjutsu · Left eye only**. 
 
 - Select the eye to advance one form with a mouse or touch. Press `Enter` directly from the scene, or use `Enter` or `Space` when the eye has keyboard focus.
 - Use `Arrow Right` to advance and `Arrow Left` to step back when focus is not already on a control.
-- Use the progress rail to revisit any discovered form.
+- Read the full seven-form sequence on the progress rail, and revisit any discovered form.
 - Select **Restart** at any time, or select the final eye to begin again.
 
-Each form transforms inside the same continuously mounted eye: layered sclera and iris surfaces dissolve between colors while the ocular symbols fade, scale, and turn into place over a deliberate 2.0–2.6 second reveal. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, and transition travel.
+Each form transforms inside the same continuously mounted eye: layered sclera and iris surfaces dissolve between colors while the ocular symbols fade, scale, and turn into place over a deliberate 2.0–2.6 second reveal. During tomoe maturation, three stable SVG slots preserve every earned mark: existing tomoe remain visible and move into their next positions while only the new mark materializes. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, and transition travel.
 
 ## Local setup
 

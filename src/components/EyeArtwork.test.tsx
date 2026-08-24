@@ -31,9 +31,27 @@ describe('base Sharingan artwork structure', () => {
     const { container } = render(<EyeArtwork stage={SASUKE_STAGES[2]} />);
 
     const angles = [
-      ...container.querySelectorAll('.ocular-pattern-layer--tomoe .tomoe-mark'),
+      ...container.querySelectorAll('.ocular-pattern-layer--tomoe .tomoe-mark.is-visible'),
     ].map((mark) => mark.getAttribute('data-angle'));
     expect(angles).toEqual(['0', '180']);
+  });
+
+  it('keeps earned tomoe mounted while they move into the three-tomoe arrangement', () => {
+    const { container, rerender } = render(<EyeArtwork stage={SASUKE_STAGES[2]} />);
+    const slots = [...container.querySelectorAll('.ocular-pattern-layer--tomoe .tomoe-mark')];
+    const movingTomoe = container.querySelector('[data-tomoe-slot="1"]');
+
+    expect(slots).toHaveLength(3);
+    expect(movingTomoe).toHaveClass('is-visible');
+    expect(movingTomoe).toHaveAttribute('data-angle', '180');
+
+    rerender(<EyeArtwork stage={SASUKE_STAGES[3]} />);
+
+    expect([...container.querySelectorAll('.ocular-pattern-layer--tomoe .tomoe-mark')]).toEqual(slots);
+    expect(container.querySelector('[data-tomoe-slot="1"]')).toBe(movingTomoe);
+    expect(movingTomoe).toHaveClass('is-visible');
+    expect(movingTomoe).toHaveAttribute('data-angle', '120');
+    expect(container.querySelector('[data-tomoe-slot="2"]')).toHaveClass('is-visible');
   });
 });
 

@@ -18,6 +18,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The eye uses an asymmetric vector aperture, softened lid contours, and a restrained corneal sheen rather than a blocky geometric mask.
 - [x] Capable devices receive a Three.js Z-depth particle field and halo; CSS remains the complete fallback.
 - [x] Two tomoe sit opposite each other at 180°.
+- [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 2.0–2.6 seconds without a full-eye crossfade.
@@ -25,6 +26,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Mouse click and touch tap advance exactly one stage.
 - [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.
 - [x] Restart returns to the dormant eye while discovered-stage navigation remains available.
+- [x] All seven canonical stage names remain visible even while future navigation is locked.
 - [x] The final state is labeled as a distinct left-eye dōjutsu, not a Sharingan form.
 - [x] Focus rings are visible on the primary eye, restart action, and discovered-stage controls.
 - [x] Reduced-motion mode removes continuous particles, depth transforms, and transition travel.

@@ -104,12 +104,14 @@ describe('Sharingan Evolution', () => {
     expect(document.getElementById('stage-lore')).toHaveTextContent(/six-tomoe Rinnegan/i);
   });
 
-  it('exposes inaccessible future forms as disabled until they are discovered', () => {
+  it('names future forms while keeping their direct navigation locked', () => {
     render(<App />);
 
     expect(screen.getByRole('button', { name: 'View Dormant Eye' })).toHaveAttribute('aria-current', 'step');
-    expect(screen.getByRole('button', { name: 'Undiscovered form 2' })).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Undiscovered form 7' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'One Tomoe Sharingan (locked)' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Mangekyō Sharingan (locked)' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: "Sasuke's Six Paths Rinnegan (locked)" })).toBeDisabled();
+    expect(screen.queryByText('Unknown')).not.toBeInTheDocument();
   });
 
   it('reports and honors the reduced-motion preference', () => {

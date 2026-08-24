@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { EyeStage } from '../stages';
 
 interface EyeArtworkProps {
@@ -5,20 +6,37 @@ interface EyeArtworkProps {
 }
 
 const TOMOE_ANGLES = {
-  1: [0],
-  2: [0, 180],
+  0: [0, 180, 240],
+  1: [0, 180, 240],
+  2: [0, 180, 240],
   3: [0, 120, 240],
 } as const;
 const RINNEGAN_TOMOE_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_PETAL_ANGLES = [0, 60, 120, 180, 240, 300];
 const MANGEKYO_LENS_ANGLES = [0, 120, 240];
 
-function Tomoe({ angle, radius = 93 }: { angle: number; radius?: number }) {
+function Tomoe({
+  angle,
+  radius = 93,
+  slot,
+  visible = true,
+}: {
+  angle: number;
+  radius?: number;
+  slot?: number;
+  visible?: boolean;
+}) {
+  const orbitStyle = {
+    '--tomoe-angle': `${angle}deg`,
+    '--tomoe-offset': `${-radius}px`,
+  } as CSSProperties;
+
   return (
     <g
-      transform={`rotate(${angle}) translate(0 ${-radius})`}
-      className="tomoe-mark"
+      className={`tomoe-mark${visible ? ' is-visible' : ''}`}
       data-angle={angle}
+      data-tomoe-slot={slot}
+      style={orbitStyle}
     >
       <g className="tomoe-glyph">
         <circle cx="0" cy="0" r="14" />
@@ -28,12 +46,12 @@ function Tomoe({ angle, radius = 93 }: { angle: number; radius?: number }) {
   );
 }
 
-function TomoePattern({ count }: { count: 1 | 2 | 3 }) {
+function TomoePattern({ count }: { count: 0 | 1 | 2 | 3 }) {
   return (
     <g className="tomoe-pattern">
       <circle className="iris-ring" r="91" />
-      {TOMOE_ANGLES[count].map((angle) => (
-        <Tomoe key={angle} angle={angle} />
+      {TOMOE_ANGLES[count].map((angle, slot) => (
+        <Tomoe key={slot} angle={angle} slot={slot} visible={slot < count} />
       ))}
     </g>
   );
@@ -107,7 +125,7 @@ export function EyeArtwork({ stage }: EyeArtworkProps) {
   const isMangekyo = stage.kind === 'mangekyo' || stage.kind === 'eternal-mangekyo';
   const isEternal = stage.kind === 'eternal-mangekyo';
   const isRinnegan = stage.kind === 'rinnegan';
-  const tomoeCount = isTomoe ? stage.tomoe : 3;
+  const tomoeCount = isTomoe ? stage.tomoe : isDormant ? 0 : 3;
 
   return (
     <svg

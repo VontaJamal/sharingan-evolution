@@ -449,12 +449,25 @@ h1 {
 
 .tomoe-mark {
   fill: #110106;
+  transform: rotate(var(--tomoe-angle)) translateY(var(--tomoe-offset));
+  transform-origin: 0 0;
+  transition: transform 2600ms cubic-bezier(.3, .05, .25, 1);
+  will-change: transform;
 }
 
 .tomoe-glyph {
+  opacity: 0;
+  transform: scale(0.18) rotate(-24deg);
   transform-box: fill-box;
   transform-origin: center;
-  animation: ocular-symbol-emerge 2200ms 180ms both cubic-bezier(.3, .05, .25, 1);
+  transition:
+    opacity 2000ms linear,
+    transform 2600ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.tomoe-mark.is-visible .tomoe-glyph {
+  opacity: 1;
+  transform: scale(1) rotate(0);
 }
 
 .ocular-pattern-layer {
@@ -780,13 +793,6 @@ footer p {
 @keyframes control-pulse {
   0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--crimson), transparent 18%); }
   55%, 100% { box-shadow: 0 0 0 0.75rem transparent; }
-}
-
-@keyframes ocular-symbol-emerge {
-  0% { opacity: 0; transform: scale(0.18) rotate(-24deg); }
-  48% { opacity: 0.78; }
-  72% { opacity: 1; transform: scale(1.14) rotate(3deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0); }
 }
 
 @media (max-width: 900px) {

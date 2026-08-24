@@ -127,7 +127,7 @@ function App() {
         </div>
       </section>
 
-      <nav id="evolution-controls" className="evolution-track" aria-label="Discovered eye stages">
+      <nav id="evolution-controls" className="evolution-track" aria-label="Eye evolution stages">
         <div className="track-line" aria-hidden="true">
           <span style={{ width: `${(furthestStage / LAST_STAGE_INDEX) * 100}%` }} />
         </div>
@@ -141,11 +141,11 @@ function App() {
                   className={isDiscovered ? 'is-discovered' : undefined}
                   disabled={!isDiscovered}
                   aria-current={stageIndex === index ? 'step' : undefined}
-                  aria-label={isDiscovered ? `View ${item.name}` : `Undiscovered form ${index + 1}`}
+                  aria-label={isDiscovered ? `View ${item.name}` : `${item.name} (locked)`}
                   onClick={() => selectStage(index)}
                 >
                   <span className="track-node" aria-hidden="true" />
-                  <span className="track-label">{isDiscovered ? item.navName : 'Unknown'}</span>
+                  <span className="track-label">{item.navName}</span>
                 </button>
               </li>
             );

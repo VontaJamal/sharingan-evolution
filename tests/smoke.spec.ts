@@ -25,7 +25,7 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
 test('paces ocular symbols into the persistent eye', async ({ page }) => {
   await page.goto('/');
 
-  await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: /awaken the eye/i }).click();
   const transition = await page.locator('.ocular-pattern-layer--tomoe').evaluate((node) => {
     const style = getComputedStyle(node);
     return { duration: style.transitionDuration, property: style.transitionProperty };
@@ -35,6 +35,20 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
     duration: '2s, 2.6s, 0s',
     property: 'opacity, transform, visibility',
   });
+
+  await page.getByRole('button', { name: /draw out the second tomoe/i }).click();
+  const movingTomoe = page.locator('[data-tomoe-slot="1"]');
+  const movingGlyph = movingTomoe.locator('.tomoe-glyph');
+  await movingTomoe.evaluate((node) => node.setAttribute('data-browser-instance', 'persistent'));
+  await expect(movingGlyph).toHaveCSS('opacity', '1');
+
+  await page.getByRole('button', { name: /complete the pattern/i }).click();
+
+  await expect(page.locator('.ocular-pattern-layer--tomoe .tomoe-mark')).toHaveCount(3);
+  await expect(movingTomoe).toHaveAttribute('data-browser-instance', 'persistent');
+  await expect(movingTomoe).toHaveAttribute('data-angle', '120');
+  await expect(movingGlyph).toHaveCSS('opacity', '1');
+  await expect(page.locator('.ocular-pattern-layer--tomoe .tomoe-mark.is-visible')).toHaveCount(3);
 });
 
 test('keeps the experience usable in a phone viewport', async ({ browser }) => {
@@ -50,7 +64,7 @@ test('keeps the experience usable in a phone viewport', async ({ browser }) => {
   await expect(eye).toBeInViewport();
   await eye.tap();
   await expect(page.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeVisible();
-  await expect(page.getByRole('navigation', { name: 'Discovered eye stages' })).toBeVisible();
+  await expect(page.getByRole('navigation', { name: 'Eye evolution stages' })).toBeVisible();
   await context.close();
 });
 
