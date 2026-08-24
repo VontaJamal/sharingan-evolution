@@ -18,7 +18,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The eye uses an asymmetric vector aperture, softened lid contours, and a restrained corneal sheen rather than a blocky geometric mask.
 - [x] Capable devices receive a Three.js Z-depth particle field and halo; CSS remains the complete fallback.
 - [x] Two tomoe sit opposite each other at 180°.
-- [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes.
+- [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.5–2.0 seconds.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 2.0–2.6 seconds without a full-eye crossfade.

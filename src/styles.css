@@ -461,8 +461,8 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    opacity 2000ms linear,
-    transform 2600ms cubic-bezier(.3, .05, .25, 1);
+    opacity 1500ms linear,
+    transform 2000ms cubic-bezier(.3, .05, .25, 1);
 }
 
 .tomoe-mark.is-visible .tomoe-glyph {

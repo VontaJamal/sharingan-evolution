@@ -36,6 +36,16 @@ test('paces ocular symbols into the persistent eye', async ({ page }) => {
     property: 'opacity, transform, visibility',
   });
 
+  const tomoeReveal = await page.locator('[data-tomoe-slot="0"] .tomoe-glyph').evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { duration: style.transitionDuration, property: style.transitionProperty };
+  });
+
+  expect(tomoeReveal).toEqual({
+    duration: '1.5s, 2s',
+    property: 'opacity, transform',
+  });
+
   await page.getByRole('button', { name: /draw out the second tomoe/i }).click();
   const movingTomoe = page.locator('[data-tomoe-slot="1"]');
   const movingGlyph = movingTomoe.locator('.tomoe-glyph');
