@@ -26,6 +26,21 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeVisible();
   await expect(page.locator('.eye-scene')).toHaveAttribute('data-browser-instance', 'persistent');
+  const frameAfterAwakening = await page.locator('main').evaluate((main) => {
+    const awakening = main.querySelector('.awakening')?.getBoundingClientRect();
+    return {
+      left: awakening?.left,
+      scrollLeft: main.scrollLeft,
+      width: awakening?.width,
+      viewportWidth: window.innerWidth,
+    };
+  });
+  expect(frameAfterAwakening).toEqual({
+    left: 0,
+    scrollLeft: 0,
+    width: frameAfterAwakening.viewportWidth,
+    viewportWidth: frameAfterAwakening.viewportWidth,
+  });
 
   await page.getByRole('button', { name: /draw out the second tomoe/i }).focus();
   await page.keyboard.press('Enter');
@@ -33,6 +48,42 @@ test('awakens through scene-level and focused keyboard controls', async ({ page 
 
   await page.getByRole('button', { name: 'Restart' }).click();
   await expect(page.getByRole('heading', { name: 'Dormant Eye' })).toBeVisible();
+  await page.getByRole('button', { name: /awaken the eye/i }).click({
+    position: { x: 140, y: 200 },
+  });
+  await page.waitForTimeout(2200);
+  const frameAfterPointerAwakening = await page.locator('.awakening').boundingBox();
+  expect(frameAfterPointerAwakening).not.toBeNull();
+  expect(frameAfterPointerAwakening!.x).toBe(0);
+  expect(frameAfterPointerAwakening!.width).toBe(1280);
+});
+
+test('keeps the poster frame anchored after pointer awakening', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+  const page = await context.newPage();
+  await page.goto('/');
+
+  await page.getByRole('button', { name: /awaken the eye/i }).click({
+    position: { x: 140, y: 200 },
+  });
+  await page.waitForTimeout(2200);
+
+  const frame = await page.locator('main').evaluate((main) => {
+    const awakening = main.querySelector('.awakening')?.getBoundingClientRect();
+    return {
+      left: awakening?.left,
+      scrollLeft: main.scrollLeft,
+      scrollTop: main.scrollTop,
+      top: awakening?.top,
+      width: awakening?.width,
+    };
+  });
+  expect(frame.left).toBe(0);
+  expect(frame.scrollLeft).toBe(0);
+  expect(frame.scrollTop).toBe(0);
+  expect(frame.top).toBeGreaterThan(0);
+  expect(frame.width).toBe(1440);
+  await context.close();
 });
 
 test('paces ocular symbols into the persistent eye', async ({ page }) => {

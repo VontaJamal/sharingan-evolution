@@ -47,7 +47,7 @@ button {
   grid-template-rows: auto minmax(0, 1fr) auto auto;
   width: 100%;
   min-height: 100svh;
-  overflow: hidden;
+  overflow: clip;
   background:
     radial-gradient(circle at 50% 47%, rgb(125 0 13 / 20%) 0 12%, transparent 42%),
     #050506;
@@ -86,7 +86,8 @@ button {
 .ink-atmosphere {
   position: absolute;
   z-index: -1;
-  inset: -18%;
+  inset: 0;
+  contain: paint;
   opacity: 0.72;
   background:
     radial-gradient(ellipse at 14% 65%, rgb(34 30 34 / 62%) 0 10%, transparent 38%),
@@ -1125,6 +1126,7 @@ footer p {
 
 @media (max-width: 900px) {
   .experience {
+    overflow-x: clip;
     overflow-y: auto;
   }
 
