@@ -7,6 +7,7 @@
   text-rendering: optimizeLegibility;
   --crimson: #ec1f2d;
   --crimson-bright: #ff4b52;
+  --morph-ease: cubic-bezier(.55, .02, .25, 1);
   --muted: #9f9795;
 }
 
@@ -454,16 +455,20 @@ h1 {
   will-change: transform;
 }
 
+.tomoe-mark.is-morphing {
+  transition: transform 2400ms var(--morph-ease);
+}
+
 .tomoe-shape {
   fill: #110106;
   stroke: #110106;
   stroke-linejoin: round;
   stroke-width: 0;
   transition:
-    d 2400ms cubic-bezier(.3, .05, .25, 1),
-    fill 900ms cubic-bezier(.3, .05, .25, 1),
-    stroke 900ms cubic-bezier(.3, .05, .25, 1),
-    stroke-width 900ms cubic-bezier(.3, .05, .25, 1);
+    d 2400ms var(--morph-ease),
+    fill 700ms 1050ms var(--morph-ease),
+    stroke 900ms 800ms var(--morph-ease),
+    stroke-width 900ms 800ms var(--morph-ease);
 }
 
 .tomoe-mark.is-morphing .tomoe-shape {
@@ -517,9 +522,9 @@ h1 {
   transform-box: fill-box;
   transform-origin: center;
   transition:
-    stroke 900ms cubic-bezier(.3, .05, .25, 1),
-    stroke-width 900ms cubic-bezier(.3, .05, .25, 1),
-    transform 2400ms cubic-bezier(.3, .05, .25, 1);
+    stroke 900ms 800ms var(--morph-ease),
+    stroke-width 900ms 800ms var(--morph-ease),
+    transform 2400ms var(--morph-ease);
 }
 
 .is-morphing .iris-ring {
@@ -545,7 +550,7 @@ h1 {
   transform: scale(0.001);
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 2400ms 80ms cubic-bezier(.3, .05, .25, 1);
+  transition: transform 2500ms 80ms var(--morph-ease);
 }
 
 .is-forming .mangekyo-void {
@@ -559,7 +564,7 @@ h1 {
   transform: scale(0.001) rotate(-32deg);
   transform-box: fill-box;
   transform-origin: center bottom;
-  transition: transform 2200ms cubic-bezier(.3, .05, .25, 1);
+  transition: transform 2400ms var(--morph-ease);
 }
 
 .is-forming .sasuke-mangekyo-petal {
@@ -582,7 +587,7 @@ h1 {
   transform: scaleX(0.45) scaleY(0.001);
   transform-box: fill-box;
   transform-origin: center top;
-  transition: transform 2200ms cubic-bezier(.3, .05, .25, 1);
+  transition: transform 2200ms var(--morph-ease);
 }
 
 .is-unfolding .itachi-inherited-blade {
@@ -602,7 +607,7 @@ h1 {
   transform: scale(0);
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 1400ms 320ms cubic-bezier(.3, .05, .25, 1);
+  transition: transform 1600ms 480ms var(--morph-ease);
 }
 
 .is-unfolding .eternal-core {
@@ -1041,6 +1046,7 @@ footer p {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    transition-delay: 0s !important;
     transition-duration: 0.01ms !important;
   }
 

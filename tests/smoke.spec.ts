@@ -86,6 +86,22 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
   await expect(page.locator('main')).toHaveAttribute('data-motion', 'reduced');
   await expect(page.locator('.cinematic-field')).toHaveAttribute('data-webgl', 'fallback');
   await expect(page.locator('.chakra-particle').first()).toHaveCSS('display', 'none');
+
+  for (let step = 0; step < 4; step += 1) {
+    await page.getByRole('button', { name: /current form/i }).click();
+  }
+
+  const reducedLensMotion = await page
+    .locator('[data-shape="sasuke-mangekyo-lens"]')
+    .first()
+    .evaluate((node) => {
+      const style = getComputedStyle(node);
+      return { delay: style.transitionDelay, duration: style.transitionDuration };
+    });
+  expect(reducedLensMotion).toEqual({
+    delay: '0s',
+    duration: '1e-05s',
+  });
   await context.close();
 });
 
@@ -109,10 +125,18 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(page.locator('.ocular-pattern-layer--mangekyo')).toHaveClass(/is-forming/);
   const lensMotion = await page.locator('[data-shape="sasuke-mangekyo-lens"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
-    return { duration: style.transitionDuration, property: style.transitionProperty };
+    return {
+      delay: style.transitionDelay,
+      duration: style.transitionDuration,
+      easing: style.transitionTimingFunction,
+      property: style.transitionProperty,
+    };
   });
   expect(lensMotion).toEqual({
-    duration: '2.4s, 0.9s, 0.9s, 0.9s',
+    delay: '0s, 1.05s, 0.8s, 0.8s',
+    duration: '2.4s, 0.7s, 0.9s, 0.9s',
+    easing:
+      'cubic-bezier(0.55, 0.02, 0.25, 1), cubic-bezier(0.55, 0.02, 0.25, 1), cubic-bezier(0.55, 0.02, 0.25, 1), cubic-bezier(0.55, 0.02, 0.25, 1)',
     property: 'd, fill, stroke, stroke-width',
   });
   await page.locator('.sasuke-mangekyo-framework').evaluate((node) => {
@@ -129,10 +153,15 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(page.locator('[data-shape="itachi-inherited-blade"]')).toHaveCount(3);
   const bladeMotion = await page.locator('[data-shape="itachi-inherited-blade"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
-    return { duration: style.transitionDuration, property: style.transitionProperty };
+    return {
+      duration: style.transitionDuration,
+      easing: style.transitionTimingFunction,
+      property: style.transitionProperty,
+    };
   });
   expect(bladeMotion).toEqual({
     duration: '2.2s',
+    easing: 'cubic-bezier(0.55, 0.02, 0.25, 1)',
     property: 'transform',
   });
   await expect(page.locator('.eternal-core')).toBeVisible();

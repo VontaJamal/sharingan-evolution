@@ -4,6 +4,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
+- `advanced-morph.webm` — 12-second browser capture of the paced three-tomoe awakening, shared-node Mangekyō morph, and inherited Eternal overlay.
 - `desktop-dormant.png` — 1440×1000 initial poster and awakening control.
 - `desktop-two-tomoe.png` — corrected 180° two-tomoe spacing.
 - `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō.
@@ -20,6 +21,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] Two tomoe sit opposite each other at 180°.
 - [x] Existing tomoe remain visible and move into place while only the newly earned mark materializes over 1.5–2.0 seconds.
 - [x] The same three SVG path nodes interpolate from tomoe silhouettes into Mangekyō lens curves as the ring expands and petals grow behind them.
+- [x] The advanced morph preserves solid tomoe through the first beat, delays their conversion into linework, and sustains visible transformation through the middle of the 2.4-second motion.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
 - [x] One eye canvas remains mounted while layered iris color and ocular patterns dissolve and settle over 2.0–2.6 seconds without a full-eye crossfade.
@@ -31,7 +33,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] All seven canonical stage names remain visible even while future navigation is locked.
 - [x] The final state is labeled as a distinct left-eye dōjutsu, not a Sharingan form.
 - [x] Focus rings are visible on the primary eye, restart action, and discovered-stage controls.
-- [x] Reduced-motion mode removes continuous particles, depth transforms, and transition travel.
+- [x] Reduced-motion mode removes continuous particles, depth transforms, transition travel, and delayed intermediate morph states.
 - [x] The disclaimer remains visible without competing with the awakening interaction.
 
-A short WebM was attempted, but the local capture backend did not finalize a bounded recording. These responsive screenshots, the written checklist, and the browser persistence assertions are the review proof for this version.
+The WebM, responsive screenshots, written checklist, and browser persistence assertions are the review proof for this version.

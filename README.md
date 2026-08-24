@@ -27,7 +27,7 @@ The final state is deliberately labeled **Distinct dōjutsu · Left eye only**. 
 - Read the full seven-form sequence on the progress rail, and revisit any discovered form.
 - Select **Restart** at any time, or select the final eye to begin again.
 
-Each form transforms inside the same continuously mounted eye: layered sclera, iris, and full-pattern surfaces dissolve, scale, and turn into place over a deliberate 2.0–2.6 second reveal. During tomoe maturation, three stable SVG slots preserve every earned mark: existing tomoe remain visible and move into their next positions while only the new mark materializes on a tighter 1.5–2.0 second beat. The advanced awakening uses a true shared-element path morph: the same three SVG nodes travel inward and interpolate from tomoe silhouettes into Sasuke's three Mangekyō lens curves while the iris ring expands and six petals grow behind them. Eternal's inherited blades then extend over the continuously mounted Sasuke framework without an opacity crossfade. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, and transition travel.
+Each form transforms inside the same continuously mounted eye: layered sclera, iris, and full-pattern surfaces dissolve, scale, and turn into place over a deliberate 2.0–2.6 second reveal. During tomoe maturation, three stable SVG slots preserve every earned mark: existing tomoe remain visible and move into their next positions while only the new mark materializes on a tighter 1.5–2.0 second beat. The advanced awakening uses a true shared-element path morph: the same three SVG nodes travel inward as solid forms, then become Sasuke's three Mangekyō lens curves through a delayed ink-line conversion while the iris ring expands and six petals grow behind them. Eternal's inherited blades then extend over the continuously mounted Sasuke framework with the same sustained cadence and no opacity crossfade. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, and transition travel.
 
 ## Local setup
 
@@ -59,6 +59,7 @@ Behavior coverage includes sequential progression, paced in-place eye transforma
 
 Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
 
+- 12-second WebM showing the tomoe-to-Mangekyō morph and Eternal overlay in motion
 - 1440×1000 dormant desktop poster
 - 1440×1000 corrected two-tomoe, Mangekyō, and Eternal Mangekyō states
 - 1440×1000 fully discovered Rinnegan state
