@@ -4,15 +4,17 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
-- `advanced-morph.webm` — 12-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, black-flame Amaterasu entrance, inherited Eternal overlay, and two-band Rinnegan reveal.
+- `advanced-morph.webm` — short browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, inherited Eternal overlay, and two-band Rinnegan reveal.
 - `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and code-drawn fan backdrop.
 - `desktop-two-tomoe.png` — corrected 180° two-tomoe spacing.
-- `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and newly awakened black flames.
+- `desktop-amaterasu-ready.png` — Mangekyō with the explicit, idle **Cast Amaterasu** control.
+- `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and actively burning procedural fire.
 - `desktop-eternal-mangekyo.png` — corrected Eternal form with the inherited three-blade overlay and persistent flame field.
 - `desktop-rinnegan.png` — 1440×1000 corrected two-band six-tomoe Rinnegan, unlocked navigation, and explicit dōjutsu distinction.
 - `mobile-mangekyo.png` — 390×844 corrected Mangekyō, sclera strain, original flames, and responsive fan backdrop after touch progression.
 - `mobile-rinnegan.png` — 390×844 two-band Rinnegan and flame framing after touch progression.
 - `before-amaterasu.png` — the previous advanced eye without the original black-flame field.
+- `before-static-amaterasu.png` — the previous automatically activated SVG flame silhouettes preserved before the castable moving-fire revision.
 - `before-single-orbit-rinnegan.png` — the previous inaccurate six-tomoe single-orbit Rinnegan.
 - `before-generic-halo.png` — the previous rotating ring and breathing circular aura preserved as regression evidence.
 - `before-sclera-strain.png` — the previous four clean sclera strokes preserved as regression evidence.
@@ -32,7 +34,9 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The advanced morph preserves solid tomoe through the first beat, delays their conversion into linework, and sustains visible transformation through the middle of the 2.05-second motion.
 - [x] Sasuke's Mangekyō uses six outer petals and three overlapping lens lines.
 - [x] Eternal Mangekyō preserves Sasuke's frame and adds Itachi's three-blade overlay.
-- [x] Eight original near-black SVG flame tongues awaken once behind the eyelid at Mangekyō and remain mounted through Eternal and Rinnegan.
+- [x] A dedicated **Cast Amaterasu** control appears only from Mangekyō onward, reports its pressed state, and changes to **End Amaterasu** while active.
+- [x] Original Canvas-drawn black fire continuously curls, branches, rises, sheds restrained embers, and changes silhouette instead of replaying a fixed entrance.
+- [x] The active fire field remains mounted through Eternal and Rinnegan and clears when the jutsu ends or the experience restarts.
 - [x] The flames use a restrained deep-crimson edge for legibility against obsidian black without changing into purple during the Rinnegan state.
 - [x] Sasuke's Rinnegan places three small comma marks on each of two inner ripple bands rather than distributing all six on one orbit.
 - [x] The Rinnegan draws its four concentric ripples into the existing iris while suppressing the prior dotted texture.
@@ -46,7 +50,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] The final state is labeled as a distinct left-eye dōjutsu, not a Sharingan form.
 - [x] Focus rings are visible on the primary eye, restart action, and discovered-stage controls.
 - [x] Reduced-motion mode removes continuous particles, depth transforms, transition travel, and delayed intermediate morph states.
-- [x] Reduced-motion mode settles the Amaterasu entrance immediately instead of playing its staggered rise.
+- [x] Reduced-motion mode renders one settled Amaterasu frame instead of running the continuous fire loop.
 - [x] The disclaimer remains visible without competing with the awakening interaction.
 
-The WebM, responsive screenshots, written checklist, and browser persistence assertions are the review proof for this version.
+The WebM, responsive screenshots, written checklist, and browser cast, frame-advance, persistence, end-state, and reduced-motion assertions are the review proof for this version.

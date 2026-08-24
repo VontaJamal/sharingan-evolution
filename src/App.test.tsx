@@ -53,27 +53,40 @@ describe('Sharingan Evolution', () => {
     expect(container.querySelector('.eye-artwork')).toBe(eyeArtwork);
   });
 
-  it('awakens a persistent original Amaterasu field at Mangekyō and keeps it through the Rinnegan', async () => {
+  it('casts Amaterasu from an explicit control and keeps the burning field mounted across advanced forms', async () => {
     const user = userEvent.setup();
     const { container } = render(<App />);
     const flameField = container.querySelector('.amaterasu-field');
 
     expect(flameField).toBeInTheDocument();
     expect(flameField).not.toHaveClass('is-active');
-    expect(container.querySelectorAll('[data-shape="amaterasu-flame"]')).toHaveLength(8);
+    expect(container.querySelector('canvas.amaterasu-field')).toBe(flameField);
+    expect(screen.queryByRole('button', { name: 'Cast Amaterasu' })).not.toBeInTheDocument();
 
     for (let step = 0; step < 4; step += 1) {
       await user.click(screen.getByRole('button', { name: /current form/i }));
     }
 
+    const castButton = screen.getByRole('button', { name: 'Cast Amaterasu' });
+    expect(castButton).toHaveAttribute('aria-pressed', 'false');
+    expect(flameField).not.toHaveClass('is-active');
+
+    await user.click(castButton);
+
     expect(container.querySelector('.amaterasu-field')).toBe(flameField);
     expect(flameField).toHaveClass('is-active');
+    expect(flameField).toHaveAttribute('data-animation', 'active');
+    expect(screen.getByRole('button', { name: 'End Amaterasu' })).toHaveAttribute('aria-pressed', 'true');
 
     await user.click(screen.getByRole('button', { name: /current form/i }));
     await user.click(screen.getByRole('button', { name: /current form/i }));
 
     expect(container.querySelector('.amaterasu-field')).toBe(flameField);
     expect(flameField).toHaveClass('is-active');
+
+    await user.click(screen.getByRole('button', { name: 'End Amaterasu' }));
+    expect(flameField).not.toHaveClass('is-active');
+    expect(flameField).toHaveAttribute('data-animation', 'idle');
   });
 
   it('awakens when Enter is pressed directly from the opening screen', async () => {

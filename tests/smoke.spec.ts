@@ -95,6 +95,11 @@ test('keeps the experience usable in a phone viewport', async ({ browser }) => {
   await expect(eye).toBeInViewport();
   await eye.tap();
   await expect(page.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeVisible();
+  for (let step = 0; step < 3; step += 1) {
+    await page.getByRole('button', { name: /current form/i }).tap();
+  }
+  await page.getByRole('button', { name: 'Cast Amaterasu' }).tap();
+  await expect(page.locator('.amaterasu-field')).toHaveAttribute('data-animation', 'active');
   await expect(page.getByRole('navigation', { name: 'Eye evolution stages' })).toBeVisible();
   await context.close();
 });
@@ -123,8 +128,12 @@ test('switches off continuous motion for reduced-motion users', async ({ browser
     delay: '0s',
     duration: '1e-05s',
   });
+  await page.getByRole('button', { name: 'Cast Amaterasu' }).click();
   await expect(page.locator('.amaterasu-field')).toHaveClass(/is-active/);
-  await expect(page.locator('.amaterasu-flame').first()).toHaveCSS('animation-duration', '1e-05s');
+  await expect(page.locator('.amaterasu-field')).toHaveAttribute('data-animation', 'reduced');
+  const reducedFrame = await page.locator('.amaterasu-field').getAttribute('data-frame');
+  await page.waitForTimeout(180);
+  await expect(page.locator('.amaterasu-field')).toHaveAttribute('data-frame', reducedFrame ?? '1');
   await context.close();
 });
 
@@ -147,11 +156,14 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(page.locator('.ocular-pattern-layer--tomoe')).toHaveClass(/is-morphing/);
   await expect(page.locator('.ocular-pattern-layer--mangekyo')).toHaveClass(/is-forming/);
   const flameField = page.locator('.amaterasu-field');
+  await expect(page.getByRole('button', { name: 'Cast Amaterasu' })).toBeVisible();
+  await expect(flameField).not.toHaveClass(/is-active/);
+  await page.getByRole('button', { name: 'Cast Amaterasu' }).click();
   await flameField.evaluate((node) => node.setAttribute('data-browser-instance', 'persistent-amaterasu'));
   await expect(flameField).toHaveClass(/is-active/);
-  await expect(page.locator('[data-shape="amaterasu-flame"]')).toHaveCount(8);
-  await expect(page.locator('.amaterasu-flame').first()).toHaveCSS('animation-name', 'amaterasu-awaken');
-  await expect(page.locator('.amaterasu-flame').first()).toHaveCSS('animation-duration', '1.25s');
+  await expect(flameField).toHaveAttribute('data-animation', 'active');
+  const firstFlameFrame = Number(await flameField.getAttribute('data-frame'));
+  await expect.poll(async () => Number(await flameField.getAttribute('data-frame'))).toBeGreaterThan(firstFlameFrame);
   const lensMotion = await page.locator('[data-shape="sasuke-mangekyo-lens"]').first().evaluate((node) => {
     const style = getComputedStyle(node);
     return {
@@ -202,4 +214,9 @@ test('morphs into Sasuke-specific Mangekyō and Eternal geometry in the browser'
   await expect(page.locator('[data-rinnegan-band="inner"]')).toHaveCount(3);
   await expect(page.locator('[data-rinnegan-band="outer"]')).toHaveCount(3);
   await expect(page.locator('[data-shape="rinnegan-ripple"]')).toHaveCount(4);
+
+  await page.getByRole('button', { name: 'End Amaterasu' }).click();
+  await expect(flameField).not.toHaveClass(/is-active/);
+  await expect(flameField).toHaveAttribute('data-animation', 'idle');
+  await expect(flameField).toHaveAttribute('data-frame', '0');
 });

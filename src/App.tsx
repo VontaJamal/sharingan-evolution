@@ -10,10 +10,11 @@ const LAST_STAGE_INDEX = SASUKE_STAGES.length - 1;
 function App() {
   const [stageIndex, setStageIndex] = useState(0);
   const [furthestStage, setFurthestStage] = useState(0);
+  const [amaterasuActive, setAmaterasuActive] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
   const stage = SASUKE_STAGES[stageIndex];
   const isFinalStage = stageIndex === LAST_STAGE_INDEX;
-  const hasAmaterasu = stageIndex >= 4;
+  const canCastAmaterasu = stageIndex >= 4;
   const fieldAccent = stage.kind === 'rinnegan'
     ? '#b895e1'
     : stage.kind === 'dormant'
@@ -23,11 +24,12 @@ function App() {
   const selectStage = useCallback((nextIndex: number) => {
     setStageIndex(nextIndex);
     setFurthestStage((current) => Math.max(current, nextIndex));
+    if (nextIndex < 4) setAmaterasuActive(false);
   }, []);
 
   const advanceStage = useCallback(() => {
     if (isFinalStage) {
-      setStageIndex(0);
+      selectStage(0);
       return;
     }
     selectStage(stageIndex + 1);
@@ -87,7 +89,7 @@ function App() {
         <button
           className="restart-button"
           type="button"
-          onClick={() => setStageIndex(0)}
+          onClick={() => selectStage(0)}
           disabled={stageIndex === 0}
         >
           Restart
@@ -107,7 +109,7 @@ function App() {
         </div>
 
         <div className="eye-scene" data-eye-stage={stage.id}>
-          <AmaterasuField active={hasAmaterasu} />
+          <AmaterasuField active={canCastAmaterasu && amaterasuActive} reducedMotion={reducedMotion} />
           <button
             className="eye-trigger"
             type="button"
@@ -117,6 +119,18 @@ function App() {
           >
             <EyeArtwork stage={stage} />
           </button>
+          {canCastAmaterasu ? (
+            <button
+              className={`jutsu-trigger${amaterasuActive ? ' is-active' : ''}`}
+              type="button"
+              aria-label={amaterasuActive ? 'End Amaterasu' : 'Cast Amaterasu'}
+              aria-pressed={amaterasuActive}
+              onClick={() => setAmaterasuActive((current) => !current)}
+            >
+              <span className="jutsu-trigger__seal" aria-hidden="true" />
+              <span>{amaterasuActive ? 'End Amaterasu' : 'Cast Amaterasu'}</span>
+            </button>
+          ) : null}
         </div>
 
         <div className="stage-narrative" key={`lore-${stage.id}`}>
