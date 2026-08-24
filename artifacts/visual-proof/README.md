@@ -4,14 +4,17 @@ Captured from the feature branch in Chromium on August 24, 2026.
 
 ## Artifacts
 
-- `advanced-morph.webm` — 14-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, inherited Eternal overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
+- `shared-element-morphs.webm` — focused 11-second browser capture of the preserved 12-to-10 o'clock first-tomoe travel, second mark materializing near 2 o'clock, shared-node Mangekyō awakening, and center-pupil-to-Eternal-core morph.
+- `advanced-morph.webm` — 11-second browser capture of the fan-backed three-tomoe awakening, shared-node Mangekyō morph, explicit Amaterasu cast, continuously moving black fire, pupil-grown Eternal core, inherited blade overlay, two-band Rinnegan reveal, and a clean jutsu end-state.
 - `desktop-dormant.png` — 1440×1000 initial poster, awakening control, and code-drawn fan backdrop.
 - `desktop-two-tomoe.png` — two-tomoe state with the preserved first mark near 10 o'clock and the newly revealed mark near 2 o'clock.
 - `desktop-amaterasu-ready.png` — Mangekyō with the explicit, idle **Cast Amaterasu** control.
 - `desktop-mangekyo.png` — corrected six-petal, three-lens Sasuke Mangekyō with the distressed sclera and actively burning procedural fire.
-- `desktop-eternal-mangekyo.png` — corrected Eternal form with the inherited three-blade overlay and persistent flame field.
+- `desktop-eternal-mangekyo.png` — corrected Eternal form with the pupil-grown triangular core, inherited three-blade overlay, and persistent flame field.
 - `desktop-rinnegan.png` — 1440×1000 corrected two-band six-tomoe Rinnegan, unlocked navigation, and explicit dōjutsu distinction.
 - `mobile-mangekyo.png` — 390×844 corrected Mangekyō, sclera strain, original flames, and responsive fan backdrop after touch progression.
+- `mobile-two-tomoe.png` — 390×844 two-tomoe state with the preserved 10-and-2 o'clock arrangement after touch progression.
+- `mobile-eternal-mangekyo.png` — 390×844 Eternal state with the pupil-grown core and inherited blade overlay.
 - `mobile-rinnegan.png` — 390×844 two-band Rinnegan and flame framing after touch progression.
 - `before-amaterasu.png` — the previous advanced eye without the original black-flame field.
 - `before-static-amaterasu.png` — the previous automatically activated SVG flame silhouettes preserved before the castable moving-fire revision.
@@ -19,6 +22,9 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - `before-generic-halo.png` — the previous rotating ring and breathing circular aura preserved as regression evidence.
 - `before-sclera-strain.png` — the previous four clean sclera strokes preserved as regression evidence.
 - `before-mangekyo.png` and `before-eternal-mangekyo.png` — the inaccurate generic-blade patterns preserved as regression evidence.
+- `before-opposed-two-tomoe.png` — the prior opposed two-tomoe placement preserved before the 12-to-10 and 2 o'clock choreography.
+- `before-separate-eternal-core.png` — the prior Eternal center rendered by a separate circular core rather than the persistent pupil path.
+- `before-eternal-core-swap.webm` — the prior Mangekyō-to-Eternal sequence in which the pupil retreated before a separate core appeared.
 
 ## Verification checklist
 
