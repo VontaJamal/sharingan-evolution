@@ -33,6 +33,11 @@ function App() {
       const target = event.target;
       if (target instanceof HTMLElement && target.matches('button, a, input, textarea, select')) return;
 
+      if (event.key === 'Enter' && !event.repeat) {
+        event.preventDefault();
+        advanceStage();
+      }
+
       if (event.key === 'ArrowRight') {
         event.preventDefault();
         advanceStage();

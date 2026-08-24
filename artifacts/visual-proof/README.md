@@ -21,7 +21,7 @@ Captured from the feature branch in Chromium on August 24, 2026.
 - [x] One eye canvas remains mounted while each ocular pattern transforms in place without a full-eye crossfade.
 - [x] Sasuke's Mangekyō framework remains mounted as the Eternal inherited-blade layer transforms over it.
 - [x] Mouse click and touch tap advance exactly one stage.
-- [x] `Enter`, `Space`, and arrow-key operation use semantic controls.
+- [x] `Enter` awakens the untouched opening scene; focused controls still support native `Enter` and `Space` operation.
 - [x] Restart returns to the dormant eye while discovered-stage navigation remains available.
 - [x] The final state is labeled as a distinct left-eye dōjutsu, not a Sharingan form.
 - [x] Focus rings are visible on the primary eye, restart action, and discovered-stage controls.

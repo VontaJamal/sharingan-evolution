@@ -43,6 +43,16 @@ describe('Sharingan Evolution', () => {
     expect(container.querySelector('.eye-artwork')).toBe(eyeArtwork);
   });
 
+  it('awakens when Enter is pressed directly from the opening screen', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    expect(document.body).toHaveFocus();
+    await user.keyboard('{Enter}');
+
+    expect(screen.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeInTheDocument();
+  });
+
   it('uses native keyboard activation and supports arrow-key progression', async () => {
     const user = userEvent.setup();
     render(<App />);

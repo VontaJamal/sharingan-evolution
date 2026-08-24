@@ -22,7 +22,7 @@ The final state is deliberately labeled **Distinct dōjutsu · Left eye only**. 
 
 ## Controls
 
-- Select the eye to advance one form. This works with a mouse, touch, `Enter`, or `Space`.
+- Select the eye to advance one form with a mouse or touch. Press `Enter` directly from the scene, or use `Enter` or `Space` when the eye has keyboard focus.
 - Use `Arrow Right` to advance and `Arrow Left` to step back when focus is not already on a control.
 - Use the progress rail to revisit any discovered form.
 - Select **Restart** at any time, or select the final eye to begin again.

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('awakens through pointer and keyboard controls', async ({ page }) => {
+test('awakens through scene-level and focused keyboard controls', async ({ page }) => {
   await page.goto('/');
 
   await expect(page).toHaveTitle(/Sharingan Evolution/);
@@ -9,7 +9,7 @@ test('awakens through pointer and keyboard controls', async ({ page }) => {
     node.setAttribute('data-browser-instance', 'persistent');
   });
 
-  await page.getByRole('button', { name: /awaken the eye/i }).click();
+  await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'One Tomoe Sharingan' })).toBeVisible();
   await expect(page.locator('.eye-scene')).toHaveAttribute('data-browser-instance', 'persistent');
 
