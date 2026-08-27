@@ -1,2 +1,81 @@
-# sharingan-evolution
-An interactive anime-inspired eye evolution experience.
+# Sharingan Evolution
+
+A cinematic, full-screen fan experience tracing Sasuke Uchiha's eye progression from a dormant eye to his Six Paths Rinnegan.
+
+![Sasuke's Six Paths Rinnegan experience](artifacts/visual-proof/desktop-rinnegan.png)
+
+The experience uses original SVG eye drawing, a cropped code-drawn uchiwa fan watermark, a castable procedural Canvas black-fire field, a progressively enhanced Three.js particle field, CSS fallback atmosphere, and lightweight motion. The WebGL layer is dynamically loaded only on capable devices, runs at a restrained 30fps with capped pixel density, and never owns the canonical ocular artwork, flames, or fan motif. It includes no copied anime frames, imported logos, music, franchise fonts, or other ripped assets.
+
+## Experience
+
+The seven data-defined forms are:
+
+1. Dormant Eye
+2. One Tomoe Sharingan
+3. Two Tomoe Sharingan
+4. Three Tomoe Sharingan
+5. Mangekyō Sharingan
+6. Eternal Mangekyō Sharingan
+7. Sasuke's Six Paths Rinnegan
+
+The final state is deliberately labeled **Distinct dōjutsu · Left eye only**. Sasuke's Rinnegan follows the Sharingan sequence in his story, but it is not presented as another Sharingan form.
+
+## Controls
+
+- Select the eye to advance one form with a mouse or touch. Press `Enter` directly from the scene, or use `Enter` or `Space` when the eye has keyboard focus.
+- From Mangekyō onward, select **Cast Amaterasu** to ignite the black fire. The same control becomes **End Amaterasu** while the jutsu is active.
+- Use `Arrow Right` to advance and `Arrow Left` to step back when focus is not already on a control.
+- Read the full seven-form sequence on the progress rail, and revisit any discovered form.
+- Select **Restart** at any time, or select the final eye to begin again.
+
+Each form transforms inside the same continuously mounted eye: layered sclera, iris, and full-pattern surfaces dissolve, scale, and turn into place over a deliberate 1.65–2.15 second reveal. During tomoe maturation, three stable SVG slots preserve every earned mark: the first tomoe travels from 12 toward 10 o'clock while the second materializes near 2 o'clock, and existing marks continue moving into the mature pattern while only the new mark appears. Branching capillaries draw in behind the iris while an uneven sclera flush deepens from the basic Sharingan through Mangekyō and Eternal, replacing decorative strain lines with a distressed-eye treatment. The advanced awakening uses true shared-element path morphs: the same three SVG tomoe nodes travel inward and become Sasuke's three Mangekyō lens curves while the iris ring expands and six petals grow behind them. For Eternal, the continuously mounted pupil expands only slightly into a compact rounded triangular core while three black paths hidden beneath it unspool outward into the inherited blades. The transition uses no blur, oversized black disk, opacity crossfade, or replacement layer. From Mangekyō onward, the explicit jutsu control ignites a continuously animated field of original Canvas-drawn black flames. The fire curls, rises, branches, sheds embers, and remains mounted as the eye advances through Eternal and Rinnegan; ending the jutsu clears it. Reduced-motion mode renders one settled flame frame instead of a loop. Sasuke's Rinnegan is drawn with four concentric ripples and two distinct three-tomoe bands rather than six tomoe sharing one orbit. An original vector interpretation of the Uchiha uchiwa fan sits as a cropped peripheral watermark with restrained pointer depth instead of sharing the eye's centerline; it is removed on phone layouts where it cannot avoid the ocular silhouette. Three.js contributes only restrained particles. The eye uses an asymmetric aperture, softened lid depth, and corneal light instead of a rigid geometric mask. The interface also has visible keyboard focus states, semantic controls, live stage announcements, readable contrast, phone-through-desktop layouts, and a `prefers-reduced-motion` mode that removes continuous particles, WebGL depth, pointer response, animation delays, and transition travel.
+
+## Local setup
+
+Requires Node.js 22 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local address printed by Vite.
+
+## Verification
+
+```bash
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+npx playwright install chromium
+npm run test:e2e
+```
+
+`npm run check` runs linting, strict type checking, behavior tests, and the production build in one command. GitHub Actions runs that quality gate and the Chromium smoke suite for pull requests and `main`.
+
+Behavior coverage includes sequential progression, the preserved 12-to-10 o'clock tomoe move and 2 o'clock reveal, paced in-place eye transformations, a viewport-anchored poster frame, peripheral fan composition and phone removal, branching sclera-strain structure and reveal timing, persistent pupil-led ink-pull morphing, Mangekyō-to-Eternal artwork continuity, explicit Amaterasu casting, continuous flame frames, persistent jutsu state, ending the effect, two-band Rinnegan geometry, organic eye-layer structure, progressive WebGL enhancement and fallback state, pointer and native keyboard activation, direct navigation after discovery, restart, accurate Rinnegan distinction, locked-state accessibility, reduced-motion behavior, real touch input, phone layout, and browser-level keyboard operation.
+
+## Visual proof
+
+Review artifacts are in [`artifacts/visual-proof`](artifacts/visual-proof):
+
+- focused 4-second WebM showing the continuous pupil-to-inherited-blade Eternal ink pull
+- 12-second WebM showing the full in-place progression through the Mangekyō and Eternal transformations
+- 7-second WebM showing the explicit Amaterasu cast, moving black fire, Eternal overlay, and corrected Rinnegan
+- 1440×1000 dormant desktop poster
+- 1440×1000 corrected two-tomoe, Mangekyō, and Eternal Mangekyō states
+- 1440×1000 fully discovered Rinnegan state
+- 390×844 touch-sized two-tomoe, Mangekyō, Eternal Mangekyō, and Rinnegan states
+- before-and-after evidence for the advanced-eye redraw
+- before-and-after evidence for the generic halo replacement
+- before-and-after evidence for the single-orbit Rinnegan correction and Amaterasu addition
+- before-and-after evidence for the opposed tomoe placement and separate Eternal-core swap
+- before-and-after evidence for the centered folding-fan composition, geometric Eternal morph, and rejected ballooning Eternal morph
+- a concise written verification checklist
+
+## Lore and IP boundary
+
+The short lore lines follow Sasuke's canonical progression: early tomoe maturation, the fully matured Sharingan at the Valley of the End, Mangekyō after the truth of Itachi's sacrifice, Eternal Mangekyō through Itachi's transplanted eyes, and the six-tomoe Rinnegan in Sasuke's left eye after receiving Hagoromo's chakra. Its six marks are placed as two three-tomoe bands on the inner ripples. The Rinnegan distinction is also encoded directly in the UI and tested.
+
+This is an unofficial, non-commercial fan project. Naruto and its characters belong to their respective rights holders. All interface artwork and effects, including the peripheral uchiwa fan watermark and procedural Amaterasu fire, are original code-created interpretations and are not official franchise assets.

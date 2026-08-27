@@ -1,0 +1,1323 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f4efeb;
+  background: #050506;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --crimson: #ec1f2d;
+  --crimson-bright: #ff4b52;
+  --morph-ease: cubic-bezier(.55, .02, .25, 1);
+  --muted: #9f9795;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: #050506;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+.experience {
+  --pointer-x: 0;
+  --pointer-y: 0;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  width: 100%;
+  min-height: 100svh;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 50% 47%, rgb(125 0 13 / 20%) 0 12%, transparent 42%),
+    #050506;
+  transition: background-color 500ms ease;
+}
+
+.experience--dormant {
+  --crimson: #7d1c24;
+  --crimson-bright: #ba343c;
+}
+
+.experience--rinnegan {
+  --crimson: #9c76c9;
+  --crimson-bright: #d4b8f1;
+  background:
+    radial-gradient(circle at 50% 47%, rgb(110 75 151 / 24%) 0 12%, transparent 42%),
+    #050506;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 0.75rem;
+  left: 50%;
+  padding: 0.75rem 1rem;
+  color: #050506;
+  background: #fff;
+  transform: translate(-50%, -160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+.ink-atmosphere {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  contain: paint;
+  opacity: 0.72;
+  background:
+    radial-gradient(ellipse at 14% 65%, rgb(34 30 34 / 62%) 0 10%, transparent 38%),
+    radial-gradient(ellipse at 86% 38%, rgb(35 27 31 / 58%) 0 8%, transparent 39%),
+    radial-gradient(circle at 50% 47%, transparent 0 21%, rgb(0 0 0 / 58%) 58% 100%);
+  filter: blur(34px);
+  transform: translate(calc(var(--pointer-x) * -0.8rem), calc(var(--pointer-y) * -0.55rem));
+  transition: transform 350ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.cinematic-field {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cinematic-field__canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+.cinematic-field.is-webgl-ready .cinematic-field__canvas {
+  opacity: 0.78;
+}
+
+.clan-fan-backdrop {
+  position: absolute;
+  z-index: 0;
+  top: -8rem;
+  right: -18rem;
+  width: min(43vw, 34rem);
+  height: min(72svh, 42rem);
+  overflow: visible;
+  opacity: 0.18;
+  filter: drop-shadow(0 0 4rem rgb(153 8 22 / 24%));
+  mask-image: linear-gradient(152deg, #000 0 52%, rgb(0 0 0 / 72%) 70%, transparent 96%);
+  transform: translate(calc(var(--pointer-x) * -0.45rem), calc(var(--pointer-y) * -0.3rem))
+    rotate(13deg);
+  transform-origin: 52% 38%;
+  transition:
+    opacity 900ms ease,
+    transform 500ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.experience--dormant .clan-fan-backdrop {
+  opacity: 0.11;
+}
+
+.experience--mangekyo .clan-fan-backdrop,
+.experience--eternal-mangekyo .clan-fan-backdrop {
+  opacity: 0.22;
+}
+
+.clan-fan-backdrop__shadow {
+  fill: #6f0712;
+  opacity: 0.28;
+  filter: url(#clan-fan-ink);
+}
+
+.clan-fan-backdrop__crown {
+  fill: url(#clan-fan-red);
+  stroke: #070506;
+  stroke-width: 10;
+}
+
+.clan-fan-backdrop__guard {
+  fill: url(#clan-fan-bone);
+  stroke: #070506;
+  stroke-width: 10;
+}
+
+.clan-fan-backdrop__handle {
+  fill: #3b292d;
+  stroke: #070506;
+  stroke-width: 10;
+}
+
+.clan-fan-backdrop__seam,
+.clan-fan-backdrop__spine {
+  fill: none;
+  stroke: #e0d2d0;
+  stroke-linecap: round;
+  stroke-width: 7;
+  opacity: 0.24;
+}
+
+.clan-fan-backdrop__seam {
+  stroke-width: 8;
+}
+
+.clan-fan-backdrop__spine {
+  stroke: #14070a;
+  stroke-width: 6;
+  opacity: 0.52;
+}
+
+.chakra-field {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  opacity: 1;
+  pointer-events: none;
+  transform: translate(calc(var(--pointer-x) * 0.45rem), calc(var(--pointer-y) * 0.3rem));
+  transition:
+    opacity 900ms ease,
+    transform 450ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.cinematic-field.is-webgl-ready .chakra-field {
+  opacity: 0.18;
+}
+
+.chakra-particle {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  height: calc(var(--size) * 7);
+  border-radius: 999px;
+  opacity: 0;
+  background: var(--crimson-bright);
+  box-shadow: 0 0 12px var(--crimson);
+  animation: chakra-rise var(--duration) var(--delay) linear infinite;
+}
+
+.masthead,
+footer {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.1rem, 2vw, 2rem) clamp(1.1rem, 3.5vw, 4rem);
+}
+
+.masthead {
+  animation: header-enter 650ms 80ms both cubic-bezier(.16, 1, .3, 1);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+  color: #f5efeb;
+  font-size: clamp(0.68rem, 1vw, 0.8rem);
+  font-weight: 780;
+  letter-spacing: 0.19em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 1px solid var(--crimson-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgb(229 22 38 / 60%);
+}
+
+.brand-mark::after {
+  display: block;
+  width: 0.24rem;
+  height: 0.24rem;
+  margin: 0.22rem;
+  border-radius: 50%;
+  background: var(--crimson-bright);
+  content: '';
+}
+
+.restart-button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0;
+  border: 0;
+  color: #d7ceca;
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.restart-button span {
+  color: var(--crimson-bright);
+  font-size: 1.1rem;
+}
+
+.restart-button:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+.restart-button:focus-visible,
+.eye-trigger:focus-visible,
+.jutsu-trigger:focus-visible,
+.evolution-track button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 6px;
+}
+
+.awakening {
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.62fr) minmax(24rem, 1.55fr) minmax(13rem, 0.62fr);
+  align-items: center;
+  gap: clamp(1rem, 2vw, 3rem);
+  min-height: 0;
+  padding: 0 clamp(1.1rem, 3.5vw, 4rem);
+}
+
+.stage-copy {
+  align-self: center;
+  animation: copy-enter 900ms both cubic-bezier(.18, .72, .24, 1);
+}
+
+.stage-kicker {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  color: var(--crimson-bright);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 13ch;
+  margin: 0;
+  color: #f4efeb;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 3.6vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.stage-distinction {
+  margin: 1.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.69rem;
+  font-weight: 760;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.eye-scene {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 52rem);
+  margin: auto;
+  transform: perspective(62rem)
+    rotateY(calc(var(--pointer-x) * 1.1deg))
+    rotateX(calc(var(--pointer-y) * -0.8deg));
+  transform-style: preserve-3d;
+  animation: awakening-enter 950ms both cubic-bezier(.16, 1, .3, 1);
+  transition: transform 260ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.amaterasu-field {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 116%;
+  aspect-ratio: 656 / 480;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -48%) translateZ(0.5rem) scale(0.88);
+  transform-origin: 50% 58%;
+  transition:
+    opacity 420ms ease,
+    transform 1050ms cubic-bezier(.15, .75, .2, 1);
+}
+
+.amaterasu-field.is-active {
+  opacity: 1;
+  transform: translate(-50%, -51%) translateZ(0.5rem) scale(1);
+}
+
+.amaterasu-field.is-active + .eye-trigger .eye-artwork {
+  animation: amaterasu-recoil 720ms both cubic-bezier(.16, .82, .18, 1);
+}
+
+.eye-trigger {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 42%;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transform: translateZ(1.5rem);
+  touch-action: manipulation;
+}
+
+.eye-trigger::after {
+  position: absolute;
+  inset: 22% 12%;
+  border-radius: 50%;
+  content: '';
+}
+
+.eye-trigger:hover .eye-artwork {
+  transform: scale(1.015);
+}
+
+.eye-trigger:active .eye-artwork {
+  transform: scale(0.985);
+}
+
+.jutsu-trigger {
+  position: absolute;
+  z-index: 2;
+  bottom: 3%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.68rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgb(236 31 45 / 48%);
+  color: #f7efec;
+  background: rgb(5 3 5 / 86%);
+  box-shadow: 0 0 1.5rem rgb(143 4 19 / 12%);
+  font-size: 0.61rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translateX(-50%);
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.jutsu-trigger:hover {
+  border-color: var(--crimson-bright);
+  box-shadow: 0 0 1.8rem rgb(143 4 19 / 32%);
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.jutsu-trigger.is-active {
+  border-color: #ef233c;
+  background: rgb(89 2 14 / 90%);
+  box-shadow: 0 0 2.2rem rgb(172 4 24 / 45%);
+}
+
+.jutsu-trigger__seal {
+  position: relative;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 1px solid #ef233c;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.2rem #080406, 0 0 0.8rem rgb(236 31 45 / 55%);
+}
+
+.jutsu-trigger__seal::before {
+  position: absolute;
+  inset: 0.26rem;
+  border-radius: 50% 50% 50% 0;
+  background: #ef233c;
+  content: '';
+  transform: rotate(-45deg);
+}
+
+.eye-artwork {
+  --irritation-opacity: 0.22;
+  --vein-opacity: 0.4;
+  display: block;
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 1.45rem 2.7rem rgb(0 0 0 / 78%));
+  transition: transform 180ms ease;
+}
+
+.eye-artwork--mangekyo {
+  --irritation-opacity: 0.52;
+  --vein-opacity: 0.68;
+}
+
+.eye-artwork--eternal-mangekyo {
+  --irritation-opacity: 0.68;
+  --vein-opacity: 0.82;
+}
+
+.eye-artwork--rinnegan {
+  --irritation-opacity: 0.5;
+  --vein-opacity: 0.66;
+}
+
+.eye-shadow {
+  fill: #000;
+  opacity: 0.86;
+  filter: blur(28px);
+}
+
+.sclera--awakened {
+  fill: url(#sclera-light);
+}
+
+.sclera--dormant {
+  fill: url(#dormant-sclera);
+  opacity: 0;
+  transition: opacity 1650ms linear;
+}
+
+.sclera--dormant.is-active {
+  opacity: 1;
+}
+
+.sclera-irritation {
+  opacity: 0;
+  transform: scaleX(0.76);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 1500ms linear,
+    transform 1800ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.sclera-irritation.is-visible {
+  opacity: var(--irritation-opacity);
+  transform: scaleX(1);
+}
+
+.sclera-irritation__bloom {
+  fill: #a51724;
+  filter: url(#sclera-irritation-soften);
+  mix-blend-mode: multiply;
+}
+
+.eye-veins {
+  fill: none;
+  opacity: 0;
+  transition: opacity 1200ms linear;
+}
+
+.eye-veins.is-visible {
+  opacity: var(--vein-opacity);
+}
+
+.eye-vein {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transition: stroke-dashoffset var(--vein-duration) var(--vein-delay) cubic-bezier(.3, .05, .25, 1);
+}
+
+.eye-veins.is-visible .eye-vein {
+  stroke-dashoffset: 0;
+}
+
+.eye-vein--trunk {
+  --vein-delay: 80ms;
+  --vein-duration: 1500ms;
+  stroke: #8a2730;
+  stroke-width: 1.55;
+}
+
+.eye-vein--branch {
+  --vein-delay: 250ms;
+  --vein-duration: 1650ms;
+  stroke: #a0444b;
+  stroke-width: 0.95;
+}
+
+.eye-vein--capillary {
+  --vein-delay: 400ms;
+  --vein-duration: 1750ms;
+  stroke: #b65d61;
+  stroke-width: 0.55;
+}
+
+.iris-aura {
+  fill: none;
+  stroke: #e71325;
+  stroke-width: 3;
+  opacity: 0.34;
+  transition: stroke 1650ms linear;
+}
+
+.iris-disc {
+  opacity: 0;
+  stroke: #130306;
+  stroke-width: 9;
+  transition: opacity 1650ms linear;
+}
+
+.iris-disc.is-active {
+  opacity: 1;
+}
+
+.iris-disc--dormant {
+  fill: #211e20;
+  stroke: #070607;
+}
+
+.iris-disc--crimson {
+  fill: url(#crimson-iris);
+}
+
+.iris-disc--rinnegan {
+  fill: url(#violet-iris);
+}
+
+.iris-texture {
+  fill: none;
+  stroke: rgb(22 0 2 / 38%);
+  stroke-dasharray: 2 7;
+  stroke-width: 7;
+  transition: opacity 1650ms linear;
+}
+
+.eye-artwork--dormant .iris-aura {
+  stroke: #5e4a4b;
+}
+
+.eye-artwork--dormant .iris-texture {
+  opacity: 0.25;
+}
+
+.eye-artwork--rinnegan .iris-aura {
+  stroke: #c7a4ee;
+}
+
+.eye-artwork--rinnegan .iris-texture {
+  opacity: 0.08;
+}
+
+.iris-ring,
+.rinnegan-pattern circle {
+  fill: none;
+  stroke: #150106;
+  stroke-width: 7;
+}
+
+.rinnegan-pattern circle {
+  stroke: #24172f;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-width: 5;
+  transition: stroke-dashoffset 1450ms var(--morph-ease);
+}
+
+.is-active .rinnegan-pattern circle {
+  stroke-dashoffset: 0;
+}
+
+.tomoe-mark {
+  transform: rotate(var(--tomoe-angle)) translateY(var(--tomoe-offset));
+  transform-origin: 0 0;
+  transition: transform 2200ms cubic-bezier(.3, .05, .25, 1);
+  will-change: transform;
+}
+
+.tomoe-mark.is-morphing {
+  transition: transform 2050ms var(--morph-ease);
+}
+
+.tomoe-shape {
+  fill: #110106;
+  stroke: #110106;
+  stroke-linejoin: round;
+  stroke-width: 0;
+  transition:
+    d 2050ms var(--morph-ease),
+    fill 600ms 850ms var(--morph-ease),
+    stroke 750ms 650ms var(--morph-ease),
+    stroke-width 750ms 650ms var(--morph-ease);
+}
+
+.tomoe-mark.is-morphing .tomoe-shape {
+  fill: transparent;
+  stroke: #090104;
+  stroke-width: 5;
+}
+
+.tomoe-glyph {
+  opacity: 0;
+  transform: scale(0.18) rotate(-24deg);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 1200ms linear,
+    transform 1700ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.tomoe-mark.is-visible .tomoe-glyph {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.ocular-pattern-layer {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.68) rotate(-18deg);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 1650ms linear,
+    transform 2150ms cubic-bezier(.3, .05, .25, 1),
+    visibility 0s linear 2150ms;
+  will-change: opacity, transform;
+}
+
+.ocular-pattern-layer.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) rotate(0);
+  transition-delay: 0s;
+}
+
+.ocular-pattern-layer--tomoe.is-morphing {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.iris-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    stroke 750ms 650ms var(--morph-ease),
+    stroke-width 750ms 650ms var(--morph-ease),
+    transform 2050ms var(--morph-ease);
+}
+
+.is-morphing .iris-ring {
+  stroke: #090104;
+  stroke-width: 5;
+  transform: scale(1.45);
+}
+
+.ocular-pattern-layer--mangekyo,
+.ocular-pattern-layer--eternal {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}
+
+.rinnegan-tomoe-glyph {
+  fill: #24172f;
+  stroke: #24172f;
+  stroke-linejoin: round;
+  stroke-width: 0.8;
+}
+
+.mangekyo-void {
+  fill: #090104;
+  transform: scale(0.001);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 2100ms 60ms var(--morph-ease);
+}
+
+.is-forming .mangekyo-void {
+  transform: scale(1);
+}
+
+.sasuke-mangekyo-petal {
+  fill: #d0081c;
+  stroke: #150106;
+  stroke-width: 1.5;
+  transform: scale(0.001) rotate(-32deg);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 2050ms var(--morph-ease);
+}
+
+.is-forming .sasuke-mangekyo-petal {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.sasuke-mangekyo-petal-axis:nth-child(2) .sasuke-mangekyo-petal,
+.sasuke-mangekyo-petal-axis:nth-child(5) .sasuke-mangekyo-petal {
+  transition-delay: 80ms;
+}
+
+.sasuke-mangekyo-petal-axis:nth-child(3) .sasuke-mangekyo-petal,
+.sasuke-mangekyo-petal-axis:nth-child(6) .sasuke-mangekyo-petal {
+  transition-delay: 160ms;
+}
+
+.itachi-inherited-blade {
+  fill: #090104;
+}
+
+.is-unfolding .itachi-inherited-blade {
+  animation: eternal-blade-pour 1420ms 180ms both cubic-bezier(.35, .02, .18, 1);
+}
+
+.itachi-inherited-axis:nth-child(2) .itachi-inherited-blade {
+  animation-delay: 260ms;
+}
+
+.itachi-inherited-axis:nth-child(3) .itachi-inherited-blade {
+  animation-delay: 340ms;
+}
+
+.pupil {
+  fill: #050204;
+  transform: scale(1);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    d 1650ms cubic-bezier(.35, .02, .12, 1),
+    transform 1650ms cubic-bezier(.35, .02, .12, 1);
+}
+
+.pupil--dormant {
+  transform: scale(2.14);
+}
+
+.pupil--eternal {
+  animation: eternal-pupil-pull 1420ms both cubic-bezier(.35, .02, .12, 1);
+}
+
+.iris-glint {
+  fill: #fff;
+  opacity: 0.16;
+  transform: rotate(38deg);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 1250ms linear,
+    transform 1700ms cubic-bezier(.3, .05, .25, 1);
+}
+
+.iris-glint--hidden {
+  opacity: 0;
+  transform: rotate(38deg) scale(0);
+}
+
+.corneal-sheen {
+  fill: url(#corneal-light);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.lid-shadow {
+  fill: #080708;
+  opacity: 0.9;
+  filter: blur(2.4px);
+}
+
+.lid-shadow--top {
+  opacity: 0.98;
+}
+
+.lid-shadow--bottom {
+  opacity: 0.94;
+}
+
+.lid-line,
+.ink-stroke {
+  fill: none;
+  stroke: #1a1719;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 10;
+}
+
+.lid-line--lower {
+  stroke: #0a090a;
+  stroke-width: 6;
+}
+
+.ink-stroke {
+  stroke: #000;
+  stroke-width: 17;
+  opacity: 0.72;
+}
+
+.lid-crease {
+  fill: none;
+  stroke: #47141c;
+  stroke-linecap: round;
+  stroke-width: 3;
+  opacity: 0.38;
+  filter: blur(0.5px);
+}
+
+.lid-crease--lower {
+  stroke: #26171b;
+  stroke-width: 2;
+  opacity: 0.48;
+}
+
+.stage-narrative {
+  align-self: center;
+  max-width: 19rem;
+  animation: lore-enter 900ms 120ms both cubic-bezier(.18, .72, .24, 1);
+}
+
+.stage-narrative > p:first-child {
+  margin: 0;
+  color: #d1c7c3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  line-height: 1.55;
+}
+
+.interaction-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+  margin: 1.55rem 0 0;
+  color: #f1eae6;
+  font-size: 0.69rem;
+  font-weight: 760;
+  letter-spacing: 0.14em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.pulse-dot {
+  flex: 0 0 auto;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--crimson-bright);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--crimson), transparent 15%);
+  animation: control-pulse 2.2s infinite;
+}
+
+.key-hint {
+  margin-left: auto;
+  color: #777071;
+  font-size: 0.58rem;
+  white-space: nowrap;
+}
+
+.evolution-track {
+  position: relative;
+  z-index: 3;
+  width: min(58rem, calc(100% - 2.2rem));
+  margin: 0 auto;
+  padding: 0.65rem 0 0.4rem;
+}
+
+.track-line {
+  position: absolute;
+  top: 1.16rem;
+  right: 3.4%;
+  left: 3.4%;
+  height: 1px;
+  overflow: hidden;
+  background: #393335;
+}
+
+.track-line span {
+  display: block;
+  height: 100%;
+  background: var(--crimson-bright);
+  box-shadow: 0 0 10px var(--crimson);
+  transition: width 1000ms cubic-bezier(.18, .72, .24, 1);
+}
+
+.evolution-track ol {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evolution-track button {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: #817a7a;
+  background: transparent;
+  font-size: 0.55rem;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.evolution-track button.is-discovered {
+  color: #a8a09e;
+  cursor: pointer;
+}
+
+.evolution-track button[aria-current='step'] {
+  color: #f4efeb;
+}
+
+.track-node {
+  position: relative;
+  z-index: 1;
+  width: 0.64rem;
+  height: 0.64rem;
+  border: 1px solid #494345;
+  border-radius: 50%;
+  background: #090809;
+}
+
+.is-discovered .track-node {
+  border-color: var(--crimson-bright);
+  background: var(--crimson);
+}
+
+[aria-current='step'] .track-node {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--crimson), transparent 70%), 0 0 18px var(--crimson);
+}
+
+footer {
+  align-items: flex-end;
+  padding-top: 0.65rem;
+  padding-bottom: clamp(0.85rem, 1.5vw, 1.4rem);
+  color: #686264;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+footer p {
+  max-width: 43rem;
+  margin: 0;
+}
+
+.keyboard-note {
+  text-align: right;
+}
+
+@keyframes awakening-enter {
+  0% { opacity: 0; filter: blur(16px); transform: perspective(62rem) scaleY(0.06) scaleX(0.82); }
+  48% { opacity: 1; filter: blur(2px); }
+  100% { opacity: 1; filter: blur(0); transform: perspective(62rem) scale(1); }
+}
+
+@keyframes eternal-pupil-pull {
+  0% {
+    d: path("M 0 22 C -7 22 -14 18 -18 11 C -22 5 -22 -5 -18 -11 C -14 -18 -7 -22 0 -22 C 7 -22 14 -18 18 -11 C 22 -5 22 5 18 11 C 14 18 7 22 0 22 Z");
+  }
+  24% {
+    d: path("M 0 26 C -8 26 -16 21 -21 13 C -26 6 -26 -6 -21 -13 C -16 -21 -8 -26 0 -26 C 8 -26 16 -21 21 -13 C 26 -6 26 6 21 13 C 16 21 8 26 0 26 Z");
+  }
+  52% {
+    d: path("M 0 28 C -8 28 -13 21 -12 13 C -13 6 -21 -1 -26 -8 C -23 -15 -11 -14 0 -8 C 11 -14 23 -15 26 -8 C 21 -1 13 6 12 13 C 13 21 8 28 0 28 Z");
+  }
+  100% {
+    d: path("M 0 34 C -8 34 -13 25 -12 16 C -13 8 -25 -2 -32 -10 C -28 -18 -13 -17 0 -10 C 13 -17 28 -18 32 -10 C 25 -2 13 8 12 16 C 13 25 8 34 0 34 Z");
+  }
+}
+
+@keyframes eternal-blade-pour {
+  0% {
+    d: path("M -3 5 C -4 9 -4 14 0 18 C 4 14 4 9 3 5 L 0 -5 Z");
+  }
+  42% {
+    d: path("M -8 6 C -9 21 -7 39 0 53 C 7 39 9 21 8 6 L 0 -6 Z");
+  }
+  72% {
+    d: path("M -14 7 C -13 31 -9 63 0 86 C 9 63 13 31 14 7 L 0 -7 Z");
+  }
+  100% {
+    d: path("M -18 7 C -15 39 -10 82 0 112 C 10 82 15 39 18 7 L 0 -7 Z");
+  }
+}
+
+@keyframes amaterasu-recoil {
+  0% {
+    filter: drop-shadow(0 1.45rem 2.7rem rgb(0 0 0 / 78%));
+    transform: scale(1);
+  }
+  38% {
+    filter: drop-shadow(0 0 2.2rem rgb(209 9 33 / 72%));
+    transform: scale(0.965);
+  }
+  100% {
+    filter: drop-shadow(0 1.45rem 2.7rem rgb(0 0 0 / 78%));
+    transform: scale(1);
+  }
+}
+
+@keyframes chakra-rise {
+  0% { opacity: 0; transform: translateY(4rem) scaleY(0.4); }
+  15% { opacity: 0.25; }
+  75% { opacity: 0.12; }
+  100% { opacity: 0; transform: translateY(-8rem) scaleY(1.6); }
+}
+
+@keyframes copy-enter {
+  from { opacity: 0; transform: translateX(-1.25rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lore-enter {
+  from { opacity: 0; transform: translateX(1.25rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes header-enter {
+  from { opacity: 0; transform: translateY(-0.8rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes control-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--crimson), transparent 18%); }
+  55%, 100% { box-shadow: 0 0 0 0.75rem transparent; }
+}
+
+@media (max-width: 900px) {
+  .experience {
+    overflow-x: clip;
+    overflow-y: auto;
+  }
+
+  .experience .clan-fan-backdrop {
+    top: -12rem;
+    right: -5rem;
+    width: min(38vw, 18rem);
+    height: 22rem;
+    opacity: 0.15;
+    transform: translate(calc(var(--pointer-x) * -0.28rem), calc(var(--pointer-y) * -0.2rem))
+      rotate(14deg);
+  }
+
+  .experience--dormant .clan-fan-backdrop {
+    opacity: 0.09;
+  }
+
+  .experience--mangekyo .clan-fan-backdrop,
+  .experience--eternal-mangekyo .clan-fan-backdrop {
+    opacity: 0.18;
+  }
+
+  .awakening {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(15rem, 1fr) auto;
+    gap: 0;
+    text-align: center;
+  }
+
+  .stage-copy {
+    z-index: 2;
+    padding-top: 0.7rem;
+  }
+
+  .stage-kicker {
+    justify-content: center;
+    margin-bottom: 0.55rem;
+  }
+
+  h1 {
+    max-width: 17ch;
+    margin-inline: auto;
+    font-size: clamp(2rem, 7vw, 3.8rem);
+  }
+
+  .stage-distinction {
+    margin-top: 0.72rem;
+  }
+
+  .eye-scene {
+    width: min(100%, 41rem);
+    margin: -1.5rem auto;
+  }
+
+  .stage-narrative {
+    z-index: 2;
+    justify-self: center;
+    max-width: 31rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .interaction-hint {
+    justify-content: center;
+    margin-top: 0.7rem;
+  }
+
+  .key-hint {
+    margin-left: 0.4rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .experience {
+    min-height: 100svh;
+    grid-template-rows: auto 1fr auto auto;
+  }
+
+  .experience .clan-fan-backdrop {
+    display: none;
+  }
+
+  .masthead {
+    padding: 1rem 1.1rem;
+  }
+
+  .brand-lockup {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+  }
+
+  .restart-button {
+    font-size: 0;
+  }
+
+  .restart-button span {
+    font-size: 1.3rem;
+  }
+
+  .awakening {
+    grid-template-rows: auto minmax(12.2rem, 1fr) auto;
+    min-height: 32rem;
+    padding-inline: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
+    line-height: 0.98;
+  }
+
+  .stage-copy {
+    padding-top: 0.1rem;
+  }
+
+  .stage-distinction {
+    font-size: 0.58rem;
+  }
+
+  .eye-scene {
+    width: min(122%, 32rem);
+    margin: -2.5rem -11%;
+  }
+
+  .stage-narrative > p:first-child {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .interaction-hint {
+    font-size: 0.59rem;
+  }
+
+  .key-hint,
+  .track-label,
+  .keyboard-note {
+    display: none;
+  }
+
+  .evolution-track {
+    width: calc(100% - 2.2rem);
+    padding-top: 0.4rem;
+  }
+
+  .track-line {
+    top: 0.93rem;
+  }
+
+  footer {
+    justify-content: center;
+    padding: 0.65rem 1.1rem 0.8rem;
+    text-align: center;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 901px) {
+  .masthead {
+    padding-top: 1rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .eye-scene {
+    width: min(100%, 42rem);
+  }
+
+  footer {
+    padding-top: 0.3rem;
+    padding-bottom: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .eye-scene,
+  .cinematic-field,
+  .chakra-field,
+  .ink-atmosphere {
+    transform: none !important;
+  }
+
+  .amaterasu-field {
+    transform: translate(-50%, -51%) scale(1) !important;
+  }
+
+  .chakra-particle {
+    display: none;
+  }
+}
